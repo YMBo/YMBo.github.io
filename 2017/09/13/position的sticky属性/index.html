@@ -34,7 +34,7 @@
 <meta property="og:description" content="表头跟随              图中展示的效果使我们在日常开发中常见的效果。以前我都是用js判断是否滚动一定距离然后给这个元素设置position:fixed这种方式来做的，今天就来记录一下用css怎么做 一、">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/position的sticky属性/1.gif">
-<meta property="og:updated_time" content="2017-09-13T02:41:32.376Z">
+<meta property="og:updated_time" content="2017-09-13T02:48:48.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="position的sticky属性">
 <meta name="twitter:description" content="表头跟随              图中展示的效果使我们在日常开发中常见的效果。以前我都是用js判断是否滚动一定距离然后给这个元素设置position:fixed这种方式来做的，今天就来记录一下用css怎么做 一、">
@@ -155,7 +155,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、用法"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、用法</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、介绍</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、用法"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、用法</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、总结</span></a></li></ol>
         </nav>
     </aside>
     
@@ -186,9 +186,14 @@
                 <div class="image-caption">表头跟随</div>
             </figure>
 <p>图中展示的效果使我们在日常开发中常见的效果。<br>以前我都是用js判断是否滚动一定距离然后给这个元素设置<code>position:fixed</code>这种方式来做的，<br>今天就来记录一下用css怎么做</p>
-<h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><p><code>css</code> 中的 <code>position</code> 属性的值常用的主要有下面几种：<br>1.absolute<br>2.relative<br>3.fixed<br>现在用到的值为 <code>sticky</code>：<br>设置了<code>sticky</code>的元素，在屏幕范围时（viewport），该元素位置不受到定位影响（top、left等值无效），当该元素的视图将要离开viewport时，定位会变成 <code>fixed</code> 的效果，并且根据设置的top 、left值进行定位</p>
+<h3 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h3><p><code>css</code> 中的 <code>position</code> 属性的值常用的主要有下面几种：<br>1.absolute<br>2.relative<br>3.fixed<br>现在用到的值为 <code>sticky</code>：<br>设置了<code>sticky</code>的元素，不脱离文档流，在屏幕范围时（viewport），该元素位置不受到定位影响（top、left等值无效），当该元素的视图将要离开偏移范围时，定位会变成 <code>fixed</code> 的效果，并且根据设置的top 、left值进行定位</p>
 <h3 id="二、用法"><a href="#二、用法" class="headerlink" title="二、用法"></a>二、用法</h3><p>上面的gif图里，我将搜索框的元素设置为<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">postion</span><span class="selector-pseudo">:sticky</span>;</div><div class="line"><span class="selector-tag">top</span><span class="selector-pseudo">:0</span>;</div><div class="line"><span class="selector-tag">left</span><span class="selector-pseudo">:0</span></div></pre></td></tr></table></figure></p>
 <p>所以当移出屏幕时就会触发fixed定位</p>
+<h3 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h3><ul>
+<li>该元素不脱离文档流，仍保留元素原本在文档流中的位置</li>
+<li>当元素在容器中被滚动超过指定偏移值时，元素在容器内固定在指定位置。比如你设置了 <code>top:50px</code> 那么sticky元素到达距离相对定位的元素顶部50px的位置时固定，不再向上移动</li>
+<li>元素固定的相对偏移是相对于它最近的具有滚动框的祖先元素，如果祖先元素都不可以滚动，那么是相对于 <code>viewport</code> 来计算元素的偏移量</li>
+</ul>
 
         </div>
 
@@ -196,7 +201,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-13T02:41:32.376Z" itemprop="dateUpdated">2017-09-13 10:41:32</time>
+    最后更新时间：<time datetime="2017-09-13T02:48:48.974Z" itemprop="dateUpdated">2017-09-13 10:48:48</time>
 </span><br>
 
 
