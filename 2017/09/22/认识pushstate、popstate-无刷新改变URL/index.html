@@ -25,20 +25,20 @@
     
     
     <meta name="keywords" content="HTML5">
-    <meta name="description" content="回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 认识新特性HTML5扩展了history,使历史记录更加灵活，">
+    <meta name="description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
 <meta name="keywords" content="HTML5">
 <meta property="og:type" content="article">
 <meta property="og:title" content="认识pushstate、popstate,无刷新改变URL">
 <meta property="og:url" content="http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/index.html">
 <meta property="og:site_name" content="DHYANA">
-<meta property="og:description" content="回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 认识新特性HTML5扩展了history,使历史记录更加灵活，">
+<meta property="og:description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/1.png">
 <meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/2.png">
-<meta property="og:updated_time" content="2017-09-22T07:14:09.485Z">
+<meta property="og:updated_time" content="2017-09-25T02:39:03.250Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识pushstate、popstate,无刷新改变URL">
-<meta name="twitter:description" content="回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 认识新特性HTML5扩展了history,使历史记录更加灵活，">
+<meta name="twitter:description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
 <meta name="twitter:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/1.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -156,7 +156,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#回顾-window-history"><span class="post-toc-number">1.</span> <span class="post-toc-text">回顾 window.history</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#认识新特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">认识新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#存储历史记录点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">存储历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#替换历史记录点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">替换历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#监听历史记录点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">监听历史记录点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#用途"><span class="post-toc-number">3.</span> <span class="post-toc-text">用途</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、回顾-window-history"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、回顾 window.history</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、认识新特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、认识新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-存储历史记录点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1.存储历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-替换历史记录点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2.替换历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-监听历史记录点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3.监听历史记录点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、用途"><span class="post-toc-number">3.</span> <span class="post-toc-text">四、用途</span></a></li></ol>
         </nav>
     </aside>
     
@@ -179,9 +179,9 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="回顾-window-history"><a href="#回顾-window-history" class="headerlink" title="回顾 window.history"></a>回顾 <code>window.history</code></h1><p><code>history</code>对象包含用户（在浏览器窗口中）访问过的url<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退</span></div><div class="line">history.back();</div><div class="line"><span class="comment">//前进</span></div><div class="line">history.forward();</div><div class="line"><span class="comment">//跳转</span></div><div class="line">history.go();</div><div class="line"><span class="comment">//历史记录条数（当前网页的，不是浏览器的）</span></div><div class="line">history.length</div><div class="line"><span class="comment">//状态</span></div><div class="line">history.state</div></pre></td></tr></table></figure></p>
-<h1 id="认识新特性"><a href="#认识新特性" class="headerlink" title="认识新特性"></a>认识新特性</h1><p>HTML5扩展了<code>history</code>,使历史记录更加灵活，可以在历史记录中存储指定记录点、替换当前历史记录点，监听历史记录点</p>
-<h2 id="存储历史记录点"><a href="#存储历史记录点" class="headerlink" title="存储历史记录点"></a>存储历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.pushState(<span class="string">'新添加的'</span>,<span class="string">''</span>,<span class="string">'?page=3'</span>);</div><div class="line"><span class="comment">// 第一个参数：设置state</span></div><div class="line"><span class="comment">// 第二个参数：页面标题，但是所有浏览器都忽略了，传空字符串就行</span></div><div class="line"><span class="comment">// 第三个删除：想要添加的链接</span></div></pre></td></tr></table></figure>
+            <h1 id="一、回顾-window-history"><a href="#一、回顾-window-history" class="headerlink" title="一、回顾 window.history"></a>一、回顾 <code>window.history</code></h1><p><code>history</code>对象包含用户（在浏览器窗口中）访问过的url<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//回退</span></div><div class="line">history.back();</div><div class="line"><span class="comment">//前进</span></div><div class="line">history.forward();</div><div class="line"><span class="comment">//跳转</span></div><div class="line">history.go();</div><div class="line"><span class="comment">//历史记录条数（当前网页的，不是浏览器的）</span></div><div class="line">history.length</div><div class="line"><span class="comment">//状态</span></div><div class="line">history.state</div></pre></td></tr></table></figure></p>
+<h1 id="二、认识新特性"><a href="#二、认识新特性" class="headerlink" title="二、认识新特性"></a>二、认识新特性</h1><p>HTML5扩展了<code>history</code>,使历史记录更加灵活，可以在历史记录中存储指定记录点、替换当前历史记录点，监听历史记录点</p>
+<h2 id="2-1-存储历史记录点"><a href="#2-1-存储历史记录点" class="headerlink" title="2.1.存储历史记录点"></a>2.1.存储历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.pushState(<span class="string">'新添加的'</span>,<span class="string">''</span>,<span class="string">'?page=3'</span>);</div><div class="line"><span class="comment">// 第一个参数：设置state</span></div><div class="line"><span class="comment">// 第二个参数：页面标题，但是所有浏览器都忽略了，传空字符串就行</span></div><div class="line"><span class="comment">// 第三个删除：想要添加的链接</span></div><div class="line"></div><div class="line"><span class="comment">//`注意，这个api会改变当前的网址，会添加一条历史记录，不是push到后面，这样会添加一条历史`</span></div></pre></td></tr></table></figure>
 <p>执行后，页面的URL为当前url？page=3<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -195,12 +195,12 @@
                 </div>
                 <div class="image-caption">执行后</div>
             </figure><br>此时的<code>history.length</code>也会+1，新增了历史记录点</p>
-<h2 id="替换历史记录点"><a href="#替换历史记录点" class="headerlink" title="替换历史记录点"></a>替换历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.replaceState(<span class="string">'新添加的'</span>,<span class="string">''</span>,<span class="string">'?page=3'</span>);</div></pre></td></tr></table></figure>
+<h2 id="2-2-替换历史记录点"><a href="#2-2-替换历史记录点" class="headerlink" title="2.2.替换历史记录点"></a>2.2.替换历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.history.replaceState(<span class="string">'新添加的'</span>,<span class="string">''</span>,<span class="string">'?page=3'</span>);</div><div class="line"></div><div class="line"><span class="comment">//`注意，这个api会改变当前的网址，不会添加一条历史记录，注意与上面pushState区别`</span></div></pre></td></tr></table></figure>
 <p>区别：<br>1.history.length不会变<br>2.替换了当前页的历史记录点</p>
-<h2 id="监听历史记录点"><a href="#监听历史记录点" class="headerlink" title="监听历史记录点"></a>监听历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-3-监听历史记录点"><a href="#2-3-监听历史记录点" class="headerlink" title="2.3.监听历史记录点"></a>2.3.监听历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div></pre></td></tr></table></figure>
 <p>浏览器前进后退都会触发这个事件<br>比如可以这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(event.state)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>后退操作时，就会打印出后退到的历史记录点的state信息。</p>
-<h1 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h1><p>上面介绍完了，那有啥用呢？</p>
+<h1 id="四、用途"><a href="#四、用途" class="headerlink" title="四、用途"></a>四、用途</h1><p>上面介绍完了，那有啥用呢？</p>
 
         </div>
 
@@ -208,7 +208,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-22T07:14:09.485Z" itemprop="dateUpdated">2017-09-22 15:14:09</time>
+    最后更新时间：<time datetime="2017-09-25T02:39:03.250Z" itemprop="dateUpdated">2017-09-25 10:39:03</time>
 </span><br>
 
 
