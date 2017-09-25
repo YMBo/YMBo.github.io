@@ -35,7 +35,8 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/1.png">
 <meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/2.png">
-<meta property="og:updated_time" content="2017-09-25T02:39:03.250Z">
+<meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/3.gif">
+<meta property="og:updated_time" content="2017-09-25T06:02:47.107Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="认识pushstate、popstate,无刷新改变URL">
 <meta name="twitter:description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
@@ -156,7 +157,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、回顾-window-history"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、回顾 window.history</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、认识新特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、认识新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-存储历史记录点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1.存储历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-替换历史记录点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2.替换历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-监听历史记录点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3.监听历史记录点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、用途"><span class="post-toc-number">3.</span> <span class="post-toc-text">四、用途</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、回顾-window-history"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、回顾 window.history</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、认识新特性"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、认识新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-存储历史记录点"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">2.1.存储历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-替换历史记录点"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2.2.替换历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-监听历史记录点"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">2.3.监听历史记录点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、用途"><span class="post-toc-number">3.</span> <span class="post-toc-text">四、用途</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#五、补充"><span class="post-toc-number">4.</span> <span class="post-toc-text">五、补充</span></a></li></ol>
         </nav>
     </aside>
     
@@ -200,7 +201,14 @@
 <h2 id="2-3-监听历史记录点"><a href="#2-3-监听历史记录点" class="headerlink" title="2.3.监听历史记录点"></a>2.3.监听历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</div></pre></td></tr></table></figure>
 <p>浏览器前进后退都会触发这个事件<br>比如可以这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(event.state)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>后退操作时，就会打印出后退到的历史记录点的state信息。</p>
-<h1 id="四、用途"><a href="#四、用途" class="headerlink" title="四、用途"></a>四、用途</h1><p>上面介绍完了，那有啥用呢？</p>
+<h1 id="四、用途"><a href="#四、用途" class="headerlink" title="四、用途"></a>四、用途</h1><p>在我写<code>react</code>饿了么的项目时，点击首页的定位信息，会从右滑动出一个新的页面，此时再通过浏览器的前进后退按钮也可以实现页面的滑动<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/认识pushstate、popstate-无刷新改变URL/3.gif" alt="浏览器控制动画" title="">
+                </div>
+                <div class="image-caption">浏览器控制动画</div>
+            </figure><br>具体制作过程看我的github：<a href="https://github.com/YMBo/react-ele" target="_blank" rel="external">ele项目</a> </p>
+<h1 id="五、补充"><a href="#五、补充" class="headerlink" title="五、补充"></a>五、补充</h1><p>在用 <code>document.referrer</code> 做返回按钮的时候，是只有 <code>a标签</code> 才能添加一条来源的。<br>比如我通过点击页面的一个 <code>链接</code> 调到了对应的页面，那么此时 <code>document.referrer</code> 是有值的，通过 <code>history.pushState</code> 添加的历史记录跳转的页面,不会添加一条 <code>document.referrer</code> 来源 </p>
 
         </div>
 
@@ -208,7 +216,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-25T02:39:03.250Z" itemprop="dateUpdated">2017-09-25 10:39:03</time>
+    最后更新时间：<time datetime="2017-09-25T06:02:47.107Z" itemprop="dateUpdated">2017-09-25 14:02:47</time>
 </span><br>
 
 
