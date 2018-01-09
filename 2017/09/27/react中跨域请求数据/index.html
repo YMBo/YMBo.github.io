@@ -25,19 +25,19 @@
     
     
     <meta name="keywords" content="webpack proxy,react跨域请求">
-    <meta name="description" content="一、介绍在我写 react ele 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。知道今天早上，我在纳闷 react开发过程中是用 webpack 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面 二、配置webpack中 prox">
+    <meta name="description" content="一、介绍在我写 react ele 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。知道今天早上，我在纳闷 react开发过程中是用 webpack 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面 传送门 – gulp里服务端代理配">
 <meta name="keywords" content="webpack proxy,react跨域请求">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react中跨域请求数据">
 <meta property="og:url" content="http://yoursite.com/2017/09/27/react中跨域请求数据/index.html">
 <meta property="og:site_name" content="DHYANA">
-<meta property="og:description" content="一、介绍在我写 react ele 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。知道今天早上，我在纳闷 react开发过程中是用 webpack 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面 二、配置webpack中 prox">
+<meta property="og:description" content="一、介绍在我写 react ele 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。知道今天早上，我在纳闷 react开发过程中是用 webpack 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面 传送门 – gulp里服务端代理配">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/react中跨域请求数据/1.png">
-<meta property="og:updated_time" content="2017-09-27T06:40:51.087Z">
+<meta property="og:updated_time" content="2018-01-09T03:00:49.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react中跨域请求数据">
-<meta name="twitter:description" content="一、介绍在我写 react ele 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。知道今天早上，我在纳闷 react开发过程中是用 webpack 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面 二、配置webpack中 prox">
+<meta name="twitter:description" content="一、介绍在我写 react ele 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。知道今天早上，我在纳闷 react开发过程中是用 webpack 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面 传送门 – gulp里服务端代理配">
 <meta name="twitter:image" content="http://yoursite.com/images/react中跨域请求数据/1.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -179,6 +179,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p>在我写 <a href="https://github.com/YMBo/react-ele" target="_blank" rel="external">react ele</a> 项目的时候，里面的所有数据都要从ele获取，所以我之前的想法是先用死的数据模拟，然后用 node 写几个接口请求ele数据并返回给我的react。<br>知道今天早上，我在纳闷 <code>react</code>开发过程中是用 <code>webpack</code> 起服务器的，那跟后台就是跨域了啊，这样ajax是没有办法请求的，所以吃完一个鸡蛋后查找了一番，果然让我找到了，看下面</p>
+<p><a href="https://ymbo.github.io/2018/01/09/http-proxy-middleware%E9%85%8D%E5%90%88gulp%E4%BD%BF%E7%94%A8%E6%97%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/" target="_blank" rel="external">传送门 – gulp里服务端代理配置 </a></p>
 <h2 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h2><p>webpack中 <code>proxy</code> 是设置代理的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">proxy: &#123;</div><div class="line">  <span class="string">"/api"</span>: &#123;</div><div class="line">      target: <span class="string">"http://localhost:3000"</span>,</div><div class="line">      secure: <span class="literal">false</span>,</div><div class="line">      changeOrigin : <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
 <p>现在比如说我 <code>/api/users</code> 这么请求，现在将代理请求<a href="http://localhost:3000/api/users" target="_blank" rel="external">http://localhost:3000/api/users</a> </p>
 <p><code>注意</code> ：<br>这里的 <code>secure</code> 参数表示能请求 <code>https</code> 的服务器<br><code>changeOrigin</code> 表示是否支持跨域请求，默认 <code>false</code> </p>
@@ -198,7 +199,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2017-09-27T06:40:51.087Z" itemprop="dateUpdated">2017-09-27 14:40:51</time>
+    最后更新时间：<time datetime="2018-01-09T03:00:49.518Z" itemprop="dateUpdated">2018-01-09 11:00:49</time>
 </span><br>
 
 
