@@ -177,7 +177,7 @@
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
             <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p><code>React.Children</code> 是顶层API之一，为处理 <code>this.props.children</code> 提供了几个方法<br><code>this.props.children</code> 表示组件所有子节点    </p>
-<h2 id="二、所有方法"><a href="#二、所有方法" class="headerlink" title="二、所有方法"></a>二、所有方法</h2><h3 id="1-React-Children-map"><a href="#1-React-Children-map" class="headerlink" title="1.React.Children.map"></a>1.React.Children.map</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//必须有返回值</span></div><div class="line">React.Children.map(<span class="keyword">this</span>.props.children,<span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> &lt;li&gt;&#123;child&#125;&lt;/li&gt;</div><div class="line">&#125;)</div><div class="line"><span class="comment">//没有返回值</span></div><div class="line">React.Children.map(<span class="keyword">this</span>.props.children,<span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</div><div class="line">	<span class="comment">/*这里进行处理*/</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="二、所有方法"><a href="#二、所有方法" class="headerlink" title="二、所有方法"></a>二、所有方法</h2><h3 id="1-React-Children-map"><a href="#1-React-Children-map" class="headerlink" title="1.React.Children.map"></a>1.React.Children.map</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//必须有返回值</span></div><div class="line">React.Children.map(<span class="keyword">this</span>.props.children,<span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;child&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></div><div class="line">&#125;)</div><div class="line"><span class="comment">//没有返回值</span></div><div class="line">React.Children.map(<span class="keyword">this</span>.props.children,<span class="function"><span class="keyword">function</span>(<span class="params">child</span>)</span>&#123;</div><div class="line">	<span class="comment">/*这里进行处理*/</span></div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>这里的 <code>child</code> 表示组件的每一个子元素，也可以用箭头函数来写，这样方便this的传递    </p>
 <h3 id="2-this-props-children"><a href="#2-this-props-children" class="headerlink" title="2.this.props.children"></a>2.this.props.children</h3><p>这个是获取当前组件的所有子节点<br><code>注意</code> ：<br>1.如果没有子节点，返回 <code>undefined</code><br>2.如果一个子节点，返回 <code>object</code><br>3.如果多个子节点，返回 <code>array</code><br>但是用 <code>React.Children.map</code> 来遍历的话不会有问题</p>
 <h3 id="3-React-Children-count"><a href="#3-React-Children-count" class="headerlink" title="3.React.Children.count"></a>3.React.Children.count</h3><p>返回组件的所有子元素个数</p>
@@ -332,7 +332,7 @@
     <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
     <h3 class="reward-title">
         <i class="icon icon-quote-left"></i>
-        把我意大利 . . . . 面拿来，给友军尝尝~
+        觉得不错的，可以支持一下呦
         <i class="icon icon-quote-right"></i>
     </h3>
     <div class="reward-content">
@@ -480,10 +480,10 @@ var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '死鬼去哪里了！';
+            document.title = '你的指尖有改变世界的力量';
             clearTimeout(titleTime);
         } else {
-            document.title = '(つェ⊂)咦!又好了!';
+            document.title = 'O(∩_∩)O';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);
