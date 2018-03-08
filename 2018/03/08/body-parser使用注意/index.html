@@ -40,7 +40,7 @@
 <meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/4.png">
 <meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/5.png">
 <meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/6.png">
-<meta property="og:updated_time" content="2018-03-08T09:04:05.203Z">
+<meta property="og:updated_time" content="2018-03-08T09:07:44.091Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="body-parser使用注意">
 <meta name="twitter:description" content="一、前言这几天在学习服务端渲染的时候用到了这个包 body-parser ,很方便的一个包，这个模块提供了四种解析器  JSON body parser Raw body parser Text body parser URL-encoded form body parser  每一项详细的配置都能在网上找到，这篇记下的是我在使用中遇到的问题 bodyParser.json(option)和bod">
@@ -244,12 +244,15 @@
                 <div class="image-caption">返回结果</div>
             </figure></p>
 <p>请求失败，那么疑问来了，我设置了json格式的请求，为什么bodyParser.json解析不了</p>
-<p>** 关键：<br>jq的ajax</p>
+<p><strong>关键</strong>：</p>
+<blockquote>
+<p>jq的ajax</p>
 <ol>
 <li>默认的ContentType的值为:application/x-www-form-urlencoded; charset=UTF-8<br>此格式为表单提交格式，数据为 <code>key1=value1&amp;key2=value2</code>的格式 </li>
 <li>虽然ajax的data属性值格式为:{key1:value1,key2:value2},但最后会转为key1=value1&amp;key2=value2的格式提交到后台 </li>
-<li>如果想传json格式数据，content-type设置好后，ajax必须将date属性值转为json字符串，不能为json对象（js对象，会自动转为key=value形式）,这样传输的时候才是json格式<br>**</li>
+<li>如果想传json格式数据，content-type设置好后，ajax必须将date属性值转为json字符串，不能为json对象（js对象，会自动转为key=value形式）,这样传输的时候才是json格式</li>
 </ol>
+</blockquote>
 <p>我们来试一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	$.ajax(&#123;</div><div class="line">		type:<span class="string">'post'</span>, </div><div class="line">		url:<span class="string">'login'</span>,</div><div class="line">		contentType:<span class="string">'application/json'</span>,</div><div class="line">		data:<span class="built_in">JSON</span>.stringify(&#123;</div><div class="line">			url:<span class="string">'login'</span>,</div><div class="line">			name:<span class="string">'123'</span>,</div><div class="line">			password:<span class="number">123456</span></div><div class="line">		&#125;),</div><div class="line">		success:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(data)</div><div class="line">		&#125;</div><div class="line">	&#125;)</div><div class="line">&#125;,<span class="number">1000</span>)</div></pre></td></tr></table></figure></p>
 <figure class="image-bubble">
                 <div class="img-lightbox">
@@ -258,6 +261,7 @@
                 </div>
                 <div class="image-caption">返回结果</div>
             </figure>
+<p>现在就可以请求成功啦</p>
 
         </div>
 
@@ -265,7 +269,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-08T09:04:05.203Z" itemprop="dateUpdated">2018-03-08 17:04:05</time>
+    最后更新时间：<time datetime="2018-03-08T09:07:44.091Z" itemprop="dateUpdated">2018-03-08 17:07:44</time>
 </span><br>
 
 
