@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mobx基本用法/1.gif">
 <meta property="og:image" content="http://yoursite.com/images/mobx基本用法/2.gif">
 <meta property="og:image" content="http://yoursite.com/images/mobx基本用法/3.png">
-<meta property="og:updated_time" content="2018-03-15T02:32:53.824Z">
+<meta property="og:updated_time" content="2018-03-15T02:35:51.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mobx基本用法">
 <meta name="twitter:description" content="一、前言本文是我初学mobx时对mobx一些基本的认识，如果新发现会继续更新 二、redux和mobx相同点：都是用来管理JavaScript应用的状态，他们不一定要跟react结合使用，还可以与别的框架结合 不同点：  redux学习成本相对于mobx成本要高很多，有reducer、action、dispatch等概念，规则多，比如更新数据必须要用 dispatch，更新的逻辑必须要用 acti">
@@ -157,7 +157,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、redux和mobx"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、redux和mobx</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、mobx基本概念"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、mobx基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-observable"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. @observable </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-computed"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. @computed</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-autorun"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.  autorun </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-action"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. @action</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-oberver"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. @oberver</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、运行环境的配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、运行环境的配置</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-number">1.</span> <span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、redux和mobx"><span class="post-toc-number">2.</span> <span class="post-toc-text">二、redux和mobx</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、mobx基本概念"><span class="post-toc-number">3.</span> <span class="post-toc-text">三、mobx基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-observable"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1. @observable </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-computed"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2. @computed</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-autorun"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.  autorun </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-action"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4. @action</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-oberver"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5. @oberver</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、运行环境的配置"><span class="post-toc-number">4.</span> <span class="post-toc-text">四、运行环境的配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-useStaticRendering"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">6. useStaticRendering</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -229,13 +229,16 @@
                 </div>
                 <div class="image-caption">.babelrc配置</div>
             </figure>
+<h4 id="6-useStaticRendering"><a href="#6-useStaticRendering" class="headerlink" title="6. useStaticRendering"></a>6. <strong>useStaticRendering</strong></h4><p>我们知道可以通过使用@observer，将react组件转换成一个监听者(Reactions)，这样在被监听的应用状态变量(Observable)有更新时，react组件就会重新渲染。而对于服务端的React组件，我们只需要它被渲染一次，而不需要组件监听模型的状态。事实上，如果服务端React组件像客户端组件一样监听模型的状态变化，就会造成严重的内存泄漏问题。官方提供了useStaticRendering方法，用于避免mobx服务端渲染的内存泄漏问题; 该方法只需要在server启动时设置一次。</p>
+<p>useStaticRendering(true);</p>
+
         </div>
 
         <blockquote class="post-copyright">
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-03-15T02:32:53.824Z" itemprop="dateUpdated">2018-03-15 10:32:53</time>
+    最后更新时间：<time datetime="2018-03-15T02:35:51.577Z" itemprop="dateUpdated">2018-03-15 10:35:51</time>
 </span><br>
 
 
