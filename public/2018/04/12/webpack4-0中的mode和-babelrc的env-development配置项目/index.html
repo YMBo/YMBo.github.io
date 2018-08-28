@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>webpack4.0中的mode和.babelrc的env.development配置项目 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="webpack">
+    <meta name="description" content="一、前言之前写过怎么在webpack中使用react-hot-loader做热更新功能，不得不说是真的非常麻烦，今天发现了更好用的办法来记录一下 1.这篇文章讲的什么？1.更简单的配置 热更新的方法2.webpack4.0的mode配置项有啥用？3.babelrc中的env.development是干啥的？ 二、热更新注意，本部分着重讲解的是热更新，至于上面提到的2和3放在下个部分webpack.">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack4.0中的mode和.babelrc的env.development配置项目">
+<meta property="og:url" content="http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言之前写过怎么在webpack中使用react-hot-loader做热更新功能，不得不说是真的非常麻烦，今天发现了更好用的办法来记录一下 1.这篇文章讲的什么？1.更简单的配置 热更新的方法2.webpack4.0的mode配置项有啥用？3.babelrc中的env.development是干啥的？ 二、热更新注意，本部分着重讲解的是热更新，至于上面提到的2和3放在下个部分webpack.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/webpack4-0中的mode和-babelrc的env-development配置项目/1.gif">
+<meta property="og:updated_time" content="2018-08-28T15:01:34.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack4.0中的mode和.babelrc的env.development配置项目">
+<meta name="twitter:description" content="一、前言之前写过怎么在webpack中使用react-hot-loader做热更新功能，不得不说是真的非常麻烦，今天发现了更好用的办法来记录一下 1.这篇文章讲的什么？1.更简单的配置 热更新的方法2.webpack4.0的mode配置项有啥用？3.babelrc中的env.development是干啥的？ 二、热更新注意，本部分着重讲解的是热更新，至于上面提到的2和3放在下个部分webpack.">
+<meta name="twitter:image" content="http://yoursite.com/images/webpack4-0中的mode和-babelrc的env-development配置项目/1.gif">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">webpack4.0中的mode和.babelrc的env.development配置项目</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">webpack4.0中的mode和.babelrc的env.development配置项目</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-12T06:29:57.000Z" itemprop="datePublished" class="page-time">
+  2018-04-12
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-这篇文章讲的什么？"><span class="post-toc-text">1.这篇文章讲的什么？</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、热更新"><span class="post-toc-text">二、热更新</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、webpack4-0的mode配置项有啥用？"><span class="post-toc-text">三、webpack4.0的mode配置项有啥用？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、babelrc中的env-development是干啥的？"><span class="post-toc-text">四、babelrc中的env.development是干啥的？</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-webpack4-0中的mode和-babelrc的env-development配置项目"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">webpack4.0中的mode和.babelrc的env.development配置项目</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-12 14:29:57" datetime="2018-04-12T06:29:57.000Z"  itemprop="datePublished">2018-04-12</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>之前写过怎么在webpack中使用react-hot-loader做热更新功能，不得不说是真的非常麻烦，今天发现了更好用的办法来记录一下</p>
+<h4 id="1-这篇文章讲的什么？"><a href="#1-这篇文章讲的什么？" class="headerlink" title="1.这篇文章讲的什么？"></a>1.这篇文章讲的什么？</h4><p>1.更简单的配置 <strong>热更新</strong>的方法<br>2.webpack4.0的<strong>mode配置项</strong>有啥用？<br>3.babelrc中的<strong>env.development</strong>是干啥的？</p>
+<h3 id="二、热更新"><a href="#二、热更新" class="headerlink" title="二、热更新"></a>二、热更新</h3><p><code>注意，本部分着重讲解的是热更新，至于上面提到的2和3放在下个部分</code><br>webpack.config.js的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpack=<span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="keyword">const</span> opn=<span class="built_in">require</span>(<span class="string">'opn'</span>)</span><br><span class="line"><span class="keyword">const</span> merge=<span class="built_in">require</span>(<span class="string">'webpack-merge'</span>)</span><br><span class="line"><span class="keyword">const</span> path=<span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"><span class="keyword">const</span> baseWebpackConfig=<span class="built_in">require</span>(<span class="string">'./webpack.base.config'</span>)</span><br><span class="line"><span class="keyword">const</span> webpackFile=<span class="built_in">require</span>(<span class="string">'./webpack.file.config'</span>)</span><br><span class="line"><span class="keyword">const</span> htmlWebpackPlugin=<span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> config=merge(baseWebpackConfig,&#123;</span><br><span class="line">	mode:<span class="string">'development'</span>,</span><br><span class="line">	output:&#123;</span><br><span class="line">		path:path.join(webpackFile.devDirectory),</span><br><span class="line">		filename:<span class="string">'js[name].[hash].js'</span>,</span><br><span class="line">		publicPath:<span class="string">''</span></span><br><span class="line">	&#125;,</span><br><span class="line">	plugins:[</span><br><span class="line">		<span class="comment">/*热更新*/</span></span><br><span class="line">		<span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),</span><br><span class="line">		<span class="keyword">new</span> htmlWebpackPlugin(&#123;</span><br><span class="line">			template:path.join(__dirname,<span class="string">'../template/index.html'</span>)</span><br><span class="line">		&#125;)</span><br><span class="line">	],</span><br><span class="line">	<span class="built_in">module</span>:&#123;</span><br><span class="line">		rules:[</span><br><span class="line">			&#123;</span><br><span class="line">				test:<span class="regexp">/\.(js|jsx)$/</span>,</span><br><span class="line">				use:<span class="string">'babel-loader'</span>,</span><br><span class="line">				include:[</span><br><span class="line">					path.join(__dirname,<span class="string">'../client'</span>)</span><br><span class="line">				],</span><br><span class="line">				exclude:path.join(__dirname,<span class="string">'../node_modules'</span>)</span><br><span class="line">			&#125;</span><br><span class="line">		]</span><br><span class="line">	&#125;,</span><br><span class="line">	devServer:&#123;</span><br><span class="line">		host:<span class="string">'0.0.0.0'</span>,</span><br><span class="line">		port:<span class="string">'8888'</span>,</span><br><span class="line">		hot:<span class="literal">true</span>,</span><br><span class="line">		overlay:&#123;</span><br><span class="line">			errors:<span class="literal">true</span></span><br><span class="line">		&#125;,</span><br><span class="line">		contentBase:path.join(__dirname,webpackFile.devDirectory),</span><br><span class="line">		historyApiFallback: <span class="literal">true</span>,</span><br><span class="line">		proxy:[</span><br><span class="line">			&#123;</span><br><span class="line">				context:[<span class="string">'/api'</span>],</span><br><span class="line">				target:<span class="string">'localhost:8888'</span>,</span><br><span class="line">				secure: <span class="literal">false</span></span><br><span class="line">			&#125;</span><br><span class="line">		],</span><br><span class="line">		<span class="comment">/*打开浏览器*/</span></span><br><span class="line">		after()&#123;</span><br><span class="line">			opn(<span class="string">'http://localhost:'</span>+<span class="keyword">this</span>.port)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">module</span>.exports=config;</span><br></pre></td></tr></table></figure></p>
+<p><em>.babelrc</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"presets"</span>:[<span class="string">'react'</span>,<span class="string">'env'</span>],</span><br><span class="line">	<span class="string">"env"</span>:&#123;</span><br><span class="line">		<span class="comment">/*开发环境下执行*/</span></span><br><span class="line">		<span class="string">"development"</span>:&#123;</span><br><span class="line">			<span class="string">"presets"</span>:[<span class="string">"react-hmre"</span>]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>package.json文件的启动命令<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dev"</span>: <span class="string">"webpack-dev-server --config build/webpack.dev.config.js"</span></span><br></pre></td></tr></table></figure></p>
+<p>现在配置热替换仅需三个步骤</p>
+<ol>
+<li>webpack中<code>devServer.hot=true</code></li>
+<li>webpack中plugins添加<code>new webpack.HotModuleReplacementPlugin()</code></li>
+<li>‘.babelrc’文件中使用 <code>react-hmre</code> （npm i babel-presets-react-hmre）预设</li>
+</ol>
+<p>配置完成是不是很简单？看看执行结果</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/webpack4-0中的mode和-babelrc的env-development配置项目/1.gif" alt="hmr" title="">
+                </div>
+                <div class="image-caption">hmr</div>
+            </figure>
+<h3 id="三、webpack4-0的mode配置项有啥用？"><a href="#三、webpack4-0的mode配置项有啥用？" class="headerlink" title="三、webpack4.0的mode配置项有啥用？"></a>三、webpack4.0的mode配置项有啥用？</h3><p>mode配置项会告诉webpack使用相应的内置优化</p>
+<p>webpack运行时还会根据mode设置一个全局变量process.env.NODE_ENV,这里的process.env.NODE_ENV不是node中的环境变量,而是webpack.DefinePlugin中定义的全局变量,允许你根据不同的环境执行不同的代码.</p>
+<p>参数：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>development</td>
+<td style="text-align:center">Provides process.env.NODE_ENV with value development. Enables NamedChunksPlugin and NamedModulesPlugin.</td>
+</tr>
+<tr>
+<td>production</td>
+<td style="text-align:center">Provides process.env.NODE_ENV with value production. Enables FlagDependencyUsagePlugin, FlagIncludedChunksPlugin, ModuleConcatenationPlugin, NoEmitOnErrorsPlugin, OccurrenceOrderPlugin, SideEffectsFlagPlugin and UglifyJsPlugin.</td>
+</tr>
+</tbody>
+</table>
+<p>从网上找到了更详细的优化说明<br>列出了针对这两种情况做的对应优化<br><strong>development</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调试</span></span><br><span class="line">devtool:<span class="built_in">eval</span></span><br><span class="line"><span class="comment">//缓存模块, 避免在未更改时重建它们。</span></span><br><span class="line">cache:<span class="literal">true</span></span><br><span class="line"><span class="comment">//缓存已解决的依赖项, 避免重新解析它们。</span></span><br><span class="line"><span class="built_in">module</span>.unsafeCache:<span class="literal">true</span></span><br><span class="line"><span class="comment">//在 bundle 中引入「所包含模块信息」的相关注释</span></span><br><span class="line">output.pathinfo:<span class="literal">true</span></span><br><span class="line"><span class="comment">//在可能的情况下确定每个模块的导出,被用于其他优化或代码生成。</span></span><br><span class="line">optimization.providedExports:<span class="literal">true</span></span><br><span class="line"><span class="comment">//找到chunk中共享的模块,取出来生成单独的chunk</span></span><br><span class="line">optimization.splitChunks:<span class="literal">true</span></span><br><span class="line"><span class="comment">//为 webpack 运行时代码创建单独的chunk</span></span><br><span class="line">optimization.runtimeChunk:<span class="literal">true</span></span><br><span class="line"><span class="comment">//编译错误时不写入到输出</span></span><br><span class="line">optimization.noEmitOnErrors:<span class="literal">true</span></span><br><span class="line"><span class="comment">//给模块有意义的名称代替ids</span></span><br><span class="line">optimization.namedModules:<span class="literal">true</span></span><br><span class="line"><span class="comment">//给模chunk有意义的名称代替ids</span></span><br><span class="line">optimization.namedChunks:<span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>production</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//性能相关配置</span></span><br><span class="line">performance:&#123;<span class="attr">hints</span>:<span class="string">"error"</span>....&#125;</span><br><span class="line"><span class="comment">//某些chunk的子chunk已一种方式被确定和标记,这些子chunks在加载更大的块时不必加载</span></span><br><span class="line">optimization.flagIncludedChunks:<span class="literal">true</span></span><br><span class="line"><span class="comment">//给经常使用的ids更短的值</span></span><br><span class="line">optimization.occurrenceOrder:<span class="literal">true</span></span><br><span class="line"><span class="comment">//确定每个模块下被使用的导出</span></span><br><span class="line">optimization.usedExports:<span class="literal">true</span></span><br><span class="line"><span class="comment">//识别package.json or rules sideEffects 标志</span></span><br><span class="line">optimization.sideEffects:<span class="literal">true</span></span><br><span class="line"><span class="comment">//尝试查找模块图中可以安全连接到单个模块中的段。- -</span></span><br><span class="line">optimization.concatenateModules:<span class="literal">true</span></span><br><span class="line"><span class="comment">//使用uglify-js压缩代码</span></span><br><span class="line">optimization.minimize:<span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>例如:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(process.env.NODE_ENV === <span class="string">'development'</span>)&#123;</span><br><span class="line">    <span class="comment">//开发环境 do something</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//生产环境 do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最终将编译成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">   <span class="comment">//开发环境 do something</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">   <span class="comment">//生产环境 do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>生产环境下,uglify打包代码时会自动删除不可达代码,也就是说生产环境压缩后最终的代码为:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//生产环境 do something</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="四、babelrc中的env-development是干啥的？"><a href="#四、babelrc中的env-development是干啥的？" class="headerlink" title="四、babelrc中的env.development是干啥的？"></a>四、babelrc中的env.development是干啥的？</h3><p>env选项可以针对特定环境进行设置。此env值会从<strong>process.env.BABEL_ENV</strong>中获取；如果该值不存在，会使用<strong>process.env.NODE_ENV</strong>；二者都不存在，使用默认值”development”。</p>
+<p>启动命令设置<code>process.env.BABEL_ENV</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dev"</span>: <span class="string">"cross-env BABEL_ENV=development webpack-dev-server --config build/webpack.dev.config.js"</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"presets"</span>:[<span class="string">'react'</span>,<span class="string">'env'</span>],</span><br><span class="line">	<span class="string">"env"</span>:&#123;</span><br><span class="line">		<span class="comment">/*开发环境下执行*/</span></span><br><span class="line">		<span class="string">"development"</span>:&#123;</span><br><span class="line">			<span class="string">"presets"</span>:[<span class="string">"react-hmre"</span>]</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就会执行”development”下配置的内容</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-28T15:01:34.808Z" itemprop="dateUpdated">2018-08-28 23:01:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/&title=《webpack4.0中的mode和.babelrc的env.development配置项目》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/&title=《webpack4.0中的mode和.babelrc的env.development配置项目》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack4.0中的mode和.babelrc的env.development配置项目》 — DHYANA&url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/21/optimization-splitChunks/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">optimization.splitChunks</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/27/react生命周期详解/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">react生命周期详解</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'webpack4.0中的mode和.babelrc的env.development配置项目',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/&title=《webpack4.0中的mode和.babelrc的env.development配置项目》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/&title=《webpack4.0中的mode和.babelrc的env.development配置项目》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack4.0中的mode和.babelrc的env.development配置项目》 — DHYANA&url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADIElEQVR42u3aQZLiQAwEwPn/p9nrbMzirZI8EdCkT4QB29kchEr99RUfj2/Hs/M/j/zKP18/O3N9hZsPbGxs7DdhJ4+es69J11doF/36Lv/5GbCxsbGPY89KS1ty8ndnS5lYsLGxsbGvP39dTvKSkyw3NjY2NvZd7OTG7fXziAobGxsbOw+V8kKVf3cTMOVPgo2NjX02e19sXuf1r8y3sbGxsV+Y/SiPfLw6a1SS6+wPbGxs7JPYeQFo/9bPttck15m1GdjY2NinsmdR0Ww0myxiHhi17dNfZ7CxsbE/gJ3cMm9XZlF+3tLUQ2JsbGzsg9jtBpq2RO3HyXfl+cUvj42Njf2G7H1U1Eb/m2/tnxMbGxv7PHYe3M9uuYmuNkuGjY2N/TnsNohvI/t2KLsvTtHYGBsbG/sgdh6+t9tu8uhnM3LIFxobGxv7PPZdAX37zz8f5baD52hcgY2NjX0QO4+E8sFAHkW124DaJ1n1N9jY2Nhvxd4Up2SZ8sHDpl1pt2xiY2Njn8G+N77JH6t99E2xxMbGxv5k9qxo7TffzCKk4gw2Njb2Qey8SMzAs6Zl1qK0kRY2Njb2GeykzcjD900RSspbWyafNlTY2NjYB7FnN2uXpi08mwAr/xmwsbGxz2Pn+1vyd9u2IW+HZgOJencPNjY29suz27/ys3KS51uz0UI7zMDGxsY+j92WjbbZyFuaHDZbRGxsbOyz2flwd1ZOkmI5GyHXtQkbGxv7UHbyEPsdL7N2ZRYwPf2RsLGxsQ9ityF+G+hsxrT3LvE/Po+NjY19HLstZm2Uf91+tBuDhtTNdBobGxv7rdh56DMctd5099mIGhsbG/tU9mxwm5eNfKj8G41Q1IFhY2NjvyH7UR6zAtYOHtpBctIOPY2TsLGxsd+cPQv383hoc34TKuVFFBsbG/sMdh73t4VqtjWzDbPyQouNjY19NnvTJCQ3bq+2GTkUBQwbGxv7I9n74e6s+blrSxA2NjY29r2f3C/QLA7DxsbGPo+dF4x2+JpHQrOQK382bGxs7FPZ+9A/3+izH/G2YdaqWGJjY2O/OvsPCcNno5R7j0cAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '你的指尖有改变世界的力量';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'O(∩_∩)O';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

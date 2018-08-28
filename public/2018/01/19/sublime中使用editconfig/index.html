@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>sublime中使用EditorConfig | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="EditorConfig">
+    <meta name="description" content="一、作用EditorConfig是统一代码格式的解决方案，它可以帮助开发者在不同的编辑器和IDE之间定义和维护一致的代码风格，比如多人合作的时候统一代码风格，避免一些潜在的问题，增加代码可读性 二、使用方法1.编辑器插件有些编辑器已经集成了这个插件，所以不用再安装，而有些编辑器没有集成这个插件，需要安装 下面这些编辑器不需要安装：">
+<meta name="keywords" content="EditorConfig">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sublime中使用EditorConfig">
+<meta property="og:url" content="http://yoursite.com/2018/01/19/sublime中使用editconfig/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、作用EditorConfig是统一代码格式的解决方案，它可以帮助开发者在不同的编辑器和IDE之间定义和维护一致的代码风格，比如多人合作的时候统一代码风格，避免一些潜在的问题，增加代码可读性 二、使用方法1.编辑器插件有些编辑器已经集成了这个插件，所以不用再安装，而有些编辑器没有集成这个插件，需要安装 下面这些编辑器不需要安装：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/1.png">
+<meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/2.png">
+<meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/3.png">
+<meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/4.png">
+<meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/5.png">
+<meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/6.jpg">
+<meta property="og:updated_time" content="2018-08-28T15:01:34.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="sublime中使用EditorConfig">
+<meta name="twitter:description" content="一、作用EditorConfig是统一代码格式的解决方案，它可以帮助开发者在不同的编辑器和IDE之间定义和维护一致的代码风格，比如多人合作的时候统一代码风格，避免一些潜在的问题，增加代码可读性 二、使用方法1.编辑器插件有些编辑器已经集成了这个插件，所以不用再安装，而有些编辑器没有集成这个插件，需要安装 下面这些编辑器不需要安装：">
+<meta name="twitter:image" content="http://yoursite.com/images/sublime中使用editconfig/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">sublime中使用EditorConfig</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">sublime中使用EditorConfig</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-01-19T02:22:50.000Z" itemprop="datePublished" class="page-time">
+  2018-01-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、作用"><span class="post-toc-text">一、作用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、使用方法"><span class="post-toc-text">二、使用方法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-编辑器插件"><span class="post-toc-text">1.编辑器插件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-配置文件说明"><span class="post-toc-text">2.配置文件说明</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-文件格式详情"><span class="post-toc-text">3.文件格式详情</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-支持的属性"><span class="post-toc-text">4.支持的属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、我遇到的问题"><span class="post-toc-text">三、我遇到的问题</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、总结"><span class="post-toc-text">四、总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-sublime中使用editconfig"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">sublime中使用EditorConfig</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-01-19 10:22:50" datetime="2018-01-19T02:22:50.000Z"  itemprop="datePublished">2018-01-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、作用"><a href="#一、作用" class="headerlink" title="一、作用"></a>一、作用</h2><p>EditorConfig是统一代码格式的解决方案，它可以帮助开发者在不同的编辑器和IDE之间定义和维护一致的代码风格，比如多人合作的时候统一代码风格，避免一些潜在的问题，增加代码可读性</p>
+<h2 id="二、使用方法"><a href="#二、使用方法" class="headerlink" title="二、使用方法"></a>二、使用方法</h2><h3 id="1-编辑器插件"><a href="#1-编辑器插件" class="headerlink" title="1.编辑器插件"></a>1.编辑器插件</h3><p>有些编辑器已经集成了这个插件，所以不用再安装，而有些编辑器没有集成这个插件，需要安装</p>
+<p>下面这些编辑器不需要安装：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sublime中使用editconfig/1.png" alt="已经集成的编辑器" title="">
+                </div>
+                <div class="image-caption">已经集成的编辑器</div>
+            </figure><br>这些编辑器需要安装：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sublime中使用editconfig/2.png" alt="需要单独安装插件的编辑器" title="">
+                </div>
+                <div class="image-caption">需要单独安装插件的编辑器</div>
+            </figure></p>
+<p>sublime里直接搜索 <code>EditorConfig</code> 安装即可<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sublime中使用editconfig/3.png" alt="安装" title="">
+                </div>
+                <div class="image-caption">安装</div>
+            </figure></p>
+<h3 id="2-配置文件说明"><a href="#2-配置文件说明" class="headerlink" title="2.配置文件说明"></a>2.配置文件说明</h3><p>在需要的地方配置 <code>.editorconfig</code>文件</p>
+<blockquote>
+<p><code>注意1：</code> 当打开一个文件时，EditorConfig插件会在打开文件的目录和其每一级父目录查找.editorconfig文件，直到有一个配置文件root=true。<br>什么意思呢？<br>比如我的文件结构是这样的：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sublime中使用editconfig/4.png" alt="文件目录" title="">
+                </div>
+                <div class="image-caption">文件目录</div>
+            </figure><br>在 <code>b.js</code> 里的代码，会先从同级目录 ——&gt; 父级目录 这个路径进行查找（冒泡 ），如果遇到了 <code>.editorconfig</code> 里 <code>root=true</code> 则停止，因为 <code>b.js</code> 同级目录的 <code>.editorconfig</code> 里 <code>root=true</code> 所以 b.js 用的就是b.js上面这个文件配置的规则</p>
+</blockquote>
+<blockquote>
+<hr>
+<p><code>注意2</code>：EditorConfig配置文件从上往下读取，并且路径最近的文件最后被读取。匹配的配置属性按照属性应用在代码上，所以最接近代码文件的属性优先级最高。<br>什么意思呢？<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sublime中使用editconfig/5.png" alt=".editconfig" title="">
+                </div>
+                <div class="image-caption">.editconfig</div>
+            </figure><br>意思就是 我的 js文件会读取 注释2 (第十行)下面的配置，而python文件会读取上面 (注释1)的配置 </p>
+</blockquote>
+<h3 id="3-文件格式详情"><a href="#3-文件格式详情" class="headerlink" title="3.文件格式详情"></a>3.文件格式详情</h3><p>EditorConfig文件使用INI格式，斜杠(/)作为路径分隔符，#或者;作为注释。注释应该单独占一行。</p>
+<h3 id="4-支持的属性"><a href="#4-支持的属性" class="headerlink" title="4.支持的属性"></a>4.支持的属性</h3><p>注意：不是每种插件都支持所有的属性，具体可见<a href="https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties" target="_blank" rel="noopener">Wiki</a>。</p>
+<p>indent_style：tab为hard-tabs，space为soft-tabs。<br>indent_size：设置整数表示规定每级缩进的列数和soft-tabs的宽度（译注：空格数）。如果设定为tab，则会使用tab_width的值（如果已指定）。<br>tab_width：设置整数用于指定替代tab的列数。默认值就是indent_size的值，一般无需指定。<br>end_of_line：定义换行符，支持lf、cr和crlf。<br>charset：编码格式，支持latin1、utf-8、utf-8-bom、utf-16be和utf-16le，不建议使用uft-8-bom。<br>trim_trailing_whitespace：设为true表示会除去换行行首的任意空白字符，false反之。<br>insert_final_newline：设为true表明使文件以一个空白行结尾，false反之。<br>root：表明是最顶层的配置文件，发现设为true时，才会停止查找.editorconfig文件。</p>
+<h2 id="三、我遇到的问题"><a href="#三、我遇到的问题" class="headerlink" title="三、我遇到的问题"></a>三、我遇到的问题</h2><p>看我的配置文件：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/sublime中使用editconfig/6.jpg" alt=".editconfig" title="">
+                </div>
+                <div class="image-caption">.editconfig</div>
+            </figure><br>我设置了缩进方式为 <code>tab</code>,每级缩进 8 列，但是我设置好后，打开a.js文件后每级的缩进并没有变化，为此我还找了好久~╮(╯▽╰)╭，最后我发现，只要把a.js关闭，再打开就生效了~</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>EditorConfig 可以说很好用了，很适合多人合作情景，但这个只是编辑器级别的格式统一，我会在后面说到代码级别的检测—ESLint，它可以通过我们配置很详细的配置文件，来规范我们的代码风格。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-28T15:01:34.808Z" itemprop="dateUpdated">2018-08-28 23:01:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/EditorConfig/">EditorConfig</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/19/sublime中使用editconfig/&title=《sublime中使用EditorConfig》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/19/sublime中使用editconfig/&title=《sublime中使用EditorConfig》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/01/19/sublime中使用editconfig/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《sublime中使用EditorConfig》 — DHYANA&url=http://yoursite.com/2018/01/19/sublime中使用editconfig/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/01/19/sublime中使用editconfig/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/02/07/受控组件和非受控组件/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">受控组件和非受控组件</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/01/09/http-proxy-middleware配合gulp使用时的一些坑/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">http-proxy-middleware配合gulp使用时的一些坑</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'sublime中使用EditorConfig',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/01/19/sublime中使用editconfig/&title=《sublime中使用EditorConfig》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/01/19/sublime中使用editconfig/&title=《sublime中使用EditorConfig》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/01/19/sublime中使用editconfig/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《sublime中使用EditorConfig》 — DHYANA&url=http://yoursite.com/2018/01/19/sublime中使用editconfig/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/01/19/sublime中使用editconfig/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLklEQVR42u3ay67DMAiE4b7/S7vbI1X2mRmSqoHfq0q5fllQwLxe8lqb9ffo7vzPcz7P31118YIBA8ZjGeu4lHOUB7v3198NBgwYcxi7B+9+61edX0551vkpMGDAgKEnc+ew66aVMGDAgHEHww3N7t1gwIABI2uoKWFXea0z4+JaHAYMGA9k6KHw+79v2d+AAQPGoxjLXFmo1UPwihYMGDB6M/QAp7+okvzZBaryPjBgwBjAyIpSd5zCTQqNd4ABA0ZTRjY24T4yO2q0/GDAgDGGkbX13fDqpptSogkDBozWjMpIhN4sy9pqdhkMAwaMpgy3fZY1yK46uj0TBgwYrRluZ05PH89hNytl/ylrYcCAMYahbA8oaVx2fmmMAwYMGAMYd4RUpZWWbWdud2JhwIDRjrHklY1WVEK5MSgGAwaM1gy36V9vulUafAYPBgwYjRiVcQd9UMP9ovp25gVTGzBgwPh5htsayxr9CsAdtjDabTBgwGjBcDcss1oym45wPxwMGDC6Mtyi1BiAiIphPbxu/zdgwIDRmlHZYtTbZ24yKn1iGDBgDGC4Y1t2eWm24cLyFQYMGO0Yy1xZZ94tdPWkEwYMGBMYbuMsC6NZYHW3FmDAgNGboQRZvfWWJYsXBFwYMGAMYOiBr36HStpn7MHCgAFjPEMJ0FkRqzwRBgwYMPRi0t10rDfytiQYMGAMYNQDqHJtZYsUBgwYkxml0jFKBJUhMCXIwoABYwDjDchh5PPUDoVEAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '你的指尖有改变世界的力量';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'O(∩_∩)O';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

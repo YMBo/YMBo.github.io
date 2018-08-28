@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>body-parser使用注意 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="npm">
+    <meta name="description" content="一、前言这几天在学习服务端渲染的时候用到了这个包 body-parser ,很方便的一个包，这个模块提供了四种解析器  JSON body parser Raw body parser Text body parser URL-encoded form body parser  每一项详细的配置都能在网上找到，这篇记下的是我在使用中遇到的问题 bodyParser.json(option)和bod">
+<meta name="keywords" content="npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="body-parser使用注意">
+<meta property="og:url" content="http://yoursite.com/2018/03/08/body-parser使用注意/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言这几天在学习服务端渲染的时候用到了这个包 body-parser ,很方便的一个包，这个模块提供了四种解析器  JSON body parser Raw body parser Text body parser URL-encoded form body parser  每一项详细的配置都能在网上找到，这篇记下的是我在使用中遇到的问题 bodyParser.json(option)和bod">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/1.png">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/2.png">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/2.png">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/3.png">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/4.png">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/5.png">
+<meta property="og:image" content="http://yoursite.com/images/body-parser使用注意/6.png">
+<meta property="og:updated_time" content="2018-08-28T15:01:34.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="body-parser使用注意">
+<meta name="twitter:description" content="一、前言这几天在学习服务端渲染的时候用到了这个包 body-parser ,很方便的一个包，这个模块提供了四种解析器  JSON body parser Raw body parser Text body parser URL-encoded form body parser  每一项详细的配置都能在网上找到，这篇记下的是我在使用中遇到的问题 bodyParser.json(option)和bod">
+<meta name="twitter:image" content="http://yoursite.com/images/body-parser使用注意/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">body-parser使用注意</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">body-parser使用注意</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-08T07:53:13.000Z" itemprop="datePublished" class="page-time">
+  2018-03-08
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、区别"><span class="post-toc-text">二、区别</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、例子"><span class="post-toc-text">三、例子</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-body-parser使用注意"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">body-parser使用注意</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-08 15:53:13" datetime="2018-03-08T07:53:13.000Z"  itemprop="datePublished">2018-03-08</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>这几天在学习服务端渲染的时候用到了这个包 <strong>body-parser</strong> ,很方便的一个包，这个模块提供了四种解析器</p>
+<ol>
+<li>JSON body parser</li>
+<li>Raw body parser</li>
+<li>Text body parser</li>
+<li>URL-encoded form body parser</li>
+</ol>
+<p>每一项详细的配置都能在网上找到，这篇记下的是我在使用中遇到的问题 <code>bodyParser.json(option)和bodyParser.urlencoded(option)的不同</code>，在网上搜这个问题，得到的答案还是让我一头雾水，终于试了几次并结合资料弄清楚两者的使用场景</p>
+<h2 id="二、区别"><a href="#二、区别" class="headerlink" title="二、区别"></a>二、区别</h2><p>看官方的解释：<br>bodyParser.json(options)：中间件只会解析 json ，允许请求任意Unicode编码,支持 gzip 和 deflate 编码。</p>
+<p>bodyParser.urlencoded(option)：中间件只解析urlencoded 请求体，并返回，只支持UTF-8编号文本，支持gzip deflate 压缩。(tip:一般这一项是接收表单提交form)</p>
+<h2 id="三、例子"><a href="#三、例子" class="headerlink" title="三、例子"></a>三、例子</h2><p>看到这里我明白了一个接受form请求，一个接受json请求，好，我写了下面的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//server端关键代码</span></span><br><span class="line"><span class="keyword">var</span> jsonParser  =bodyParser.json();</span><br><span class="line">app.post(<span class="string">'/login'</span>,jsonParser,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(req.body)</span><br><span class="line">	res.send(req.body)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">//客户端请求</span></span><br><span class="line">&lt;form method=<span class="string">"post"</span> action=<span class="string">"/login"</span>&gt;</span><br><span class="line">	&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-group"</span>&gt;</span><br><span class="line">		&lt;label <span class="keyword">for</span>=<span class="string">"inputTitle"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-sm-3 control-label"</span>&gt;电影名称&lt;<span class="regexp">/label&gt;</span></span><br><span class="line"><span class="regexp">		&lt;input id="inputTitle" type="text" name="title" value="" class="form-control" /</span>&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">	&lt;div class="form-group"&gt;</span></span><br><span class="line"><span class="regexp">		&lt;label for="inputLanguage" class="col-sm-3 control-label"&gt;海报&lt;/</span>label&gt;</span><br><span class="line">		&lt;input id=<span class="string">"inputLanguage"</span> type=<span class="string">"text"</span> name=<span class="string">"poster"</span> value=<span class="string">""</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> /&gt;</span><br><span class="line">	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;button type="submit" class="btn btn-default"&gt;确定&lt;/</span>button&gt;</span><br><span class="line">&lt;<span class="regexp">/form&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">setTimeout(function()&#123;</span></span><br><span class="line"><span class="regexp">	$.ajax(&#123;</span></span><br><span class="line"><span class="regexp">		type:'post', </span></span><br><span class="line"><span class="regexp">		url:'login',</span></span><br><span class="line"><span class="regexp">		data:&#123;</span></span><br><span class="line"><span class="regexp">			url:'login',</span></span><br><span class="line"><span class="regexp">			name:'123',</span></span><br><span class="line"><span class="regexp">			password:123456</span></span><br><span class="line"><span class="regexp">		&#125;,</span></span><br><span class="line"><span class="regexp">		success:function(data)&#123;</span></span><br><span class="line"><span class="regexp">			console.log(data)</span></span><br><span class="line"><span class="regexp">		&#125;</span></span><br><span class="line"><span class="regexp">	&#125;)</span></span><br><span class="line"><span class="regexp">&#125;,1000)</span></span><br></pre></td></tr></table></figure></p>
+<p>客户端有一个用于测试的表单和一个1s后发送post请求的ajax</p>
+<p>先看一下表单请求的结果：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/1.png" alt="表单请求" title="">
+                </div>
+                <div class="image-caption">表单请求</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/2.png" alt="表单方式请求后服务端返回结果" title="">
+                </div>
+                <div class="image-caption">表单方式请求后服务端返回结果</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/2.png" alt="ajax方式请求后服务端返回结果" title="">
+                </div>
+                <div class="image-caption">ajax方式请求后服务端返回结果</div>
+            </figure>
+<p>可以看到bodyParser.json()并没有解析到ajax和form表单请求，现在来换bodyParser.urlencoded(option)的解析方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> urlencodedParser = bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">app.post(<span class="string">'/login'</span>,urlencodedParser,<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(req.body)</span><br><span class="line">	res.send(req.body)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/3.png" alt="表单方式请求后服务端返回结果" title="">
+                </div>
+                <div class="image-caption">表单方式请求后服务端返回结果</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/4.png" alt="ajax方式请求后服务端返回结果" title="">
+                </div>
+                <div class="image-caption">ajax方式请求后服务端返回结果</div>
+            </figure>
+<p>可以看到这种解析方式成功将请求解析到了body里。<br>到了这里，我又有疑问了，知道了bodyParser.urlencoded期望的数据形式，那bodyParser.json适用于什么情况呢？</p>
+<p>看下面例子，既然api说bodyParser.json适用于json的数据类型，所以我将ajax的content-Type设置为json</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$.ajax(&#123;</span><br><span class="line">		type:<span class="string">'post'</span>, </span><br><span class="line">		url:<span class="string">'login'</span>,</span><br><span class="line">		contentType:<span class="string">'application/json'</span>,</span><br><span class="line">		data:&#123;</span><br><span class="line">			url:<span class="string">'login'</span>,</span><br><span class="line">			name:<span class="string">'123'</span>,</span><br><span class="line">			password:<span class="number">123456</span></span><br><span class="line">		&#125;,</span><br><span class="line">		success:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(data)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+<p>请求结果：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/5.png" alt="返回结果" title="">
+                </div>
+                <div class="image-caption">返回结果</div>
+            </figure></p>
+<p>请求失败，那么疑问来了，我设置了json格式的请求，为什么bodyParser.json解析不了</p>
+<p><strong>关键</strong>：</p>
+<blockquote>
+<p>jq的ajax</p>
+<ol>
+<li>默认的ContentType的值为:application/x-www-form-urlencoded; charset=UTF-8<br>此格式为表单提交格式，数据为 <code>key1=value1&amp;key2=value2</code>的格式 </li>
+<li>虽然ajax的data属性值格式为:{key1:value1,key2:value2},但最后会转为key1=value1&amp;key2=value2的格式提交到后台 </li>
+<li>如果想传json格式数据，content-type设置好后，ajax必须将date属性值转为json字符串，不能为json对象（js对象，会自动转为key=value形式）,这样传输的时候才是json格式</li>
+</ol>
+</blockquote>
+<p>我们来试一下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	$.ajax(&#123;</span><br><span class="line">		type:<span class="string">'post'</span>, </span><br><span class="line">		url:<span class="string">'login'</span>,</span><br><span class="line">		contentType:<span class="string">'application/json'</span>,</span><br><span class="line">		data:<span class="built_in">JSON</span>.stringify(&#123;</span><br><span class="line">			url:<span class="string">'login'</span>,</span><br><span class="line">			name:<span class="string">'123'</span>,</span><br><span class="line">			password:<span class="number">123456</span></span><br><span class="line">		&#125;),</span><br><span class="line">		success:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.log(data)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;,<span class="number">1000</span>)</span><br></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/body-parser使用注意/6.png" alt="返回结果" title="">
+                </div>
+                <div class="image-caption">返回结果</div>
+            </figure>
+<p>现在就可以请求成功啦</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-28T15:01:34.805Z" itemprop="dateUpdated">2018-08-28 23:01:34</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/08/body-parser使用注意/&title=《body-parser使用注意》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/08/body-parser使用注意/&title=《body-parser使用注意》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/08/body-parser使用注意/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《body-parser使用注意》 — DHYANA&url=http://yoursite.com/2018/03/08/body-parser使用注意/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/08/body-parser使用注意/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/27/react生命周期详解/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">react生命周期详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/03/06/mobx基本用法/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">mobx基本用法</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'body-parser使用注意',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2018</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/08/body-parser使用注意/&title=《body-parser使用注意》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/08/body-parser使用注意/&title=《body-parser使用注意》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/08/body-parser使用注意/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《body-parser使用注意》 — DHYANA&url=http://yoursite.com/2018/03/08/body-parser使用注意/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/08/body-parser使用注意/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aO27DQAwFQN//0g6QKoUtPJKKE1GzleGshR0VDD/7eMTr+b1+fs6/SfYff3/awsDAuCzjebgSRm9P9ZW9OxsGBsZ9GNUgm//23YHy0Jw8HwMDAyM5Vi9lPE4NMTAwMHoB9zi9qx7xz/5vYGBgXJCRh85jTDU058XwabU4BgbGBRm9wcBnPv/6fAMDA+PfM57FNQmCvVI2OhUGBsZqxnEyl6d9SbOsN37Iy1oMDIzdjLxNlgTN/LpGdfwQXdrAwMBYypi0vXphN08iC3/FwMC4DSMvKatBOU8uexfUMDAwtjLy4rA3epy03spJIQYGxmpGteE1D7WT/S/2YGBgrGYUNn1kDDkK+hgYGEsZ1YsU1aSw+oTmwAADA+NmjN4osXf0XrmLgYFxN8bxqqZ0yUMTWO/KGgYGxm5GtXzNw2ISspvNteN2GwYGxiLGpFlfPVyeSia/fZHhYmBgLGXkaVnvuJOLZfMCGAMDYxMjb8pXBwPVUnbUvMPAwFjKqA4m81Fl8jpOGzBgYGDcgHHWla/JaGHysjAwMHYzmrPNcbmbNNfKM0oMDIyljGdx9S515WG0F+4xMDB2M3ohtdf6z19BnhpiYGDch5EE2V76mIfjE9JHDAyMGzB6pWkyVGje9SgGfQwMDIx8ADkZJ1RHCCdkmhgYGEsZvVBbGEbGoXYUcDEwMC7ISIrYakM/GWSehsfAwFjNmBSQVXav9Z+HewwMjHWML/aXnpw406bCAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '你的指尖有改变世界的力量';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'O(∩_∩)O';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
