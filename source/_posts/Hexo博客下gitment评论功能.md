@@ -1,5 +1,6 @@
 ---
 title: gitment评论插件的配置
+date: 2017-11-13 16:11:31
 tag: 'hexo'
 ---
 今天我在第N次搭建博客的时候想加一个评论功能，我用的主题是indigo，在根目录_config.yml文件里经过测试发现最简洁好用的就是gitment，所以这里记录我gitment配置过程：
