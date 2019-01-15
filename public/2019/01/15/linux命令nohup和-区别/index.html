@@ -41,7 +41,7 @@
 <meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/6.png">
 <meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/7.gif">
 <meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/8.png">
-<meta property="og:updated_time" content="2019-01-15T08:56:38.580Z">
+<meta property="og:updated_time" content="2019-01-15T09:17:19.198Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux命令nohup和&amp;区别">
 <meta name="twitter:description" content="一、前言因为我想把一个程序一直运行在centos系统上，后来的知 nohup ，&amp;amp; 命令都可以，在网上查找资料后，对这些资料进行整理，让这两条命令的异同更直观的展现出来 二、nohup命令nohup 是 no hang up 的缩写,不挂断的意思 语法：nohup Command [ Arg … ] [　&amp;amp; ]作用：不挂断的运行指定程序下面我会按照  nohup command &amp;">
@@ -197,7 +197,7 @@
 <li>如果没有当前目录创建文件的权限，那么输出重定向到跟目录下的 /nohup.out 文件中，</li>
 <li>如果没有文件能创建或打开以用于追加，那么那么 Command 参数指定的命令不可调用（执行失败）</li>
 </ol>
-<h5 id="2-1、问题1：-2-gt-amp-1-什么意思？"><a href="#2-1、问题1：-2-gt-amp-1-什么意思？" class="headerlink" title="2.1、问题1：  2&gt;&amp;1 什么意思？"></a>2.1、问题1：  2&gt;&amp;1 什么意思？</h5><p>操作系统中有三个常用的流：<br>　　0：标准输入流 stdin<br>　　1：标准输出流 stdout<br>　　2：标准错误流 stderr<br>一般当我们用 &gt; console.txt，实际是 1&gt;console.txt的省略用法；&lt; console.txt ，实际是 0 &lt; console.txt的省略用法。</p>
+<h5 id="2-1、问题1：-2-gt-amp-1-什么意思？"><a href="#2-1、问题1：-2-gt-amp-1-什么意思？" class="headerlink" title="2.1、问题1：  2&gt;&amp;1 什么意思？"></a>2.1、问题1：  2&gt;&amp;1 什么意思？</h5><p>操作系统中有三个常用的流：<br>　　0：标准输入流 stdin<br>　　1：标准输出流 stdout<br>　　2：标准错误流 stderr<br>一般当我们用 &gt; console.txt，实际是 1&gt;console.txt的省略用法；&lt; console.txt ，实际是 0 &lt; console.txt的省略用法。<br><code>补充</code> :<strong>&gt; console.txt</strong> 每次执行会覆盖文件内容，使用 <strong>&gt;&gt; console.txt</strong> 进行追加，则console.txt不会被覆盖</p>
 <p>有时候希望将错误的信息重新定向到输出，就是将2的结果重定向至1中就有了”2&gt;1”这样的思路，如果按照上面的写法，系统会默认将错误的信息（STDERR）2重定向到一个名字为1的文件中，而非所想的（STDOUT）中。因此需要加&amp;进行区分。就有了 2&gt;&amp;1 这样的用法</p>
 <blockquote>
 <p>这句话意思是把标准错误（2）重定向到标准输出中（1），而标准输出又导入文件myout.file里面，所以结果是标准错误和标准输出都导入文件myout.file里面了</p>
@@ -268,7 +268,7 @@
                 </div>
                 <div class="image-caption">猜想测试</div>
             </figure></p>
-<p><code>结论</code>：<strong>command &gt;a.txt &amp;可以不再终端输出信息</strong></p>
+<p><code>结论</code>：<strong>command &gt;a.txt &amp;可以不在终端输出信息</strong></p>
 <h4 id="6、-amp-总结"><a href="#6、-amp-总结" class="headerlink" title="6、&amp;总结"></a>6、&amp;总结</h4><p><strong> Command &amp; :<br>&amp;的意思是在后台运行， 当你在执行 Command &amp; 的时候， 即使你用 <code>ctrl+C</code>, 那么Command照样运行（因为对SIGINT信号免疫）。 但是要注意， 如果你直接 <code>关掉终端</code> 后， 那么，Command进程同样消失（因为对SIGHUP信号不免疫）。</strong></p>
 <h3 id="四、表格对比"><a href="#四、表格对比" class="headerlink" title="四、表格对比"></a>四、表格对比</h3><table>
 <thead>
@@ -302,7 +302,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-01-15T08:56:38.580Z" itemprop="dateUpdated">2019-01-15 16:56:38</time>
+    最后更新时间：<time datetime="2019-01-15T09:17:19.198Z" itemprop="dateUpdated">2019-01-15 17:17:19</time>
 </span><br>
 
 

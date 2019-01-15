@@ -30,8 +30,10 @@ nohup 是 no hang up 的缩写,不挂断的意思
 　　1：标准输出流 stdout
 　　2：标准错误流 stderr
 一般当我们用 > console.txt，实际是 1>console.txt的省略用法；< console.txt ，实际是 0 < console.txt的省略用法。
+`补充` :**> console.txt** 每次执行会覆盖文件内容，使用 **>> console.txt** 进行追加，则console.txt不会被覆盖
 
 有时候希望将错误的信息重新定向到输出，就是将2的结果重定向至1中就有了"2>1"这样的思路，如果按照上面的写法，系统会默认将错误的信息（STDERR）2重定向到一个名字为1的文件中，而非所想的（STDOUT）中。因此需要加&进行区分。就有了 2>&1 这样的用法
+
 
 > 这句话意思是把标准错误（2）重定向到标准输出中（1），而标准输出又导入文件myout.file里面，所以结果是标准错误和标准输出都导入文件myout.file里面了
 
@@ -92,7 +94,7 @@ nohup 是 no hang up 的缩写,不挂断的意思
 `java -jar jenkins.war --ajp13Port=-1 --httpPort=8088 > /Users/admin/nohup.out 2>&1 &`
 ![猜想测试](/images/linux命令nohup和&区别/8.png)
 
-`结论`：**command >a.txt &可以不再终端输出信息**
+`结论`：**command >a.txt &可以不在终端输出信息**
 
 #### 6、&总结
 ** Command & : 
