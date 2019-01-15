@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>linux命令nohup和&amp;区别 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="linux">
+    <meta name="description" content="一、前言因为我想把一个程序一直运行在centos系统上，后来的知 nohup ，&amp;amp; 命令都可以，在网上查找资料后，对这些资料进行整理，让这两条命令的异同更直观的展现出来 二、nohup命令nohup 是 no hang up 的缩写,不挂断的意思 语法：nohup Command [ Arg … ] [　&amp;amp; ]作用：不挂断的运行指定程序下面我会按照  nohup command &amp;">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux命令nohup和&amp;区别">
+<meta property="og:url" content="http://yoursite.com/2019/01/15/linux命令nohup和-区别/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言因为我想把一个程序一直运行在centos系统上，后来的知 nohup ，&amp;amp; 命令都可以，在网上查找资料后，对这些资料进行整理，让这两条命令的异同更直观的展现出来 二、nohup命令nohup 是 no hang up 的缩写,不挂断的意思 语法：nohup Command [ Arg … ] [　&amp;amp; ]作用：不挂断的运行指定程序下面我会按照  nohup command &amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/1.png">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/2.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/4.gif">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/3.png">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/5.png">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/6.png">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/7.gif">
+<meta property="og:image" content="http://yoursite.com/images/linux命令nohup和&区别/8.png">
+<meta property="og:updated_time" content="2019-01-15T08:56:38.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux命令nohup和&amp;区别">
+<meta name="twitter:description" content="一、前言因为我想把一个程序一直运行在centos系统上，后来的知 nohup ，&amp;amp; 命令都可以，在网上查找资料后，对这些资料进行整理，让这两条命令的异同更直观的展现出来 二、nohup命令nohup 是 no hang up 的缩写,不挂断的意思 语法：nohup Command [ Arg … ] [　&amp;amp; ]作用：不挂断的运行指定程序下面我会按照  nohup command &amp;">
+<meta name="twitter:image" content="http://yoursite.com/images/linux命令nohup和&区别/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">linux命令nohup和&amp;区别</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">linux命令nohup和&amp;区别</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-15T06:27:22.000Z" itemprop="datePublished" class="page-time">
+  2019-01-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、nohup命令"><span class="post-toc-text">二、nohup命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、nohup-command"><span class="post-toc-text">1、nohup command</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、-gt-myout-file-2-gt-amp-1"><span class="post-toc-text">2、 &gt; myout.file 2&gt;&amp;1</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-1、问题1：-2-gt-amp-1-什么意思？"><span class="post-toc-text">2.1、问题1：  2&gt;&amp;1 什么意思？</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#2-2、问题2：-为何2-gt-amp-1要写在-gt-myout-file后面？"><span class="post-toc-text">2.2、问题2：  为何2&gt;&amp;1要写在&gt;myout.file后面？</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、例子：执行jenkins服务"><span class="post-toc-text">3、例子：执行jenkins服务</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、关闭当前终端"><span class="post-toc-text">4、关闭当前终端</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、注意注意！ctrl-c"><span class="post-toc-text">5、注意注意！ctrl+c</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、-nohup总结"><span class="post-toc-text">6、 nohup总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、-amp-命令"><span class="post-toc-text">三、&amp;命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、command-amp"><span class="post-toc-text">1、command &amp;</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、还以jenkins为例子测试"><span class="post-toc-text">2、还以jenkins为例子测试</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、执行ctrl-c"><span class="post-toc-text">3、执行ctrl+c</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、关闭当前终端-1"><span class="post-toc-text">4、关闭当前终端</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、补充"><span class="post-toc-text">5、补充</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、-amp-总结"><span class="post-toc-text">6、&amp;总结</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、表格对比"><span class="post-toc-text">四、表格对比</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、实际应用"><span class="post-toc-text">五、实际应用</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-linux命令nohup和-区别"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">linux命令nohup和&区别</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-15 14:27:22" datetime="2019-01-15T06:27:22.000Z"  itemprop="datePublished">2019-01-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>因为我想把一个程序一直运行在centos系统上，后来的知 <code>nohup</code> ，<code>&amp;</code> 命令都可以，在网上查找资料后，对这些资料进行整理，让这两条命令的异同更直观的展现出来</p>
+<h3 id="二、nohup命令"><a href="#二、nohup命令" class="headerlink" title="二、nohup命令"></a>二、nohup命令</h3><p>nohup 是 no hang up 的缩写,不挂断的意思</p>
+<p>语法：nohup Command [ Arg … ] [　&amp; ]<br>作用：不挂断的运行指定程序<br>下面我会按照 <strong> nohup command &gt; myout.file 2&gt;&amp;1 </strong> 这条命令进行拆分讲解</p>
+<h4 id="1、nohup-command"><a href="#1、nohup-command" class="headerlink" title="1、nohup command"></a>1、nohup command</h4><blockquote>
+<p>不挂起的执行 <code>command</code> 程序,当 <code>ctrl+c</code> 的时候会退出 <code>command</code> 程序 （因为对SIGINT信号不免疫）</p>
+</blockquote>
+<h4 id="2、-gt-myout-file-2-gt-amp-1"><a href="#2、-gt-myout-file-2-gt-amp-1" class="headerlink" title="2、 &gt; myout.file 2&gt;&amp;1"></a>2、 &gt; myout.file 2&gt;&amp;1</h4><ol>
+<li>标准输出和标准错误都打印到当前目录下的myout.file文件里</li>
+<li>如果直接执行 <strong> nohup command </strong> 没有后面的一串，那么将在当前目录自动创建 <code>nohup.out</code>文件，并shell中提示 <code>appending output to nohup.out</code>，输出都将附加到这个文件里。</li>
+<li>如果没有当前目录创建文件的权限，那么输出重定向到跟目录下的 /nohup.out 文件中，</li>
+<li>如果没有文件能创建或打开以用于追加，那么那么 Command 参数指定的命令不可调用（执行失败）</li>
+</ol>
+<h5 id="2-1、问题1：-2-gt-amp-1-什么意思？"><a href="#2-1、问题1：-2-gt-amp-1-什么意思？" class="headerlink" title="2.1、问题1：  2&gt;&amp;1 什么意思？"></a>2.1、问题1：  2&gt;&amp;1 什么意思？</h5><p>操作系统中有三个常用的流：<br>　　0：标准输入流 stdin<br>　　1：标准输出流 stdout<br>　　2：标准错误流 stderr<br>一般当我们用 &gt; console.txt，实际是 1&gt;console.txt的省略用法；&lt; console.txt ，实际是 0 &lt; console.txt的省略用法。</p>
+<p>有时候希望将错误的信息重新定向到输出，就是将2的结果重定向至1中就有了”2&gt;1”这样的思路，如果按照上面的写法，系统会默认将错误的信息（STDERR）2重定向到一个名字为1的文件中，而非所想的（STDOUT）中。因此需要加&amp;进行区分。就有了 2&gt;&amp;1 这样的用法</p>
+<blockquote>
+<p>这句话意思是把标准错误（2）重定向到标准输出中（1），而标准输出又导入文件myout.file里面，所以结果是标准错误和标准输出都导入文件myout.file里面了</p>
+</blockquote>
+<h5 id="2-2、问题2：-为何2-gt-amp-1要写在-gt-myout-file后面？"><a href="#2-2、问题2：-为何2-gt-amp-1要写在-gt-myout-file后面？" class="headerlink" title="2.2、问题2：  为何2&gt;&amp;1要写在&gt;myout.file后面？"></a>2.2、问题2：  为何2&gt;&amp;1要写在&gt;myout.file后面？</h5><p><code>command &gt; file 2&gt;&amp;1</code><br>       首先是command &gt; file将标准输出重定向到file中， 2&gt;&amp;1 是标准错误拷贝了标准输出的行为，也就是同样被重定向到file中，最终结果就是标准输出和错误都被重定向到file中。<br><code>command 2&gt;&amp;1 &gt;file</code><br>      2&gt;&amp;1 标准错误拷贝了标准输出的行为，但此时标准输出还是在终端。&gt;file 后输出才被重定向到file，但标准错误仍然保持在终端。</p>
+<h4 id="3、例子：执行jenkins服务"><a href="#3、例子：执行jenkins服务" class="headerlink" title="3、例子：执行jenkins服务"></a>3、例子：执行jenkins服务</h4><p><code>nohup java -jar jenkins.war --ajp13Port=-1 --httpPort=8088 &gt; /Users/admin/nohup.out 2&gt;&amp;1</code>  启动jenkins,并将输出导入到文件nohup.out里</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/1.png" alt="执行结果" title="">
+                </div>
+                <div class="image-caption">执行结果</div>
+            </figure>
+<p>可以看到执行成功了，<strong>新建窗口</strong> 再看看日志文件打开 <code>/Users/admin/nohup.out</code> 这个文件：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/2.jpeg" alt="文件内容" title="">
+                </div>
+                <div class="image-caption">文件内容</div>
+            </figure></p>
+<p><code>结论</code>：<strong>控制台没有输入jenkins的启动信息</strong></p>
+<h4 id="4、关闭当前终端"><a href="#4、关闭当前终端" class="headerlink" title="4、关闭当前终端"></a>4、关闭当前终端</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/4.gif" alt="关闭启动jenkins的终端" title="">
+                </div>
+                <div class="image-caption">关闭启动jenkins的终端</div>
+            </figure>
+<p><code>结论</code> ：<strong>可以看到关掉终端不会关闭jenkins进程</strong></p>
+<h4 id="5、注意注意！ctrl-c"><a href="#5、注意注意！ctrl-c" class="headerlink" title="5、注意注意！ctrl+c"></a>5、注意注意！ctrl+c</h4><p>可以从<code>执行结果</code>图看到，任务开始后终端是不能输入的，那我执行 <strong> ctrl+c </strong> 让终端编程可输入状态会发生什么呢？<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/3.png" alt="执行ctrl+c后任务结束了" title="">
+                </div>
+                <div class="image-caption">执行ctrl+c后任务结束了</div>
+            </figure><br>可以看到任务结束！！ </p>
+<p><code>结论</code>：<strong><code>ctrl+c</code>使jenkins进程结束了</strong></p>
+<h4 id="6、-nohup总结"><a href="#6、-nohup总结" class="headerlink" title="6、 nohup总结"></a>6、 nohup总结</h4><p><strong> nohup Command [ Arg … ] [　&amp; ]:<br>程序运行不挂起，默认会将输出重定向nohup.out文件中，也可以自定义输出文件，<code>ctrl+c</code>的话会退出a.sh进程（因为对SIGINT信号不免疫），<code>关闭Command</code>, Command进程还是存在的（对SIGHUP信号免疫） </strong></p>
+<h3 id="三、-amp-命令"><a href="#三、-amp-命令" class="headerlink" title="三、&amp;命令"></a>三、&amp;命令</h3><h4 id="1、command-amp"><a href="#1、command-amp" class="headerlink" title="1、command &amp;"></a>1、command &amp;</h4><p>让command程序在后台运行</p>
+<h4 id="2、还以jenkins为例子测试"><a href="#2、还以jenkins为例子测试" class="headerlink" title="2、还以jenkins为例子测试"></a>2、还以jenkins为例子测试</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/5.png" alt="启动jenkins" title="">
+                </div>
+                <div class="image-caption">启动jenkins</div>
+            </figure>
+<p><code>结论</code>：<strong>控制台输出了jenkins的启动信息</strong></p>
+<h4 id="3、执行ctrl-c"><a href="#3、执行ctrl-c" class="headerlink" title="3、执行ctrl+c"></a>3、执行<code>ctrl+c</code></h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/6.png" alt="执行ctrl+c" title="">
+                </div>
+                <div class="image-caption">执行ctrl+c</div>
+            </figure>
+<p><code>结论</code>：<strong>ctrl+c不会使jenkins进程停止</strong></p>
+<h4 id="4、关闭当前终端-1"><a href="#4、关闭当前终端-1" class="headerlink" title="4、关闭当前终端"></a>4、关闭当前终端</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/7.gif" alt="关闭当前终端" title="">
+                </div>
+                <div class="image-caption">关闭当前终端</div>
+            </figure>
+<p><code>结论</code>：<strong>关闭终端会使jenkins进程停止</strong></p>
+<h4 id="5、补充"><a href="#5、补充" class="headerlink" title="5、补充"></a>5、补充</h4><p>这时我突然想到了，上面介绍了 <code>&gt;a.txt</code> 这样可以把信息输入到a.txt文件里，那可不可以 <code>Command &gt;a.txt &amp;</code>这样用呢？<br><code>java -jar jenkins.war --ajp13Port=-1 --httpPort=8088 &gt; /Users/admin/nohup.out 2&gt;&amp;1 &amp;</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/linux命令nohup和&区别/8.png" alt="猜想测试" title="">
+                </div>
+                <div class="image-caption">猜想测试</div>
+            </figure></p>
+<p><code>结论</code>：<strong>command &gt;a.txt &amp;可以不再终端输出信息</strong></p>
+<h4 id="6、-amp-总结"><a href="#6、-amp-总结" class="headerlink" title="6、&amp;总结"></a>6、&amp;总结</h4><p><strong> Command &amp; :<br>&amp;的意思是在后台运行， 当你在执行 Command &amp; 的时候， 即使你用 <code>ctrl+C</code>, 那么Command照样运行（因为对SIGINT信号免疫）。 但是要注意， 如果你直接 <code>关掉终端</code> 后， 那么，Command进程同样消失（因为对SIGHUP信号不免疫）。</strong></p>
+<h3 id="四、表格对比"><a href="#四、表格对比" class="headerlink" title="四、表格对比"></a>四、表格对比</h3><table>
+<thead>
+<tr>
+<th>命令方式</th>
+<th>ctrl+c关闭后进程是否关闭</th>
+<th>直接关闭终端后进程是否关闭</th>
+<th>是否终端输出信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nohup</td>
+<td>关闭</td>
+<td>不关闭</td>
+<td>不输出，无论是否加上 &gt;nohup.out，信息都被导入到nohup.out（指定）文件</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>不关闭</td>
+<td>关闭</td>
+<td>默认输出，但加上&gt;nohup.out则会不输出，信息被导入到nohup.out（指定）文件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="五、实际应用"><a href="#五、实际应用" class="headerlink" title="五、实际应用"></a>五、实际应用</h3><p>鉴于它们个自的优缺点，一般都是这样用<br><strong>nohup command &gt; myout.file 2&gt;&amp;1 &amp;</strong></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-01-15T08:56:38.580Z" itemprop="dateUpdated">2019-01-15 16:56:38</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/&title=《linux命令nohup和&区别》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/&title=《linux命令nohup和&区别》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/linux命令nohup和-区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux命令nohup和&区别》 — DHYANA&url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/19/Django开发安装MySQL-python解决过程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Django开发安装MySQL-python解决过程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'linux命令nohup和&amp;区别',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/&title=《linux命令nohup和&区别》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/&title=《linux命令nohup和&区别》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/linux命令nohup和-区别/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《linux命令nohup和&区别》 — DHYANA&url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/linux命令nohup和-区别/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3awa7CMAwEQP7/p3lXJF7LbkKRmkxOFaCE4WDs2I9HvJ4v6/315PPvz0e7He35hYWBgXFbxvN0HX0mwZzvP/PuPydiYGBswDg6Pn9O3k2Cb7sDBgYGxvnBH4JgEHzzczEwMDDmA+5UYhcEXwwMDIykmMzTu7zEPQ/El9TiGBgYN2Tkt+6/f76kv4GBgXErxrNcbTtzJnAX3woDA2NpxljqNhMuBwvUZPgDAwNjaUZbRibhdYydD4odUjEwMBZltIGvTRnbPfMAHf1vYGBg3JzRjlP88uav+FEwMDCWZiRDEjM38O1YRhKgo/IVAwNjIUZbrNaVcRl8B5NLDAyMjRljJeXYCNdUkoqBgbENIw+vbVqZkwYbBhgYGEsz5pO5sSSvvcirARgYGMsxpsZGLxi8yPfHwMDYgZEflrzShte8CRENW2BgYCzKaAvIvLWZty3z3YoEEQMDY1FGHhzbgNgG07GxDAwMjLUZyVV+fmRybZcno/XIBQYGxmaMfIu2MZmfmCSIGBgYuzHydHAsvWtL1rxVgIGBsQ+jvQgbG9iaTwoxMDD2YcwMWOTDFm05Wg+NYWBgLM3I17cSuxY2dp2HgYGxHiMJsmNtxTZMT7UNMDAwNmC0ga/F50MbdfMSAwMDY+I67LriFgMDA2OmJZmXpi3pQ5jGwMDYgJEkee3gRZ4ytk0IDAyM3Rhj4XKsKM1/pu+OaGBgYNyW8QequXRyHl/CZQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '你的指尖有改变世界的力量';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'O(∩_∩)O';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
