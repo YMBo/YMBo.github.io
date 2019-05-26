@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>记录一次git操作（git远程仓库地址变更） | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="git">
+    <meta name="description" content="背景项目远程仓库地址是A，将项目以名称为appclone在本地，而且在服务器上也以项目名称为appclone。由于一些原因，将远程仓库A迁移到远程仓库B,所以需要将远程服务器app的仓库地址由A改为B，但由于服务器的一些程序的限制，app文件名称不可以变，只需要变动里面的项目内容  远程仓库，有三次提交记录">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记录一次git操作（git远程仓库地址变更）">
+<meta property="og:url" content="http://yoursite.com/2019/05/26/记录一次git操作/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="背景项目远程仓库地址是A，将项目以名称为appclone在本地，而且在服务器上也以项目名称为appclone。由于一些原因，将远程仓库A迁移到远程仓库B,所以需要将远程服务器app的仓库地址由A改为B，但由于服务器的一些程序的限制，app文件名称不可以变，只需要变动里面的项目内容  远程仓库，有三次提交记录">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/1.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/2.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/3.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/4.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/5.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/6.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/5.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/7.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/8.png">
+<meta property="og:image" content="http://yoursite.com/images/记录一次git操作/9.png">
+<meta property="og:updated_time" content="2019-05-26T09:52:13.025Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记录一次git操作（git远程仓库地址变更）">
+<meta name="twitter:description" content="背景项目远程仓库地址是A，将项目以名称为appclone在本地，而且在服务器上也以项目名称为appclone。由于一些原因，将远程仓库A迁移到远程仓库B,所以需要将远程服务器app的仓库地址由A改为B，但由于服务器的一些程序的限制，app文件名称不可以变，只需要变动里面的项目内容  远程仓库，有三次提交记录">
+<meta name="twitter:image" content="http://yoursite.com/images/记录一次git操作/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">记录一次git操作（git远程仓库地址变更）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">记录一次git操作（git远程仓库地址变更）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-05-26T03:55:36.000Z" itemprop="datePublished" class="page-time">
+  2019-05-26
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、仓库迁移"><span class="post-toc-text">一、仓库迁移</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-将A仓库镜像到B仓库"><span class="post-toc-text">1. 将A仓库镜像到B仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-本地额外提交到old仓库两次记录"><span class="post-toc-text">2.本地额外提交到old仓库两次记录</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-将new仓库内容与old仓库内容同步"><span class="post-toc-text">3. 将new仓库内容与old仓库内容同步</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-将服务器仓库的地址变更为new仓库地址并更新"><span class="post-toc-text">4. 将服务器仓库的地址变更为new仓库地址并更新</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-1-服务器地址切换"><span class="post-toc-text">4.1. 服务器地址切换</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#4-2-服务器git-pull"><span class="post-toc-text">4.2. 服务器git pull</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、解决方案"><span class="post-toc-text">二、解决方案</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-方法1"><span class="post-toc-text">1. 方法1</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-方法2"><span class="post-toc-text">2. 方法2</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-git-remote-set-url-origin-lt-新地址-gt"><span class="post-toc-text">3 git remote -set-url origin &lt;新地址&gt;</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-记录一次git操作"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">记录一次git操作（git远程仓库地址变更）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-05-26 11:55:36" datetime="2019-05-26T03:55:36.000Z"  itemprop="datePublished">2019-05-26</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>项目远程仓库地址是<code>A</code>，将项目以名称为<code>app</code>clone在本地，而且在服务器上也以项目名称为<code>app</code>clone。由于一些原因，将远程仓库<code>A</code>迁移到远程仓库<code>B</code>,所以需要将远程服务器<code>app</code>的仓库地址<strong>由A改为B</strong>，但由于服务器的一些程序的限制，<code>app</code>文件名称不可以变，只需要变动里面的项目内容</p>
+<ol>
+<li>远程仓库，有三次提交记录<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/1.png" alt="远程仓库" title="">
+                </div>
+                <div class="image-caption">远程仓库</div>
+            </figure></li>
+<li>本地仓库<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/2.png" alt="本地仓库" title="">
+                </div>
+                <div class="image-caption">本地仓库</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/3.png" alt="仓库地址" title="">
+                </div>
+                <div class="image-caption">仓库地址</div>
+            </figure>
+</li>
+</ol>
+<h3 id="一、仓库迁移"><a href="#一、仓库迁移" class="headerlink" title="一、仓库迁移"></a>一、仓库迁移</h3><h4 id="1-将A仓库镜像到B仓库"><a href="#1-将A仓库镜像到B仓库" class="headerlink" title="1. 将A仓库镜像到B仓库"></a>1. 将A仓库镜像到B仓库</h4><p>名称为<code>old</code>仓库迁移到了名称为<code>new</code>仓库里<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/4.png" alt="新的仓库地址" title="">
+                </div>
+                <div class="image-caption">新的仓库地址</div>
+            </figure></p>
+<h4 id="2-本地额外提交到old仓库两次记录"><a href="#2-本地额外提交到old仓库两次记录" class="headerlink" title="2.本地额外提交到old仓库两次记录"></a>2.本地额外提交到old仓库两次记录</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/5.png" alt="old仓库的提交记录" title="">
+                </div>
+                <div class="image-caption">old仓库的提交记录</div>
+            </figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/6.png" alt="new仓库的提交记录" title="">
+                </div>
+                <div class="image-caption">new仓库的提交记录</div>
+            </figure>
+<p><strong>可以看到old仓库领先new仓库两次提交</strong><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/5.png" alt="远程服务器仓库的提交记录" title="">
+                </div>
+                <div class="image-caption">远程服务器仓库的提交记录</div>
+            </figure></p>
+<h4 id="3-将new仓库内容与old仓库内容同步"><a href="#3-将new仓库内容与old仓库内容同步" class="headerlink" title="3. 将new仓库内容与old仓库内容同步"></a>3. 将new仓库内容与old仓库内容同步</h4><p>因为old里面内容较新，所以讲old文件同步到new上，并且同步后再提交一次记录到new上<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/7.png" alt="远程服务器仓库的提交记录" title="">
+                </div>
+                <div class="image-caption">远程服务器仓库的提交记录</div>
+            </figure></p>
+<h4 id="4-将服务器仓库的地址变更为new仓库地址并更新"><a href="#4-将服务器仓库的地址变更为new仓库地址并更新" class="headerlink" title="4. 将服务器仓库的地址变更为new仓库地址并更新"></a>4. 将服务器仓库的地址变更为new仓库地址并更新</h4><h5 id="4-1-服务器地址切换"><a href="#4-1-服务器地址切换" class="headerlink" title="4.1. 服务器地址切换"></a>4.1. 服务器地址切换</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/8.png" alt="远程服务器仓库地址切换" title="">
+                </div>
+                <div class="image-caption">远程服务器仓库地址切换</div>
+            </figure>
+<h5 id="4-2-服务器git-pull"><a href="#4-2-服务器git-pull" class="headerlink" title="4.2. 服务器git pull"></a>4.2. 服务器git pull</h5><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/记录一次git操作/9.png" alt="远程服务器git pull" title="">
+                </div>
+                <div class="image-caption">远程服务器git pull</div>
+            </figure>
+<p>可以看到更新失败需要手动处理冲突，<code>其实关键就在这里如果服务跑一个程序比如说web服务，这些文件是web页面，那么此时web页面就会展示错误，因为文件里有待解决的冲突，那怎么解决呢？</code></p>
+<h3 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h3><p>其实下面1、2方法在一定程度上是一个意思</p>
+<h4 id="1-方法1"><a href="#1-方法1" class="headerlink" title="1. 方法1"></a>1. 方法1</h4><p>服务器clone最新的new仓库到app的同级目录，然后将本来存在的app删除，并将new仓库改名为app即可（mv也可以改名）</p>
+<h4 id="2-方法2"><a href="#2-方法2" class="headerlink" title="2. 方法2"></a>2. 方法2</h4><p>服务器clone最新的new仓库到app的同级目录，将new文件下的.git 隐藏文件（工作区）移动到app文件下替换app的.git，git reset –hard HEAD^后git pull即可</p>
+<h4 id="3-git-remote-set-url-origin-lt-新地址-gt"><a href="#3-git-remote-set-url-origin-lt-新地址-gt" class="headerlink" title="3 git remote -set-url origin &lt;新地址&gt;"></a>3 git remote -set-url origin &lt;新地址&gt;</h4><ol>
+<li>首先git remote -set-url origin &lt;新地址&gt;</li>
+<li>git fetch（拉取更新但不合并）</li>
+<li>git reset –hard origin/master （用远程服务器的origin/master替换本地、暂存区、版本库）</li>
+</ol>
+<blockquote>
+<p>tip: 当更新仓库的时候用 git pull ，但是git pull 包含了两个操作 ，git fetch 和git merge,<br>git fetch 是将远程的master（默认）分支存储到本地的origin/master命名空间中，不会进行合并<br>但是有时候我们想用远程仓库的内容完全替换到本地的容：<br>git reset –hard origin/master<br>撤销本地、暂存区、版本库(用远程服务器的origin/master替换本地、暂存区、版本库)</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上面说了这么一大堆，其实都是我实际中遇到的坑坑，差点坑死我，不过上面说的确实是很麻烦，所以再总结一下<br><strong>问题</strong>：切换远程分支避免遇到<code>merge</code>，或者说怎么更好的切换远程分支并更新<br><strong>解决方案</strong>：上面三种</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-26T09:52:13.025Z" itemprop="dateUpdated">2019-05-26 17:52:13</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/05/26/记录一次git操作/&title=《记录一次git操作（git远程仓库地址变更）》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/05/26/记录一次git操作/&title=《记录一次git操作（git远程仓库地址变更）》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/05/26/记录一次git操作/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《记录一次git操作（git远程仓库地址变更）》 — DHYANA&url=http://yoursite.com/2019/05/26/记录一次git操作/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/05/26/记录一次git操作/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/15/linux命令nohup和-区别/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">linux命令nohup和&amp;区别</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: '记录一次git操作（git远程仓库地址变更）',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/05/26/记录一次git操作/&title=《记录一次git操作（git远程仓库地址变更）》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/05/26/记录一次git操作/&title=《记录一次git操作（git远程仓库地址变更）》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/05/26/记录一次git操作/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《记录一次git操作（git远程仓库地址变更）》 — DHYANA&url=http://yoursite.com/2019/05/26/记录一次git操作/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/05/26/记录一次git操作/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aS27DMAwFwNz/0i7QVYsiySOpFLA0WhmBYHu8YPjR4xGv63vlO3/uv/6sZ7//3bN4YWBg3JaR3O7ZdRXTe25ExcDAOIDxOsg+e4kkQOcvmn8yDAwMjORVkt97nwMDAwNjVcB9neTNK1AMDAyMSTH5uljt9cTyVt2CWhwDA+OGjOpg4D+vPzjfwMDAuAnjaq3qaDMZCYzeBwMDY2tGL73rDQDyFl4+BH1MslQMDIybMNY+phd2ew2+X3swMDAOYFTbatVkMW+W9XZiYGDszegVmdXraqFbPTqGgYFxGiM/6JCH5t4wstluw8DA2JTRO+iQhONqepeXtRgYGGcyeqQ8NFfT0Gr6iIGBsSujGjrzJv4kcOdnwMo1NwYGxg0Z1eFiLxBPwnGhhMbAwNiUUU3IJuld3vqvjh8wMDDOYUzSwfzgRa9wffNpMDAwDmD02vqTIxfVdDCqazEwMDZl5GlZUrJWqZPmHQYGxsmMvB1WTekSQG/wiYGBcRqj1+LvnelYHNwxMDCOYcwDX6+UrY4wC1MODAyMLRi9YWQeoOfjgfJ+DAyMjRhXceWkScJXvRsGBsbejMmwM2+oVV+ifCwMAwPjAEae6iWkTzTaog+BgYFxAGPVw/KAW/0HeAPDwMDAWHpUYjLCfDMMwMDAOJ5RbXjlLbz5szAwME5gTEaS1bI2v3/hqBkGBsbWjOpg4HMJ3yQBxcDA2JTxBb+XslANlgWjAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '你的指尖有改变世界的力量';
+            clearTimeout(titleTime);
+        } else {
+            document.title = 'O(∩_∩)O';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
