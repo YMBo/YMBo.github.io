@@ -136,8 +136,8 @@ visit_counter:
 
 # 动态定义title
 title_change:
-  normal: O(∩_∩)O
-  leave: 你的指尖有改变世界的力量
+  normal: 又好了
+  leave: 网页崩溃啦！
 
 # 设置为 true 发布后将使用 unpkg cdn
 cdn: true

@@ -475,10 +475,10 @@
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '你的指尖有改变世界的力量';
+            document.title = '网页崩溃啦！';
             clearTimeout(titleTime);
         } else {
-            document.title = 'O(∩_∩)O';
+            document.title = '又好了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);

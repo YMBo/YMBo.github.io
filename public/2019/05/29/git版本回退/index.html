@@ -295,7 +295,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/06/10/axios源码分析/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">axios源码分析</h4>
+      </a>
+    </div>
   
 
   
@@ -504,10 +511,10 @@
     var OriginTitile = document.title, titleTime;
     document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
-            document.title = '你的指尖有改变世界的力量';
+            document.title = '网页崩溃啦！';
             clearTimeout(titleTime);
         } else {
-            document.title = 'O(∩_∩)O';
+            document.title = '又好了';
             titleTime = setTimeout(function() {
                 document.title = OriginTitile;
             },2000);
