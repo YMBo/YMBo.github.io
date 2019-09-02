@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/3.png">
 <meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/4.png">
 <meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/5.png">
-<meta property="og:updated_time" content="2019-08-25T08:59:42.102Z">
+<meta property="og:updated_time" content="2018-12-19T10:58:34.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javascript的数据属性和访问器属性">
 <meta name="twitter:description" content="一、数据属性1.基本认识1.1概念数据属性包含一个数据值的位置，在这个位置可以读取和写入值 数据属性有4个描述其行为的特性 [[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能肉修改属性的特性，或者能把属性修改为访问器属性。默认true [[Enumerable]] : 表示能否通过 for-in 循环返回属性。 默认 true [[Writable]] :">
@@ -224,13 +224,13 @@
 <p>tip :<br>1.当使用了getter或setter方法，不允许使用 <code>writable</code> 和 <code>value</code> 这两个属性。<br>2.get和set 函数不是必须的<br>3.先看这种写法：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/javascript的数据属性和访问器属性/1.png" alt="特别要注意这种写法，容易写错！" title="">
+                    <img src="/images/javascript的数据属性和访问器属性/1.png" alt="特别要注意这种写法，容易写错！" title>
                 </div>
                 <div class="image-caption">特别要注意这种写法，容易写错！</div>
             </figure><br>可以看到 <code>堆栈溢出</code> 了，` 原因是因为如果在get里return this.year ，这样如果我们在外面 book .year时，就会运行get函数，而get函数里面执行到this.year时又会运行get函数，造成死循环。正常写法是利用一个中间值来设置某一个属性，看下面代码<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/javascript的数据属性和访问器属性/2.png" alt="正确写法" title="">
+                    <img src="/images/javascript的数据属性和访问器属性/2.png" alt="正确写法" title>
                 </div>
                 <div class="image-caption">正确写法</div>
             </figure><br>_year 前面的下划线是一种常用的记号，用于表示只能通过对象方法访问的属性。<br>一般上面上面代码目的是 设置一个属性的值会导致其他属性发生变化，就不用把属性单拿出来计算了，很方便</p>
@@ -240,21 +240,21 @@
 <h3 id="2-定义多个属性"><a href="#2-定义多个属性" class="headerlink" title="2.定义多个属性"></a>2.定义多个属性</h3><p>Object.defineProperty()这种写法每次只能定义一个属性，那么可以通过 <code>Object.defineProperties</code> 来定义多个属性<br>定义多个属性：<br><code>请注意下面图片内代码是有问题的，这是《js高级程序设计》 里的例子</code><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/javascript的数据属性和访问器属性/3.png" alt="定义多个属性" title="">
+                    <img src="/images/javascript的数据属性和访问器属性/3.png" alt="定义多个属性" title>
                 </div>
                 <div class="image-caption">定义多个属性</div>
             </figure><br>这个方法定义多个属性没问题，但是也可以从上面的图看出来，定义的访问器属性year的set方法里面并没有生效，这俩属于数据属性，<code>原因是因为 定义的_year属性和edition属性不能往里面写值了</code>。</p>
 <p>自己解决历程：我自己猜想原因可能是这样，因为_year和edition写不进去值了，所以设置 enumerable 为true。我尝试修改了一下，如下<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/javascript的数据属性和访问器属性/4.png" alt="给两个数据属性添加了writable(可读写 )特征" title="">
+                    <img src="/images/javascript的数据属性和访问器属性/4.png" alt="给两个数据属性添加了writable(可读写 )特征" title>
                 </div>
                 <div class="image-caption">给两个数据属性添加了writable(可读写 )特征</div>
             </figure><br>这样运行成功。为了验证猜想，做了如下例子：</p>
 <p><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/javascript的数据属性和访问器属性/5.png" alt="所有特性" title="">
+                    <img src="/images/javascript的数据属性和访问器属性/5.png" alt="所有特性" title>
                 </div>
                 <div class="image-caption">所有特性</div>
             </figure>；</p>
@@ -293,7 +293,7 @@ inputText.addEventListener(<span class="string">'input'</span>,<span class="func
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-08-25T08:59:42.102Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
+    最后更新时间：<time datetime="2018-12-19T10:58:34.910Z" itemprop="dateUpdated">2018-12-19 18:58:34</time>
 </span><br>
 
 

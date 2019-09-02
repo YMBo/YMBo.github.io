@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -43,7 +43,7 @@
 <meta property="og:image" content="http://yoursite.com/images/记录一次git操作/7.png">
 <meta property="og:image" content="http://yoursite.com/images/记录一次git操作/8.png">
 <meta property="og:image" content="http://yoursite.com/images/记录一次git操作/9.png">
-<meta property="og:updated_time" content="2019-08-25T08:59:42.111Z">
+<meta property="og:updated_time" content="2019-05-26T09:52:13.025Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一次git操作（git远程仓库地址变更）">
 <meta name="twitter:description" content="背景项目远程仓库地址是A，将项目以名称为appclone在本地，而且在服务器上也以项目名称为appclone。由于一些原因，将远程仓库A迁移到远程仓库B,所以需要将远程服务器app的仓库地址由A改为B，但由于服务器的一些程序的限制，app文件名称不可以变，只需要变动里面的项目内容  远程仓库，有三次提交记录">
@@ -192,21 +192,21 @@
 <li>远程仓库，有三次提交记录<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/1.png" alt="远程仓库" title="">
+                    <img src="/images/记录一次git操作/1.png" alt="远程仓库" title>
                 </div>
                 <div class="image-caption">远程仓库</div>
             </figure></li>
 <li>本地仓库<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/2.png" alt="本地仓库" title="">
+                    <img src="/images/记录一次git操作/2.png" alt="本地仓库" title>
                 </div>
                 <div class="image-caption">本地仓库</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/3.png" alt="仓库地址" title="">
+                    <img src="/images/记录一次git操作/3.png" alt="仓库地址" title>
                 </div>
                 <div class="image-caption">仓库地址</div>
             </figure>
@@ -215,49 +215,49 @@
 <h3 id="一、仓库迁移"><a href="#一、仓库迁移" class="headerlink" title="一、仓库迁移"></a>一、仓库迁移</h3><h4 id="1-将A仓库镜像到B仓库"><a href="#1-将A仓库镜像到B仓库" class="headerlink" title="1. 将A仓库镜像到B仓库"></a>1. 将A仓库镜像到B仓库</h4><p>名称为<code>old</code>仓库迁移到了名称为<code>new</code>仓库里<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/4.png" alt="新的仓库地址" title="">
+                    <img src="/images/记录一次git操作/4.png" alt="新的仓库地址" title>
                 </div>
                 <div class="image-caption">新的仓库地址</div>
             </figure></p>
 <h4 id="2-本地额外提交到old仓库两次记录"><a href="#2-本地额外提交到old仓库两次记录" class="headerlink" title="2.本地额外提交到old仓库两次记录"></a>2.本地额外提交到old仓库两次记录</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/5.png" alt="old仓库的提交记录" title="">
+                    <img src="/images/记录一次git操作/5.png" alt="old仓库的提交记录" title>
                 </div>
                 <div class="image-caption">old仓库的提交记录</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/6.png" alt="new仓库的提交记录" title="">
+                    <img src="/images/记录一次git操作/6.png" alt="new仓库的提交记录" title>
                 </div>
                 <div class="image-caption">new仓库的提交记录</div>
             </figure>
 <p><strong>可以看到old仓库领先new仓库两次提交</strong><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/5.png" alt="远程服务器仓库的提交记录" title="">
+                    <img src="/images/记录一次git操作/5.png" alt="远程服务器仓库的提交记录" title>
                 </div>
                 <div class="image-caption">远程服务器仓库的提交记录</div>
             </figure></p>
 <h4 id="3-将new仓库内容与old仓库内容同步"><a href="#3-将new仓库内容与old仓库内容同步" class="headerlink" title="3. 将new仓库内容与old仓库内容同步"></a>3. 将new仓库内容与old仓库内容同步</h4><p>因为old里面内容较新，所以讲old文件同步到new上，并且同步后再提交一次记录到new上<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/7.png" alt="远程服务器仓库的提交记录" title="">
+                    <img src="/images/记录一次git操作/7.png" alt="远程服务器仓库的提交记录" title>
                 </div>
                 <div class="image-caption">远程服务器仓库的提交记录</div>
             </figure></p>
 <h4 id="4-将服务器仓库的地址变更为new仓库地址并更新"><a href="#4-将服务器仓库的地址变更为new仓库地址并更新" class="headerlink" title="4. 将服务器仓库的地址变更为new仓库地址并更新"></a>4. 将服务器仓库的地址变更为new仓库地址并更新</h4><h5 id="4-1-服务器地址切换"><a href="#4-1-服务器地址切换" class="headerlink" title="4.1. 服务器地址切换"></a>4.1. 服务器地址切换</h5><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/8.png" alt="远程服务器仓库地址切换" title="">
+                    <img src="/images/记录一次git操作/8.png" alt="远程服务器仓库地址切换" title>
                 </div>
                 <div class="image-caption">远程服务器仓库地址切换</div>
             </figure>
 <h5 id="4-2-服务器git-pull"><a href="#4-2-服务器git-pull" class="headerlink" title="4.2. 服务器git pull"></a>4.2. 服务器git pull</h5><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/记录一次git操作/9.png" alt="远程服务器git pull" title="">
+                    <img src="/images/记录一次git操作/9.png" alt="远程服务器git pull" title>
                 </div>
                 <div class="image-caption">远程服务器git pull</div>
             </figure>
@@ -281,7 +281,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-08-25T08:59:42.111Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
+    最后更新时间：<time datetime="2019-05-26T09:52:13.025Z" itemprop="dateUpdated">2019-05-26 17:52:13</time>
 </span><br>
 
 

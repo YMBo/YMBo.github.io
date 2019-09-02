@@ -9,10 +9,8 @@ tags: 后期剪辑
 * 好友
 
 ## 一、效果
-<div>
-<video id="video" style='height: 600px;margin:0 auto;display:block'  controls="" preload="none" poster="/video/视频demo/backetball.jpg">
-      <source id="mp4" src="/video/视频demo/backetball.mp4" type="video/mp4">
-</video>
+<div style='height: 500px; width: 100%;margin-bottom:150px;border:1px solid #eee;line-height:0;'>
+<iframe style='height:100%;width:100%'   src="//player.bilibili.com/player.html?aid=66369743&cid=115109777&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 </div>
 
 ## 二、知识点

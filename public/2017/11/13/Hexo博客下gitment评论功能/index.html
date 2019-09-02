@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -37,7 +37,7 @@
 <meta property="og:image" content="http://yoursite.com/images/gitment评论插件的配置/2.png">
 <meta property="og:image" content="http://yoursite.com/images/gitment评论插件的配置/3.png">
 <meta property="og:image" content="http://yoursite.com/images/gitment评论插件的配置/4.png">
-<meta property="og:updated_time" content="2019-08-25T08:59:42.098Z">
+<meta property="og:updated_time" content="2018-12-19T10:58:34.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gitment评论插件的配置">
 <meta name="twitter:description" content="今天我在第N次搭建博客的时候想加一个评论功能，我用的主题是indigo，在根目录_config.yml文件里经过测试发现最简洁好用的就是gitment，所以这里记录我gitment配置过程： 第一步先注册一个 oAuth Application注册成功会得到一个client id和 client secret两个参数，它们将被用于后面的用户登录">
@@ -185,27 +185,27 @@
 <h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>先注册一个 <a href="https://github.com/settings/applications/new" target="_blank" rel="noopener">oAuth Application</a><br>注册成功会得到一个<code>client id</code>和 <code>client secret</code>两个参数，它们将被用于后面的用户登录<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/gitment评论插件的配置/1.png" alt="oAuth Application" title="">
+                    <img src="/images/gitment评论插件的配置/1.png" alt="oAuth Application" title>
                 </div>
                 <div class="image-caption">oAuth Application</div>
             </figure><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/gitment评论插件的配置/2.png" alt="_config.yml" title="">
+                    <img src="/images/gitment评论插件的配置/2.png" alt="_config.yml" title>
                 </div>
                 <div class="image-caption">_config.yml</div>
             </figure><br>其中githubID需要<a href="https://api.github.com/users/github账户名" target="_blank" rel="noopener">https://api.github.com/users/github账户名</a>  访问这个链接来获取</p>
 <h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>如果你想要此功能的页面存在这一部分：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/gitment评论插件的配置/3.png" alt="gitment页面配置" title="">
+                    <img src="/images/gitment评论插件的配置/3.png" alt="gitment页面配置" title>
                 </div>
                 <div class="image-caption">gitment页面配置</div>
             </figure><br>这是一个ejs页面，里面是模板，通过使用主题的_config.yml文件配置<br>那么你可以跳过这一步，否则需要在使用评论功能的页面添加这写代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://imsun.github.io/gitment/style/default.css"</span>&gt;</span><br><span class="line">&lt;script src=<span class="string">"https://imsun.github.io/gitment/dist/gitment.browser.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">var</span> gitment = <span class="keyword">new</span> Gitment(&#123;</span><br><span class="line">	id: <span class="string">'页面 ID'</span>, <span class="comment">// 可选。默认为 location.href</span></span><br><span class="line">	owner: <span class="string">'你的 GitHub ID'</span>, <span class="comment">// 可以是你的GitHub用户名，也可以是github id</span></span><br><span class="line">	repo: <span class="string">'存储评论的 github repo'</span>,</span><br><span class="line">	oauth: &#123;</span><br><span class="line">		client_id: <span class="string">'你的 client id'</span>,</span><br><span class="line">		client_secret: <span class="string">'你的 client secret'</span>,</span><br><span class="line">	&#125;,</span><br><span class="line">&#125;)</span><br><span class="line">gitment.render(<span class="string">'container'</span>)</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p>到这里已经默认你添加了上面的代码，现在注意了，我用的主题本身就带上面的代码的，只不过需要在 主题的 _comfig.yml文件中配置对应项，我在配置文件中配置好后，启动本地服务器，发现回复模块报错，控制台中发现他会请求一个链接，链接上带有刚刚配置好的参数，这里参数全部为空，我以为我配置文件有问题，折腾了好久，仍然不行，后来发现我要添加这个功能的页面里的模板并没有获取到我在_config.yml配置，最后通过修改要添加回复功能页面的模板文件才成功：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/gitment评论插件的配置/4.png" alt="修改为" title="">
+                    <img src="/images/gitment评论插件的配置/4.png" alt="修改为" title>
                 </div>
                 <div class="image-caption">修改为</div>
             </figure><br>直接赋值，而不是使用模板，不知道为啥用模板获取不到值，现在已经配置成功<br>如果配置失败，那么一定是上面的参数写错了，或者像我这种情况模板页面获取不到值，只需要直接赋值即可</p>
@@ -216,7 +216,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-08-25T08:59:42.098Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
+    最后更新时间：<time datetime="2018-12-19T10:58:34.907Z" itemprop="dateUpdated">2018-12-19 18:58:34</time>
 </span><br>
 
 
