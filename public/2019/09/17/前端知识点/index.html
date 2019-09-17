@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>前端知识点 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="react,css,javascript,http,vue">
+    <meta name="description" content="一、JavaScript一、[‘1’, ‘2’, ‘3’].map(parseInt) ？ [1,NaN,NaN]    parseInt(string, radix)，字符串转十进制整数 string：必需。要被解析的字符串。radix : 可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开">
+<meta name="keywords" content="react,css,javascript,http,vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端知识点">
+<meta property="og:url" content="http://yoursite.com/2019/09/17/前端知识点/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、JavaScript一、[‘1’, ‘2’, ‘3’].map(parseInt) ？ [1,NaN,NaN]    parseInt(string, radix)，字符串转十进制整数 string：必需。要被解析的字符串。radix : 可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-17T10:06:48.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端知识点">
+<meta name="twitter:description" content="一、JavaScript一、[‘1’, ‘2’, ‘3’].map(parseInt) ？ [1,NaN,NaN]    parseInt(string, radix)，字符串转十进制整数 string：必需。要被解析的字符串。radix : 可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">前端知识点</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">前端知识点</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-09-17T06:42:40.000Z" itemprop="datePublished" class="page-time">
+  2019-09-17
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、JavaScript"><span class="post-toc-text">一、JavaScript</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、-‘1’-‘2’-‘3’-map-parseInt-？"><span class="post-toc-text">一、[‘1’, ‘2’, ‘3’].map(parseInt) ？</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、防抖和节流"><span class="post-toc-text">二、防抖和节流</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、介绍下-Set、Map、WeakSet-和-WeakMap-的区别？"><span class="post-toc-text">三、介绍下 Set、Map、WeakSet 和 WeakMap 的区别？</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-前端知识点"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">前端知识点</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-09-17 14:42:40" datetime="2019-09-17T06:42:40.000Z"  itemprop="datePublished">2019-09-17</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、JavaScript"><a href="#一、JavaScript" class="headerlink" title="一、JavaScript"></a>一、JavaScript</h2><h3 id="一、-‘1’-‘2’-‘3’-map-parseInt-？"><a href="#一、-‘1’-‘2’-‘3’-map-parseInt-？" class="headerlink" title="一、[‘1’, ‘2’, ‘3’].map(parseInt) ？"></a>一、[‘1’, ‘2’, ‘3’].map(parseInt) ？</h3><blockquote>
+<p>[1,NaN,NaN] </p>
+</blockquote>
+<p> <strong>parseInt(string, radix)，字符串转十进制整数</strong></p>
+<p><code>string</code>：<span style="font-size:13px">必需。要被解析的字符串。</span><br><code>radix</code> : <span style="font-size:13px">可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开头，将以 16 为基数。如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN。</span></p>
+<p><span style="font-size:13px;color:#0b807d"><br>解析的时候，parseInt会认为 <code>string</code> 参数是 <code>radix</code> 进制的，比如：<br><code>parseInt(3,4)</code> ,这里会认为“3”是 4进制的，所以当遇到这种情况:<br><code>parseInt(3,2)</code>, 会认为这里的“3”是二进制的，那么3的二进制是3吗？不是啊，是 “11”啊 ，所以会返回NaN<br></span></p>
+<h3 id="二、防抖和节流"><a href="#二、防抖和节流" class="headerlink" title="二、防抖和节流"></a>二、防抖和节流</h3><p><code>下面我都用的 函数属性timer作为记录定时器的变量，其实也可以在函数内声明一个变量</code><br><strong>防抖实现</strong><br><span style="font-size:13px;color:#0b807d"><br>    触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间,<br>    比如窗口缩放事件 window.resize<br></span><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        clearTimeout(fn.timer)</span><br><span class="line">        fn.timer=setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">        &#125;,time)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><span style="font-size:13px;color:#0b807d"><br>问：<code>为啥用apply?</code><br>答：改变函数this指向<br>问：为啥要改变fn的this指向？如果不apply这个this又指向谁？要是不改有啥影响？<br>卒~</span></p>
+<p><code>解析：</code>首先要明白一件事情，<strong>this</strong>的指向问题，<br><strong>this的指向只是与如何调用这个方法有关</strong>，看几个例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">a=&#123;</span><br><span class="line">    m:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">----------------------------------------------</span><br><span class="line"><span class="number">1.</span> </span><br><span class="line">a.m()       <span class="comment">// a&#123;&#125; 对象</span></span><br><span class="line"></span><br><span class="line">----------------------------------------------</span><br><span class="line"><span class="number">2.</span> </span><br><span class="line"><span class="keyword">var</span> b=a.m;</span><br><span class="line">    m()         <span class="comment">//  指向全局对象，这里是window</span></span><br><span class="line">----------------------------------------------</span><br><span class="line"><span class="number">3.</span> </span><br><span class="line">a.s=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注意这里setTimeout我用的是 普通函数，this指向全局对象，这里指向window</span></span><br><span class="line"></span><br><span class="line"><span class="number">4.</span> </span><br><span class="line">a.s=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  因为用了箭头函数，这里的this指向上一层this，即a对象</span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>、<span class="number">4</span> 注意对比</span><br><span class="line">----------------------------------------------</span><br><span class="line"><span class="number">5.</span> </span><br><span class="line">在函数里面执行a.m</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">c</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    a.m()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// a对象</span></span><br><span class="line"></span><br><span class="line"><span class="number">6.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">m</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line">a.c=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    m()</span><br><span class="line">&#125;</span><br><span class="line">a.c()         <span class="comment">// window</span></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>、<span class="number">6</span> </span><br><span class="line">注意对比，这俩都是函数里面的函数执行。</span><br><span class="line">因为里面函数里面的函数并不是作为一个方法所调用，</span><br><span class="line">所以指向的是<span class="built_in">window</span>，注意与 <span class="number">5</span> 做对比</span><br><span class="line">----------------------------------------------</span><br></pre></td></tr></table></figure></p>
+<p><span style="font-size:13px;color:#0b807d"><br>看完上面例子，你就知道了setTimeout里如果用箭头函数，那么this是当前作用于，但是 <code>fn()</code> 这样执行的时候，里面的this指向全局，所以要给这个fn绑定当前执行环境的this，以避免一些因为作用域问题引起bug<br></span></p>
+<p><strong>节流实现</strong><br><span style="font-size:13px;color:#0b807d"><br>高频事件触发，但在n秒内只会执行一次<br></span><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,time</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(fn.timer)<span class="keyword">return</span></span><br><span class="line">        fn.timer=setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">            fn.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>)</span><br><span class="line">            clearTimeout(fn.timer)</span><br><span class="line">        &#125;,time)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p></p>
+<h3 id="三、介绍下-Set、Map、WeakSet-和-WeakMap-的区别？"><a href="#三、介绍下-Set、Map、WeakSet-和-WeakMap-的区别？" class="headerlink" title="三、介绍下 Set、Map、WeakSet 和 WeakMap 的区别？"></a>三、介绍下 Set、Map、WeakSet 和 WeakMap 的区别？</h3><p><a href="http://es6.ruanyifeng.com/#docs/set-map" target="_blank" rel="noopener">阮一峰es6</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-09-17T10:06:48.970Z" itemprop="dateUpdated">2019-09-17 18:06:48</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vue/">vue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/17/前端知识点/&title=《前端知识点》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/17/前端知识点/&title=《前端知识点》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/17/前端知识点/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端知识点》 — DHYANA&url=http://yoursite.com/2019/09/17/前端知识点/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/17/前端知识点/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/09/17/景别/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">景别</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/09/10/实现一个promise/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">实现一个promise</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: '前端知识点',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/09/17/前端知识点/&title=《前端知识点》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/09/17/前端知识点/&title=《前端知识点》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/09/17/前端知识点/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《前端知识点》 — DHYANA&url=http://yoursite.com/2019/09/17/前端知识点/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/09/17/前端知识点/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACNklEQVR42u3a3Y6CQAwGUN//pdlkb13ga4txGc5cGVTgYFKnP69XvLbfVX39vt4/+X6VvXcvWBgYGLdlbIdr78LHR/be7Z3n+N4wMDCew0iCbB4Qk0B8/Cjze8PAwMBIguneLR4fSUIwBgYGRi/gToJyAsDAwMCYJLH58fz8X8jFMTAwbsj4XGNg/vpf9DcwMDC+ytiKK09Nq8W7PMj+8S0MDIylGXl7slc+67UEkkf2SvJaDAyMJRjz5mWvGVkd6Tg5joGB8TBGtVVZLe7nhbPC1TEwMJZm5EX/3qnz1PeCRikGBsYDGEmwy0cxeulrD4+BgfEcxiTs9oJpb7Bj93FjYGA8gFGtsefltl66O9oaYmBgLMqYjz7Mx08n4RgDA2NtRm/MYjJTmifMzfvBwMBYjpFv4PJhiLwwlxf1TjamGBgYizJ6Tcp5A7KaDBd+BwwMjOUY1WbkaGyrONgx2tViYGAsx+i1KvNNXl6kqwbxk5ELDAyMRRl5gCts2lrDFr1wj4GBsR4jL9lXG5D5DUUjX8kvgIGBsTQj34T1xrzm/wkn21YMDIylGdUS21XJbbWRWagaYmBgLMfYiquX3OZDrs3WAgYGxtKMarC7ILoPUt8RAAMD4+aMPMheViArps3Ro8TAwHgAY7LJ+8iAV7V5gIGBgXFIytsGkybEZQEXAwPjYYxJkM3DbpTKYmBgPICRNwPy9LU3KNYbQcPAwFibUU0ge5u/PHwnAxwXtDAxMDDuwfgBn2o39eWLGpQAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
