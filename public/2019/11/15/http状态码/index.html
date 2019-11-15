@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>http状态码 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="http协议">
+    <meta name="description" content="2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面 举例：  form表单等如果返回 204，那么页面不刷新 a的href如果返回 204，那么页面不跳转  206 partial content含义 ：返回一部分内容（分片请求数据） 请求头限定范围 ：Ra">
+<meta name="keywords" content="http协议">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http状态码">
+<meta property="og:url" content="http://yoursite.com/2019/11/15/http状态码/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面 举例：  form表单等如果返回 204，那么页面不刷新 a的href如果返回 204，那么页面不跳转  206 partial content含义 ：返回一部分内容（分片请求数据） 请求头限定范围 ：Ra">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-15T09:46:11.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http状态码">
+<meta name="twitter:description" content="2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面 举例：  form表单等如果返回 204，那么页面不刷新 a的href如果返回 204，那么页面不跳转  206 partial content含义 ：返回一部分内容（分片请求数据） 请求头限定范围 ：Ra">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">http状态码</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">http状态码</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-15T03:42:16.000Z" itemprop="datePublished" class="page-time">
+  2019-11-15
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2XX"><span class="post-toc-text">2XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#200-ok"><span class="post-toc-text">200 ok</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#204-no-content"><span class="post-toc-text">204 no content</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#206-partial-content"><span class="post-toc-text">206 partial content</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3XX"><span class="post-toc-text">3XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#301：永久重定向"><span class="post-toc-text">301：永久重定向</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#302：临时重定向"><span class="post-toc-text">302：临时重定向</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#区别"><span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#303：see-other"><span class="post-toc-text">303：see other</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#304：not-modified"><span class="post-toc-text">304：not modified</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4XX：bad-request-客户端错误"><span class="post-toc-text">4XX：bad request 客户端错误</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#401-unauthorized"><span class="post-toc-text">401 unauthorized</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#403-forbidden"><span class="post-toc-text">403 forbidden</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#404-not-found"><span class="post-toc-text">404 not found</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5XX-服务端错误"><span class="post-toc-text">5XX 服务端错误</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#500"><span class="post-toc-text">500</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#503-service-unavailable"><span class="post-toc-text">503 service unavailable</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-http状态码"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">http状态码</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-15 11:42:16" datetime="2019-11-15T03:42:16.000Z"  itemprop="datePublished">2019-11-15</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="2XX"><a href="#2XX" class="headerlink" title="2XX"></a>2XX</h3><h4 id="200-ok"><a href="#200-ok" class="headerlink" title="200 ok"></a>200 ok</h4><p><span style="color:#00860b;font-weight: bold;">含义</span> ：成功处理</p>
+<h4 id="204-no-content"><a href="#204-no-content" class="headerlink" title="204 no content"></a>204 no content</h4><p> <span style="color:#00860b;font-weight: bold;">含义</span> ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面</p>
+<p><span style="color:#00860b;font-weight: bold;">举例</span>：</p>
+<ol>
+<li>form表单等如果返回 <code>204，那么页面不刷新</code></li>
+<li>a的href如果返回 <code>204，那么页面不跳转</code></li>
+</ol>
+<h4 id="206-partial-content"><a href="#206-partial-content" class="headerlink" title="206 partial content"></a>206 partial content</h4><p><span style="color:#00860b;font-weight: bold;">含义</span> ：返回一部分内容（分片请求数据）</p>
+<p><span style="color:#00860b;font-weight: bold;">请求头限定范围</span> ：Range: bytes=0-1024 。</p>
+<p><span style="color:#00860b;font-weight: bold;">头部字段说明</span><br><span style="color:#00860b;font-weight: bold;">响应头 </span>:<br>响应头Content-Range表示文件真实大小<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Content-Range: bytes <span class="number">557056</span><span class="number">-6160883</span>/<span class="number">6160884</span></span><br><span class="line">Content-Length: <span class="number">5603828</span></span><br></pre></td></tr></table></figure></p>
+<p><span style="color:#00860b;font-weight: bold;">请求头</span>:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Range: bytes=<span class="number">557056</span>-</span><br></pre></td></tr></table></figure></p>
+<p>Range: bytes=startOffset-targetOffset/sum  [表示从startOffset读取，一直读取到targetOffset位置)<br>每次要续传时，先读取已下载文件的字节大小比如100000，然后 rang：100000-，就可以继续下载</p>
+<p>Range: bytes=startOffset-targetOffset  [字节总数也可以去掉]</p>
+<p><span style="color:#00860b;font-weight: bold;">应用</span>：断点续传，大文件下载，迅雷，百度</p>
+<h3 id="3XX"><a href="#3XX" class="headerlink" title="3XX"></a>3XX</h3><h4 id="301：永久重定向"><a href="#301：永久重定向" class="headerlink" title="301：永久重定向"></a>301：永久重定向</h4><p><span style="color:#00860b;font-weight: bold;">含义</span>：<br>    该状态码表示请求的资源已被分配了新的uri，也就是会做一个跳转<br><span style="color:#00860b;font-weight: bold;">后台 </span><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res.writeHead(<span class="number">302</span>,&#123;<span class="string">'Location'</span>: <span class="string">'/'</span>&#125;);</span><br><span class="line">res.end();</span><br></pre></td></tr></table></figure></p>
+<p><span style="color:#00860b;font-weight: bold;">记住</span>：url重定向是在<code>浏览器端完成的</code>，url的重定向与<code>状态码和location有关</code>，浏览器先判断状态码是否为301或302时，才会根据location响应头内容进行跳转，上面的代码里，如果返回的状态码是别的比如200啥的，那么浏览器不会跳转</p>
+<h4 id="302：临时重定向"><a href="#302：临时重定向" class="headerlink" title="302：临时重定向"></a>302：临时重定向</h4><p>临时跳转，不是永久性的</p>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><p>从 SEO 角度，302 跳转，搜索引擎仍然保留原来的地址，301 跳转，则会保留跳转后的地址</p>
+<h4 id="303：see-other"><a href="#303：see-other" class="headerlink" title="303：see other"></a>303：see other</h4><p>请求的资源存在另一个uri，应该使用get方法定向获取请求的资源</p>
+<p><span style="color:#00860b;font-weight: bold;">理解</span>：这和302似乎很像，举个例子<br>比如我要用<code>post</code>请求创建一个用户admin，到了后台发现admin已经存在，那返回个303和location位置，然后浏览器用<code>get</code>去请求admin的位置（响应头location里返回）</p>
+<p><span style="color:#00860b;font-weight: bold;">资源已存在</span></p>
+<h4 id="304：not-modified"><a href="#304：not-modified" class="headerlink" title="304：not modified"></a>304：not modified</h4><p>资源找到了，但不符合条件，不返回任何主体</p>
+<p><span style="color:#00860b;font-weight: bold;">理解</span>：当触发<code>协商缓存</code>时，就返回304<br><span style="color:#00860b;font-weight: bold;">一段悄悄地对话</span><br>浏览器：我来找2019年后更新的A数据<br>服务器：A数据2019年后没更新过啊，304走你<br>浏览器：从（浏览器）缓存中读取</p>
+<h3 id="4XX：bad-request-客户端错误"><a href="#4XX：bad-request-客户端错误" class="headerlink" title="4XX：bad request 客户端错误"></a>4XX：bad request 客户端错误</h3><p>请求报文中存在语法错误，当错误发生时，需要修改请求内容后再次发送</p>
+<h4 id="401-unauthorized"><a href="#401-unauthorized" class="headerlink" title="401 unauthorized"></a>401 unauthorized</h4><p>一般是客户端需要认证（登录状态失效等）</p>
+<h4 id="403-forbidden"><a href="#403-forbidden" class="headerlink" title="403 forbidden"></a>403 forbidden</h4><p>你介个用户没有权限访问指定资源的权限</p>
+<h4 id="404-not-found"><a href="#404-not-found" class="headerlink" title="404 not found"></a>404 not found</h4><p>没找到请求资源</p>
+<h3 id="5XX-服务端错误"><a href="#5XX-服务端错误" class="headerlink" title="5XX 服务端错误"></a>5XX 服务端错误</h3><h4 id="500"><a href="#500" class="headerlink" title="500"></a>500</h4><p>服务端有bug或错误</p>
+<h4 id="503-service-unavailable"><a href="#503-service-unavailable" class="headerlink" title="503 service unavailable"></a>503 service unavailable</h4><p>服务器停机或超载维护</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-11-15T09:46:11.656Z" itemprop="dateUpdated">2019-11-15 17:46:11</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http协议/">http协议</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/15/http状态码/&title=《http状态码》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/15/http状态码/&title=《http状态码》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/15/http状态码/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《http状态码》 — DHYANA&url=http://yoursite.com/2019/11/15/http状态码/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/15/http状态码/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/04/iphone拍照获取位置信息的原理/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iphone拍照获取位置信息的原理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'http状态码',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2019</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/15/http状态码/&title=《http状态码》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/15/http状态码/&title=《http状态码》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/15/http状态码/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《http状态码》 — DHYANA&url=http://yoursite.com/2019/11/15/http状态码/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/15/http状态码/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aQY7jMAwEwPz/09nrArv2dIvOAJFKp4GisVU+EKLI1yse77/G/cy/vyb/ez//2MDAwPhaxvt2XK1JqAmvnb/cAwYGxgGMq21drUkefb+55F3J3jAwMDDu16wdH9dIGBgYGBNGfmS83zQGBgbGPSNJYudJaX7Q/GAujoGB8YWM/Nb99//+SH0DAwPjqxjvciTX/fNjZb0rDAyMrRnPXqW1DROTgIuBgXEOo33ZWmmzTX3rj4KBgXEMI7kUa0sCSch+oNiJgYFxAGMtBW3bWPOV+dsxMDBOYLSPzh+apLuTxo4fVmJgYGzEaBPL9rJ+PhOVMzEwMA5gtE1X82Jne8FXJ7EYGBgbMdoL/bb0uEZNwu7l58bAwNiOMWnnWqsetsfKolsEAwNja0ab0CZBMN9i3mpWf0sMDIztGJMyQJ58JmfV+pCKgYFxDCMpAEzAa00YRc8IBgbGpoxJO9daME2Og2vPxMDAOIGRlwHyEmPeOraGx8DAOIcxLww8VUdNPsTlDAYGxgGMSUL7VJgeFU0xMDAOZiRhNN90+8ZRFo6BgbEF412OPESuYdqPhYGBcQIjH0Xrw0PXbXmRAAMD4wTGsy2neVicBNxXcm7FwMDYjtEGvvbqrb30r1diYGBgLL0mIU1aNzAwMDDyo+EkDV4rW/7nfzEwMA5gJElsMp/8miSu9RoMDIytGWup47xhImkmS/aAgYGxNeMPG4OdO7w1aXYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
