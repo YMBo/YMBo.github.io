@@ -24,19 +24,19 @@
     <meta name="theme-color" content="#4fe05c">
     
     
-    <meta name="keywords" content="http协议">
-    <meta name="description" content="2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面 举例：  form表单等如果返回 204，那么页面不刷新 a的href如果返回 204，那么页面不跳转  206 partial content含义 ：返回一部分内容（分片请求数据） 请求头限定范围 ：Ra">
-<meta name="keywords" content="http协议">
+    <meta name="keywords" content="http">
+    <meta name="description" content="1XX101 Switching Protocols客户端发送带有首部字段Upgrade的字段，告知服务器通信协议发生改变服务端返回 101 Switching Protocols，之后的通信不再采用HTTP，而采用Upgrade指定的方式 2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据）">
+<meta name="keywords" content="http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="http状态码">
 <meta property="og:url" content="http://yoursite.com/2019/11/15/http状态码/index.html">
 <meta property="og:site_name" content="DHYANA">
-<meta property="og:description" content="2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面 举例：  form表单等如果返回 204，那么页面不刷新 a的href如果返回 204，那么页面不跳转  206 partial content含义 ：返回一部分内容（分片请求数据） 请求头限定范围 ：Ra">
+<meta property="og:description" content="1XX101 Switching Protocols客户端发送带有首部字段Upgrade的字段，告知服务器通信协议发生改变服务端返回 101 Switching Protocols，之后的通信不再采用HTTP，而采用Upgrade指定的方式 2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-15T09:46:11.656Z">
+<meta property="og:updated_time" content="2019-11-21T06:53:44.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="http状态码">
-<meta name="twitter:description" content="2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面 举例：  form表单等如果返回 204，那么页面不刷新 a的href如果返回 204，那么页面不跳转  206 partial content含义 ：返回一部分内容（分片请求数据） 请求头限定范围 ：Ra">
+<meta name="twitter:description" content="1XX101 Switching Protocols客户端发送带有首部字段Upgrade的字段，告知服务器通信协议发生改变服务端返回 101 Switching Protocols，之后的通信不再采用HTTP，而采用Upgrade指定的方式 2XX200 ok含义 ：成功处理 204 no content 含义 ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据）">
     
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
@@ -153,7 +153,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2XX"><span class="post-toc-text">2XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#200-ok"><span class="post-toc-text">200 ok</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#204-no-content"><span class="post-toc-text">204 no content</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#206-partial-content"><span class="post-toc-text">206 partial content</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3XX"><span class="post-toc-text">3XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#301：永久重定向"><span class="post-toc-text">301：永久重定向</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#302：临时重定向"><span class="post-toc-text">302：临时重定向</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#区别"><span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#303：see-other"><span class="post-toc-text">303：see other</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#304：not-modified"><span class="post-toc-text">304：not modified</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4XX：bad-request-客户端错误"><span class="post-toc-text">4XX：bad request 客户端错误</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#401-unauthorized"><span class="post-toc-text">401 unauthorized</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#403-forbidden"><span class="post-toc-text">403 forbidden</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#404-not-found"><span class="post-toc-text">404 not found</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5XX-服务端错误"><span class="post-toc-text">5XX 服务端错误</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#500"><span class="post-toc-text">500</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#503-service-unavailable"><span class="post-toc-text">503 service unavailable</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1XX"><span class="post-toc-text">1XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#101-Switching-Protocols"><span class="post-toc-text">101 Switching Protocols</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2XX"><span class="post-toc-text">2XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#200-ok"><span class="post-toc-text">200 ok</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#204-no-content"><span class="post-toc-text">204 no content</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#206-partial-content"><span class="post-toc-text">206 partial content</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3XX"><span class="post-toc-text">3XX</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#301：永久重定向"><span class="post-toc-text">301：永久重定向</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#302：临时重定向"><span class="post-toc-text">302：临时重定向</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#区别"><span class="post-toc-text">区别</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#303：see-other"><span class="post-toc-text">303：see other</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#304：not-modified"><span class="post-toc-text">304：not modified</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4XX：bad-request-客户端错误"><span class="post-toc-text">4XX：bad request 客户端错误</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#401-unauthorized"><span class="post-toc-text">401 unauthorized</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#403-forbidden"><span class="post-toc-text">403 forbidden</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#404-not-found"><span class="post-toc-text">404 not found</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#405-Method-Not-Allowed"><span class="post-toc-text">405 Method Not Allowed</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5XX-服务端错误"><span class="post-toc-text">5XX 服务端错误</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#500"><span class="post-toc-text">500</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#503-service-unavailable"><span class="post-toc-text">503 service unavailable</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -176,7 +176,8 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="2XX"><a href="#2XX" class="headerlink" title="2XX"></a>2XX</h3><h4 id="200-ok"><a href="#200-ok" class="headerlink" title="200 ok"></a>200 ok</h4><p><span style="color:#00860b;font-weight: bold;">含义</span> ：成功处理</p>
+            <h3 id="1XX"><a href="#1XX" class="headerlink" title="1XX"></a>1XX</h3><h4 id="101-Switching-Protocols"><a href="#101-Switching-Protocols" class="headerlink" title="101 Switching Protocols"></a>101 Switching Protocols</h4><p>客户端发送带有首部字段Upgrade的字段，告知服务器通信协议发生改变<br>服务端返回 <strong>101 Switching Protocols</strong>，之后的通信不再采用HTTP，而采用Upgrade指定的方式</p>
+<h3 id="2XX"><a href="#2XX" class="headerlink" title="2XX"></a>2XX</h3><h4 id="200-ok"><a href="#200-ok" class="headerlink" title="200 ok"></a>200 ok</h4><p><span style="color:#00860b;font-weight: bold;">含义</span> ：成功处理</p>
 <h4 id="204-no-content"><a href="#204-no-content" class="headerlink" title="204 no content"></a>204 no content</h4><p> <span style="color:#00860b;font-weight: bold;">含义</span> ：服务器接受的请求已成功处理，但是在相应报文中不包含实体的主体部分（就是没有返回数据），浏览器不刷新页面也不导向新的页面</p>
 <p><span style="color:#00860b;font-weight: bold;">举例</span>：</p>
 <ol>
@@ -203,6 +204,7 @@
 <h4 id="401-unauthorized"><a href="#401-unauthorized" class="headerlink" title="401 unauthorized"></a>401 unauthorized</h4><p>一般是客户端需要认证（登录状态失效等）</p>
 <h4 id="403-forbidden"><a href="#403-forbidden" class="headerlink" title="403 forbidden"></a>403 forbidden</h4><p>你介个用户没有权限访问指定资源的权限</p>
 <h4 id="404-not-found"><a href="#404-not-found" class="headerlink" title="404 not found"></a>404 not found</h4><p>没找到请求资源</p>
+<h4 id="405-Method-Not-Allowed"><a href="#405-Method-Not-Allowed" class="headerlink" title="405 Method Not Allowed"></a>405 Method Not Allowed</h4><p>服务端不支持这种HTTP方法</p>
 <h3 id="5XX-服务端错误"><a href="#5XX-服务端错误" class="headerlink" title="5XX 服务端错误"></a>5XX 服务端错误</h3><h4 id="500"><a href="#500" class="headerlink" title="500"></a>500</h4><p>服务端有bug或错误</p>
 <h4 id="503-service-unavailable"><a href="#503-service-unavailable" class="headerlink" title="503 service unavailable"></a>503 service unavailable</h4><p>服务器停机或超载维护</p>
 
@@ -212,7 +214,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-15T09:46:11.656Z" itemprop="dateUpdated">2019-11-15 17:46:11</time>
+    最后更新时间：<time datetime="2019-11-21T06:53:44.511Z" itemprop="dateUpdated">2019-11-21 14:53:44</time>
 </span><br>
 
 
@@ -235,7 +237,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http协议/">http协议</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
 
 
             
@@ -290,7 +292,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/19/http首部字段/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">http首部字段</h4>
+      </a>
+    </div>
   
 
   

@@ -1,9 +1,12 @@
 ---
 title: http状态码
 date: 2019-11-15 11:42:16
-tags: http协议
+tags: http
 ---
-
+### 1XX
+#### 101 Switching Protocols
+客户端发送带有首部字段Upgrade的字段，告知服务器通信协议发生改变
+服务端返回 **101 Switching Protocols**，之后的通信不再采用HTTP，而采用Upgrade指定的方式
 ### 2XX
 
 #### 200 ok
@@ -90,6 +93,8 @@ res.end();
 #### 404 not found
 没找到请求资源
 
+#### 405 Method Not Allowed
+服务端不支持这种HTTP方法
 
 ### 5XX 服务端错误
 
