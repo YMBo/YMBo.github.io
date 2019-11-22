@@ -87,6 +87,9 @@ res.end();
 #### 401 unauthorized
 一般是客户端需要认证（登录状态失效等）
 
+#### 412 precondition failed
+服务器对比if-Match（请求头）和ETag失败时，返回
+
 #### 403 forbidden
 你介个用户没有权限访问指定资源的权限
 
