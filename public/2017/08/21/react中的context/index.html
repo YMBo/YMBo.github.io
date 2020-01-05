@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     
 
     
@@ -38,7 +38,7 @@
 <meta property="og:image" content="http://yoursite.com/images/react中的context/3.png">
 <meta property="og:image" content="http://yoursite.com/images/react中的context/4.png">
 <meta property="og:image" content="http://yoursite.com/images/react中的context/5.png">
-<meta property="og:updated_time" content="2018-12-19T10:58:34.912Z">
+<meta property="og:updated_time" content="2019-08-25T08:59:42.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react中的context">
 <meta name="twitter:description" content="一、为什么用context？现在我们有一颗组件树：                                                                                             组件树             假如这个组件树代表的应用是用户可以自定义主题的，每个子组件都会根据主题的不同来调整自己的样式，所以‘主题色’这个东西就应该是组件之间">
@@ -185,19 +185,19 @@
             <h2 id="一、为什么用context？"><a href="#一、为什么用context？" class="headerlink" title="一、为什么用context？"></a>一、为什么用context？</h2><p>现在我们有一颗组件树：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react中的context/1.png" alt="组件树" title>
+                    <img src="/images/react中的context/1.png" alt="组件树" title="">
                 </div>
                 <div class="image-caption">组件树</div>
             </figure><br>假如这个组件树代表的应用是用户可以自定义主题的，每个子组件都会根据主题的不同来调整自己的样式，所以‘主题色’这个东西就应该是组件之间共享的一个状态，所以应该放到Index组件中。<br>但是在此之前能想到的办法只能是<code>this.props.主题色</code><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react中的context/2.png" alt="主题色的传递" title>
+                    <img src="/images/react中的context/2.png" alt="主题色的传递" title="">
                 </div>
                 <div class="image-caption">主题色的传递</div>
             </figure><br>这种形式，这种形式实在是麻烦，如果组件嵌套过深，就不得不一层层传递到最底层，所以就出现了简单的办法——通过context传递<br>context这种方法是全局都能共享的状态，我们需要的时候就去取这个状态，不需要手动传递<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react中的context/3.png" alt="context共享状态" title>
+                    <img src="/images/react中的context/3.png" alt="context共享状态" title="">
                 </div>
                 <div class="image-caption">context共享状态</div>
             </figure></p>
@@ -221,14 +221,14 @@
 <h2 id="四、我的例子"><a href="#四、我的例子" class="headerlink" title="四、我的例子:"></a>四、我的例子:</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react中的context/4.png" alt="点击变色按钮前" title>
+                    <img src="/images/react中的context/4.png" alt="点击变色按钮前" title="">
                 </div>
                 <div class="image-caption">点击变色按钮前</div>
             </figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react中的context/5.png" alt="点击变色按钮后" title>
+                    <img src="/images/react中的context/5.png" alt="点击变色按钮后" title="">
                 </div>
                 <div class="image-caption">点击变色按钮后</div>
             </figure>
@@ -238,7 +238,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-19T10:58:34.912Z" itemprop="dateUpdated">2018-12-19 18:58:34</time>
+    最后更新时间：<time datetime="2019-08-25T08:59:42.104Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
 </span><br>
 
 
@@ -425,7 +425,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>YMBo &copy; 2017 - 2019</span>
+        <p><span>YMBo &copy; 2017 - 2020</span>
             <span>
                 
                 <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->

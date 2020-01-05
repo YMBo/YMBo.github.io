@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     
 
     
@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/4.png">
 <meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/5.png">
 <meta property="og:image" content="http://yoursite.com/images/sublime中使用editconfig/6.jpg">
-<meta property="og:updated_time" content="2018-12-19T10:58:34.913Z">
+<meta property="og:updated_time" content="2019-08-25T08:59:42.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sublime中使用EditorConfig">
 <meta name="twitter:description" content="一、作用EditorConfig是统一代码格式的解决方案，它可以帮助开发者在不同的编辑器和IDE之间定义和维护一致的代码风格，比如多人合作的时候统一代码风格，避免一些潜在的问题，增加代码可读性 二、使用方法1.编辑器插件有些编辑器已经集成了这个插件，所以不用再安装，而有些编辑器没有集成这个插件，需要安装 下面这些编辑器不需要安装：">
@@ -188,20 +188,20 @@
 <p>下面这些编辑器不需要安装：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/sublime中使用editconfig/1.png" alt="已经集成的编辑器" title>
+                    <img src="/images/sublime中使用editconfig/1.png" alt="已经集成的编辑器" title="">
                 </div>
                 <div class="image-caption">已经集成的编辑器</div>
             </figure><br>这些编辑器需要安装：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/sublime中使用editconfig/2.png" alt="需要单独安装插件的编辑器" title>
+                    <img src="/images/sublime中使用editconfig/2.png" alt="需要单独安装插件的编辑器" title="">
                 </div>
                 <div class="image-caption">需要单独安装插件的编辑器</div>
             </figure></p>
 <p>sublime里直接搜索 <code>EditorConfig</code> 安装即可<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/sublime中使用editconfig/3.png" alt="安装" title>
+                    <img src="/images/sublime中使用editconfig/3.png" alt="安装" title="">
                 </div>
                 <div class="image-caption">安装</div>
             </figure></p>
@@ -210,7 +210,7 @@
 <p><code>注意1：</code> 当打开一个文件时，EditorConfig插件会在打开文件的目录和其每一级父目录查找.editorconfig文件，直到有一个配置文件root=true。<br>什么意思呢？<br>比如我的文件结构是这样的：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/sublime中使用editconfig/4.png" alt="文件目录" title>
+                    <img src="/images/sublime中使用editconfig/4.png" alt="文件目录" title="">
                 </div>
                 <div class="image-caption">文件目录</div>
             </figure><br>在 <code>b.js</code> 里的代码，会先从同级目录 ——&gt; 父级目录 这个路径进行查找（冒泡 ），如果遇到了 <code>.editorconfig</code> 里 <code>root=true</code> 则停止，因为 <code>b.js</code> 同级目录的 <code>.editorconfig</code> 里 <code>root=true</code> 所以 b.js 用的就是b.js上面这个文件配置的规则</p>
@@ -220,7 +220,7 @@
 <p><code>注意2</code>：EditorConfig配置文件从上往下读取，并且路径最近的文件最后被读取。匹配的配置属性按照属性应用在代码上，所以最接近代码文件的属性优先级最高。<br>什么意思呢？<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/sublime中使用editconfig/5.png" alt=".editconfig" title>
+                    <img src="/images/sublime中使用editconfig/5.png" alt=".editconfig" title="">
                 </div>
                 <div class="image-caption">.editconfig</div>
             </figure><br>意思就是 我的 js文件会读取 注释2 (第十行)下面的配置，而python文件会读取上面 (注释1)的配置 </p>
@@ -231,7 +231,7 @@
 <h2 id="三、我遇到的问题"><a href="#三、我遇到的问题" class="headerlink" title="三、我遇到的问题"></a>三、我遇到的问题</h2><p>看我的配置文件：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/sublime中使用editconfig/6.jpg" alt=".editconfig" title>
+                    <img src="/images/sublime中使用editconfig/6.jpg" alt=".editconfig" title="">
                 </div>
                 <div class="image-caption">.editconfig</div>
             </figure><br>我设置了缩进方式为 <code>tab</code>,每级缩进 8 列，但是我设置好后，打开a.js文件后每级的缩进并没有变化，为此我还找了好久~╮(╯▽╰)╭，最后我发现，只要把a.js关闭，再打开就生效了~</p>
@@ -243,7 +243,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-19T10:58:34.913Z" itemprop="dateUpdated">2018-12-19 18:58:34</time>
+    最后更新时间：<time datetime="2019-08-25T08:59:42.106Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
 </span><br>
 
 
@@ -430,7 +430,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>YMBo &copy; 2017 - 2019</span>
+        <p><span>YMBo &copy; 2017 - 2020</span>
             <span>
                 
                 <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->

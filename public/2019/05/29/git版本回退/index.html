@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     
 
     
@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/images/git版本回退/1.png">
 <meta property="og:image" content="http://yoursite.com/images/git版本回退/2.png">
 <meta property="og:image" content="http://yoursite.com/images/git版本回退/3.png">
-<meta property="og:updated_time" content="2019-05-29T03:41:15.668Z">
+<meta property="og:updated_time" content="2019-08-25T08:59:42.101Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git版本回退">
 <meta name="twitter:description" content="一、版本回退 file可以用“.”代替，表示所有文件  1.丢弃工作区修改git checkout -- file 2.丢弃暂存区git reset HEAD &amp;lt;file&amp;gt;后，会将指定文件回退到工作区 3.回退版本库3.1、回退且暂存区、工作区保存修改git reset --soft commit–soft参数告诉Git重置HEAD到另外一个commit，但也到此为止。如果你指定–so">
@@ -192,21 +192,21 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/git版本回退/1.png" alt="soft" title>
+                    <img src="/images/git版本回退/1.png" alt="soft" title="">
                 </div>
                 <div class="image-caption">soft</div>
             </figure>
 <h5 id="3-2、回退且丢弃修改"><a href="#3-2、回退且丢弃修改" class="headerlink" title="3.2、回退且丢弃修改"></a>3.2、回退且丢弃修改</h5><p><code>git reset --hard commit</code><br>回退到commit版本且，从<code>HEAD</code>到另外一个<code>commit</code>之间的所有修改都会被丢弃，现在暂存区，工作区，版本库的内容都是commit这个点的内容<br><strong>工作区=暂存区=版本库</strong><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/git版本回退/2.png" alt="hard" title>
+                    <img src="/images/git版本回退/2.png" alt="hard" title="">
                 </div>
                 <div class="image-caption">hard</div>
             </figure></p>
 <h4 id="3-3、回退且保存修改到工作区"><a href="#3-3、回退且保存修改到工作区" class="headerlink" title="3.3、回退且保存修改到工作区"></a>3.3、回退且保存修改到工作区</h4><p><code>git reset --mixed commit</code>参数默认，可以不写<br>原理同上，只不过修改会保存在工作区，暂存区会跟版本库一致<br><strong>工作区!=暂存区=版本库</strong><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/git版本回退/3.png" alt="mixed" title>
+                    <img src="/images/git版本回退/3.png" alt="mixed" title="">
                 </div>
                 <div class="image-caption">mixed</div>
             </figure></p>
@@ -217,7 +217,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-05-29T03:41:15.668Z" itemprop="dateUpdated">2019-05-29 11:41:15</time>
+    最后更新时间：<time datetime="2019-08-25T08:59:42.101Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
 </span><br>
 
 
@@ -404,7 +404,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>YMBo &copy; 2017 - 2019</span>
+        <p><span>YMBo &copy; 2017 - 2020</span>
             <span>
                 
                 <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->

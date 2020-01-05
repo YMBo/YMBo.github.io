@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     
 
     
@@ -42,7 +42,7 @@
 <meta property="og:image" content="http://yoursite.com/images/react生命周期详解/7.png">
 <meta property="og:image" content="http://yoursite.com/images/react生命周期详解/8.png">
 <meta property="og:image" content="http://yoursite.com/images/react生命周期详解/9.png">
-<meta property="og:updated_time" content="2018-12-19T10:58:34.913Z">
+<meta property="og:updated_time" content="2019-08-25T08:59:42.106Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react生命周期详解">
 <meta name="twitter:description" content="一、react生命周期 componentWillMount componentDidMount componentWillReceiveProps shouldComponentUpdate componentWillUpdate componentDidUpdate componentUnmount每个生命周期概念不是本文讲解重点，重点是生命周期在组件渲染时候容易造成的混淆  二、compon">
@@ -202,21 +202,21 @@
 <p>先点击 <code>儿子按钮</code> 按钮，也就是子组件Son里的按钮<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/1.png" alt="执行结果" title>
+                    <img src="/images/react生命周期详解/1.png" alt="执行结果" title="">
                 </div>
                 <div class="image-caption">执行结果</div>
             </figure><br>可以看到 <em>componentWillReceiveProps</em>  没有执行</p>
 <p>然后点击 <code>APP点我</code> 按钮：<br>点之前：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/2.png" alt="点之前" title>
+                    <img src="/images/react生命周期详解/2.png" alt="点之前" title="">
                 </div>
                 <div class="image-caption">点之前</div>
             </figure></p>
 <p>点之后：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/3.png" alt="点之后" title>
+                    <img src="/images/react生命周期详解/3.png" alt="点之后" title="">
                 </div>
                 <div class="image-caption">点之后</div>
             </figure></p>
@@ -226,14 +226,14 @@
 <p>官网上说不能写在<em>componentWillUpdate</em>里，建议写在<em>componentWillReceiveProps</em>，我就不明白了，我非得写在<em>componentWillUpdate</em>里，看看执行结果<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/4.png" alt="报错" title>
+                    <img src="/images/react生命周期详解/4.png" alt="报错" title="">
                 </div>
                 <div class="image-caption">报错</div>
             </figure></p>
 <p>看 死循环了，因为上面提到<em>componentWillUpdate</em>触发条件是 states 变化 和 props变化，写在了这里就不停的setState  states的值，所以就不停的触发<em>componentWillUpdate</em>，因此像这种父组件更改子组件的内容应该写在 <em>componentWillReceiveProps</em> 里，来试试：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/5.png" alt="ojbk" title>
+                    <img src="/images/react生命周期详解/5.png" alt="ojbk" title="">
                 </div>
                 <div class="image-caption">ojbk</div>
             </figure><br>好，一切正常！</p>
@@ -262,21 +262,21 @@
 <h4 id="1-初始化时父子组件的声明周期执行顺序"><a href="#1-初始化时父子组件的声明周期执行顺序" class="headerlink" title="1.初始化时父子组件的声明周期执行顺序"></a>1.初始化时父子组件的声明周期执行顺序</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/6.png" alt="结果" title>
+                    <img src="/images/react生命周期详解/6.png" alt="结果" title="">
                 </div>
                 <div class="image-caption">结果</div>
             </figure>
 <h4 id="2-点击父组件的按钮时生命周期执行顺序"><a href="#2-点击父组件的按钮时生命周期执行顺序" class="headerlink" title="2.点击父组件的按钮时生命周期执行顺序"></a>2.点击父组件的按钮时生命周期执行顺序</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/7.png" alt="结果" title>
+                    <img src="/images/react生命周期详解/7.png" alt="结果" title="">
                 </div>
                 <div class="image-caption">结果</div>
             </figure>
 <h4 id="3-点击子组件执行顺序"><a href="#3-点击子组件执行顺序" class="headerlink" title="3.点击子组件执行顺序"></a>3.点击子组件执行顺序</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/8.png" alt="结果" title>
+                    <img src="/images/react生命周期详解/8.png" alt="结果" title="">
                 </div>
                 <div class="image-caption">结果</div>
             </figure>
@@ -284,7 +284,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/react生命周期详解/9.png" alt="结果" title>
+                    <img src="/images/react生命周期详解/9.png" alt="结果" title="">
                 </div>
                 <div class="image-caption">结果</div>
             </figure>
@@ -296,7 +296,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-19T10:58:34.913Z" itemprop="dateUpdated">2018-12-19 18:58:34</time>
+    最后更新时间：<time datetime="2019-08-25T08:59:42.106Z" itemprop="dateUpdated">2019-08-25 16:59:42</time>
 </span><br>
 
 
@@ -483,7 +483,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>YMBo &copy; 2017 - 2019</span>
+        <p><span>YMBo &copy; 2017 - 2020</span>
             <span>
                 
                 <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->

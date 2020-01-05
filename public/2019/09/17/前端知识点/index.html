@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
     
 
     
@@ -24,9 +24,9 @@
     <meta name="theme-color" content="#4fe05c">
     
     
-    <meta name="keywords" content="http,react,css,javascript,vue">
+    <meta name="keywords" content="http,react,javascript,css,vue">
     <meta name="description" content="一、JavaScript一、[‘1’, ‘2’, ‘3’].map(parseInt) ？ [1,NaN,NaN]    parseInt(string, radix)，字符串转十进制整数 string：必需。要被解析的字符串。radix : 可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开">
-<meta name="keywords" content="http,react,css,javascript,vue">
+<meta name="keywords" content="http,react,javascript,css,vue">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端知识点">
 <meta property="og:url" content="http://yoursite.com/2019/09/17/前端知识点/index.html">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/images/前端知识点/1.png">
 <meta property="og:image" content="http://yoursite.com/images/前端知识点/2.png">
 <meta property="og:image" content="http://yoursite.com/images/前端知识点/3.jpg">
-<meta property="og:updated_time" content="2019-09-20T08:04:42.216Z">
+<meta property="og:updated_time" content="2020-01-05T09:42:15.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端知识点">
 <meta name="twitter:description" content="一、JavaScript一、[‘1’, ‘2’, ‘3’].map(parseInt) ？ [1,NaN,NaN]    parseInt(string, radix)，字符串转十进制整数 string：必需。要被解析的字符串。radix : 可选。表示要解析的数字的基数。该值介于 2 ~ 36 之间。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。如果它以 “0x” 或 “0X” 开">
@@ -199,7 +199,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/前端知识点/1.png" alt="深度优先遍历" title>
+                    <img src="/images/前端知识点/1.png" alt="深度优先遍历" title="">
                 </div>
                 <div class="image-caption">深度优先遍历</div>
             </figure>
@@ -207,7 +207,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/前端知识点/2.png" alt="广度优先遍历" title>
+                    <img src="/images/前端知识点/2.png" alt="广度优先遍历" title="">
                 </div>
                 <div class="image-caption">广度优先遍历</div>
             </figure>
@@ -216,7 +216,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/前端知识点/3.jpg" alt="事件循环" title>
+                    <img src="/images/前端知识点/3.jpg" alt="事件循环" title="">
                 </div>
                 <div class="image-caption">事件循环</div>
             </figure>
@@ -225,7 +225,8 @@
 <p><strong>执行顺序</strong><br><span style="font-size:13px;color:#0b807d">执行队列空闲=&gt;检查微任务队列=&gt;检查宏任务队列</span><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">    resolve(<span class="number">3</span>)</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">val</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(val);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 2,3,1</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>执行过程</strong><br><span style="font-size:13px;color:#0b807d"><br>script进入主线程开始执行同步代码，将异步操作交给浏览器执行，所以先将setTimeout挂起，然后打印 2 ，遇到了promise则挂起，此时任务队列空闲（这时异步操作都已经执行完加入了事件队列），那么去检查事件队列，先检查微任务队列，好，发现了 promise的then回调，执行 ，打印3，微任务队列空了，检查宏任务队列 打印1 ，此时执行栈为空 ,退出<br></span></p>
 <p><strong>比较特殊的例子</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'1'</span>);</span><br><span class="line">    <span class="keyword">await</span> async2();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'2'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async2</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'3'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'4'</span>);</span><br><span class="line">async1();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'5'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 4，1，3，5，2</span></span><br></pre></td></tr></table></figure></p>
-<p><span style="font-size:13px;color:#0b807d"><br>async方法执行时，遇到await会立即执行表达式，然后把表达式后面的代码放到微任务队列里，让出执行栈让同步代码先执行<br>也就是 await async2()后面（下面）的部分是放在了promise（微任务），所以才有这样的结果<br></span><br><strong>练习题，写出执行结果</strong><br><code>考点：就是事件循环、宏任务、微任务的执行顺序，上面说的弄明白了，就很容易了</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 start'</span>);</span><br><span class="line">    <span class="keyword">await</span> async2();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 end'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async2'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">async1();</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><span style="font-size:13px;color:#0b807d"><br>async方法执行时，遇到await会立即执行表达式，然后把表达式后面的代码放到微任务队列里，让出执行栈让同步代码先执行<br>也就是 await async2()后面（下面）的部分是放在了promise（微任务），async1 转换一下就是这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'1'</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span>=&gt;</span>resolve(async2())).then(<span class="function"><span class="params">e</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'2'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></span></p>
+<p>可以看到 async2() 实在promise的executor（执行器）里同步执行的，所以是<br>主线程  4 , async  1 ，async2 , 将console.log(2) 加入微任务， 主线程的 console.log(5)<br>执行栈已经空闲，查看事件队列（优先微任务，然后宏任务） 输出2<br><br><strong>练习题，写出执行结果</strong><br><code>考点：就是事件循环、宏任务、微任务的执行顺序，上面说的弄明白了，就很容易了</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 start'</span>);</span><br><span class="line">    <span class="keyword">await</span> async2();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async1 end'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">async2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'async2'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script start'</span>);</span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'setTimeout'</span>);</span><br><span class="line">&#125;, <span class="number">0</span>)</span><br><span class="line">async1();</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise1'</span>);</span><br><span class="line">    resolve();</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'promise2'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'script end'</span>);</span><br></pre></td></tr></table></figure></p>
 <h3 id="八、for循环每隔1秒输出对应数值"><a href="#八、for循环每隔1秒输出对应数值" class="headerlink" title="八、for循环每隔1秒输出对应数值"></a>八、for循环每隔1秒输出对应数值</h3><p><span style="font-size:13px;color:#0b807d">因为以前面试遇到过，所以就记录下来</span></p>
 <ol>
 <li><p>async、await</p>
@@ -256,7 +257,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-09-20T08:04:42.216Z" itemprop="dateUpdated">2019-09-20 16:04:42</time>
+    最后更新时间：<time datetime="2020-01-05T09:42:15.350Z" itemprop="dateUpdated">2020-01-05 17:42:15</time>
 </span><br>
 
 
@@ -443,7 +444,7 @@
         </p>
     </div>
     <div class="bottom">
-        <p><span>YMBo &copy; 2017 - 2019</span>
+        <p><span>YMBo &copy; 2017 - 2020</span>
             <span>
                 
                 <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
