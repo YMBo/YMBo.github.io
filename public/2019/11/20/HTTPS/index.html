@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://yoursite.com/images/https/11.png">
 <meta property="og:image" content="http://yoursite.com/images/https/12.png">
 <meta property="og:image" content="http://yoursite.com/images/https/13.png">
-<meta property="og:updated_time" content="2020-01-03T12:49:25.495Z">
+<meta property="og:updated_time" content="2020-01-06T13:48:34.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPS">
 <meta name="twitter:description" content="前言以下是我对《图解HTTP》这本书阅读后的知识梳理，为了加深印象和忘了的时候能不瞎找 一、http缺点1. 通信使用明文，不加密，内容可能会被窃听TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等">
@@ -238,7 +238,7 @@
                 <div class="image-caption">证书</div>
             </figure><br></p>
 
-<h4 id="2-加密（公开密钥加密）"><a href="#2-加密（公开密钥加密）" class="headerlink" title="2.加密（公开密钥加密）"></a>2.加密（公开密钥加密）</h4><p style="font-size:13px;color:#565656"><br>SSL采用<strong>公开密钥加密</strong>的加密方式<br><br>使用一对非对称的密钥，一个叫私有秘钥（不能让别人知道），一个叫公有密钥（受任何人都可以知道）<br></p>
+<h4 id="2-加密（公开密钥加密）"><a href="#2-加密（公开密钥加密）" class="headerlink" title="2.加密（公开密钥加密）"></a>2.加密（公开密钥加密）</h4><p style="font-size:13px;color:#565656"><br>SSL采用<strong>公开密钥加密</strong>的加密方式<br><br>使用一对非对称的密钥，一个叫私有秘钥（不能让别人知道），一个叫公有密钥（受任何人都可以知道）<br><br><br></p>
 
 <h5 id="𝟙-流程"><a href="#𝟙-流程" class="headerlink" title="𝟙.流程"></a>𝟙.流程</h5><p>发送密文一方使用对方的公开密钥进行加密，对方收到加密的信息后，再用自己的私钥解密</p>
 <blockquote>
@@ -272,6 +272,8 @@
 </blockquote>
 <h4 id="2-加密（共享密钥加密）"><a href="#2-加密（共享密钥加密）" class="headerlink" title="2.加密（共享密钥加密）"></a>2.加密（共享密钥加密）</h4><p>加密和解密用同一个密钥的方式称为共享密钥加密也叫对称密钥加密</p>
 <h4 id="3-两种加密方式的对比"><a href="#3-两种加密方式的对比" class="headerlink" title="3.两种加密方式的对比"></a>3.两种加密方式的对比</h4><p>公开密钥加密处理速度慢于共享密钥加密</p>
+<p><strong>公开密钥优势</strong> 不需要交换共享密钥，所以不用担心共享密钥会暴露<br><strong>公开密钥劣势</strong> 耗费资源，必须经过数字证书验证 </p>
+<p><strong>共享密钥优势</strong> 不需要经过数字证书验证，速度优于公开密钥<br><strong>共享密钥劣势</strong> 需要发送共享密钥，有暴露的风向</p>
 <h3 id="三、HTTP-加密-认证-完整性保护-HTTPS"><a href="#三、HTTP-加密-认证-完整性保护-HTTPS" class="headerlink" title="三、HTTP+加密+认证+完整性保护=HTTPS"></a>三、HTTP+加密+认证+完整性保护=HTTPS</h3><p>HTTPS使用SSL和TLS两种协议<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -353,7 +355,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-01-03T12:49:25.495Z" itemprop="dateUpdated">2020-01-03 20:49:25</time>
+    最后更新时间：<time datetime="2020-01-06T13:48:34.176Z" itemprop="dateUpdated">2020-01-06 21:48:34</time>
 </span><br>
 
 
