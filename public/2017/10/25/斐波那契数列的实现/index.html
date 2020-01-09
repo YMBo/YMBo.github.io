@@ -33,7 +33,7 @@
 <meta property="og:site_name" content="DHYANA">
 <meta property="og:description" content="一、扫盲斐波那契数列也叫黄金分割数列，也叫兔子数列原理：假定一对大兔子每月能生一对小兔子，且每对新生的小兔子经过一个月可以长成一对大兔子，如果不发生死亡，且每次均生下一雌一雄，问一年后共有多少对兔子？    月份 兔子情况 总数     第0个月 a（小兔子） 1   第1个月 a（具备繁殖能力） 1   第2个月 b（生啦生啦）+ a（他父母） 2   第3个月 b（2月份出生的具备繁殖能力，正">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-19T10:58:34.914Z">
+<meta property="og:updated_time" content="2019-12-16T03:18:17.587Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="斐波那契数列的实现">
 <meta name="twitter:description" content="一、扫盲斐波那契数列也叫黄金分割数列，也叫兔子数列原理：假定一对大兔子每月能生一对小兔子，且每对新生的小兔子经过一个月可以长成一对大兔子，如果不发生死亡，且每次均生下一雌一雄，问一年后共有多少对兔子？    月份 兔子情况 总数     第0个月 a（小兔子） 1   第1个月 a（具备繁殖能力） 1   第2个月 b（生啦生啦）+ a（他父母） 2   第3个月 b（2月份出生的具备繁殖能力，正">
@@ -153,7 +153,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、扫盲"><span class="post-toc-text">一、扫盲</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、代码实现"><span class="post-toc-text">二、代码实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-第一种"><span class="post-toc-text">1.第一种</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-第二种"><span class="post-toc-text">2.第二种</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、缺陷"><span class="post-toc-text">三、缺陷</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、扫盲"><span class="post-toc-text">一、扫盲</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、代码实现"><span class="post-toc-text">二、代码实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-第一种"><span class="post-toc-text">1.第一种</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-第二种"><span class="post-toc-text">2.第二种</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、缺陷"><span class="post-toc-text">三、缺陷</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、优化"><span class="post-toc-text">四、优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-关于优化的思路"><span class="post-toc-text">1. 关于优化的思路</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -220,9 +220,16 @@
 </table>
 <p> 1、1 、2、3、5、8、13、21、34、55、89……<br>所以规律就是 <code>fn(n)=fn(n-1)+fn(n-2)</code></p>
 <h2 id="二、代码实现"><a href="#二、代码实现" class="headerlink" title="二、代码实现"></a>二、代码实现</h2><h3 id="1-第一种"><a href="#1-第一种" class="headerlink" title="1.第一种"></a>1.第一种</h3><p>这种是最常见的实现：<br><code>迭代</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*i 月份</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a=[];</span><br><span class="line">	<span class="comment">/*0个月什么都不存在*/</span></span><br><span class="line">	a[<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	a[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> o=<span class="number">2</span>;o&lt;=i;o++)&#123;</span><br><span class="line">		a[o]=a[o<span class="number">-1</span>]+a[o<span class="number">-2</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> a[i]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-第二种"><a href="#2-第二种" class="headerlink" title="2.第二种"></a>2.第二种</h3><p><code>递归</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* i 月份</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;<span class="number">2</span>)&#123;<span class="keyword">return</span> i===<span class="number">0</span>?<span class="number">0</span>:<span class="number">1</span>;&#125;</span><br><span class="line">	<span class="keyword">return</span> fn(i<span class="number">-1</span>)+fn(i<span class="number">-2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-第二种"><a href="#2-第二种" class="headerlink" title="2.第二种"></a>2.第二种</h3><p><code>递归</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* i 月份</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=<span class="number">1</span>)&#123;<span class="keyword">return</span> <span class="number">1</span>&#125;</span><br><span class="line">	<span class="keyword">return</span> fn(i<span class="number">-1</span>)+fn(i<span class="number">-2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>是不是感觉很简洁</p>
 <h2 id="三、缺陷"><a href="#三、缺陷" class="headerlink" title="三、缺陷"></a>三、缺陷</h2><p>针对这个例子来说，这里的递归会进行太多次的调用（比迭代多），所以简洁的背后牺牲的是性能</p>
+<h2 id="四、优化"><a href="#四、优化" class="headerlink" title="四、优化"></a>四、优化</h2><p>上面的递归非常消耗性能，所以要优化一下</p>
+<h3 id="1-关于优化的思路"><a href="#1-关于优化的思路" class="headerlink" title="1. 关于优化的思路"></a>1. 关于优化的思路</h3><p><strong>是什么导致上面的性能消耗大的？</strong>，可以看到，递归的循环次数非常多，且没有<strong>尾调用</strong></p>
+<blockquote>
+<p>我们知道，函数调用会在内存形成一个“调用记录”，又称“调用帧”（call frame），保存调用位置和内部变量等信息。如果在函数A的内部调用函数B，那么在A的调用帧上方，还会形成一个B的调用帧。等到B运行结束，将结果返回到A，B的调用帧才会消失。如果函数B内部还调用函数C，那就还有一个C的调用帧，以此类推。所有的调用帧，就形成一个“调用栈”（call stack）。</p>
+</blockquote>
+<p>所以每一次的fn执行都会增加一个调用帧，导致内存消耗变大</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">i,prev=<span class="number">1</span>,current=<span class="number">1</span></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=<span class="number">1</span>)&#123;<span class="keyword">return</span> current&#125;</span><br><span class="line">	<span class="keyword">return</span> fn(i<span class="number">-1</span>,current,prev+current)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -230,7 +237,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-12-19T10:58:34.914Z" itemprop="dateUpdated">2018-12-19 18:58:34</time>
+    最后更新时间：<time datetime="2019-12-16T03:18:17.587Z" itemprop="dateUpdated">2019-12-16 11:18:17</time>
 </span><br>
 
 

@@ -10,7 +10,7 @@ tags: javascript
 数据属性包含一个数据值的位置，在这个位置可以读取和写入值
 
 #### 数据属性有4个描述其行为的特性
-1. [[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能肉修改属性的特性，或者能把属性修改为访问器属性。默认true
+1. [[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能修改属性的特性，或者能把属性修改为访问器属性。默认true,（**说的磨磨唧唧，其实就是能否通过delete删除属性、能否再修改Enumerable、Writable（特殊，把Configurable设置为false后，这个属性也能被修改）、Value（更特殊，看下面例子）、Configurable属性这四个属性**）
 2. [[Enumerable]] : 表示能否通过 for-in 循环返回属性。 默认 true
 3. [[Writable]] : 表示能否修改属性的值 。 默认 true
 4. [[Value]] : 包含这个属性的数据值。 默认 undefined
@@ -64,6 +64,8 @@ Object.defineProperty(b,"age",{
     at Function.defineProperty (<anonymous>)
     at <anonymous>:3:8 */
 
+
+//   看下面这俩顺序👇👇👇👇👇👇👇👇👇👇👇👇👇
 //尝试修改writable
 Object.defineProperty(b,"age",{
 	writable:false
@@ -79,14 +81,20 @@ VM17512:1 Uncaught TypeError: Cannot redefine property: age
     at Function.defineProperty (<anonymous>)
     at <anonymous>:1:8
 */
+//  👆👆👆👆👆👆👆👆👆👆👆👆👆
 ```
-> tip:上面的操作只针对于 b对象的age 属性，所以此时我再添加一个属性也是成功的，比如
+> **tip**:上面的操作只针对于 b对象的age 属性，所以此时我再添加一个属性也是成功的，比如
 ``` javascript
 b.name='m';
 console.log(b)
 // 输出 {age: 0, name: "m"}
 ```
-> tip2:
+> **tip2**:
+看上面的代码 22-37行，这俩属性很特殊，
+1. 就算`configurable:false`了，**writable属性依然可以被修改**
+2. **注意注意！！**  看到代码里的顺序了么？writable的修改是在value的修改的上面的，这时修改value报错，但我发现如果`writable`和`configurable`同时为`false`（且的关系，不是或），这个value属性才会报错（也就是修改不了）,否则也是可以修改的
+
+> **tip3**:
 ES5有三个操作会忽略enumerable为false的属性。
 
 > 1. for...in循环：只遍历对象自身的和继承的可枚举的属性
@@ -119,7 +127,7 @@ _year 前面的下划线是一种常用的记号，用于表示只能通过对�
 ## 三、总结
 ### 1.到底怎么判断是数据属性还是访问器属性
 
-可以通过 Object.getOwnPropertyName()方法获取到所有实例中的属性，包括不可枚举的属性。
+可以通过 Object.getOwnPropertyNames()方法获取到所有实例中的属性，包括不可枚举的属性。
 然后，使用Object.getOwnPropertyDescriptor(）方法获取到每一个属性的描述符，如果描述符中有get/set方法，说明它是访问器方法，否则它就是数据属性。
 其实由于两种属性各自的4种特征都是都不一样的，如果一个对象的属性描述符里含有一个单独的特征就可以判断是什么类型的属性，比如
 ``` javascript

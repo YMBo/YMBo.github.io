@@ -88,7 +88,7 @@ res.end();
 一般是客户端需要认证（登录状态失效等）
 
 #### 412 precondition failed
-服务器对比if-Match（请求头）和ETag失败时，返回
+响应状态码 412 Precondition Failed（先决条件失败）表示客户端错误，意味着对于目标资源的访问请求被拒绝。这通常发生于采用除 GET 和 HEAD 之外的方法进行条件请求时无法进行请求（通常是上载或修改资源，由首部字段 If-Unmodified-Since 或 If-None-Match 规定的先决条件不成立的情况下
 
 #### 403 forbidden
 你介个用户没有权限访问指定资源的权限
