@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
     
 
     
@@ -46,7 +46,7 @@
 <meta property="og:image" content="http://yoursite.com/images/https/11.png">
 <meta property="og:image" content="http://yoursite.com/images/https/12.png">
 <meta property="og:image" content="http://yoursite.com/images/https/13.png">
-<meta property="og:updated_time" content="2020-01-06T13:48:34.176Z">
+<meta property="og:updated_time" content="2020-01-09T02:26:25.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTPS">
 <meta name="twitter:description" content="前言以下是我对《图解HTTP》这本书阅读后的知识梳理，为了加深印象和忘了的时候能不瞎找 一、http缺点1. 通信使用明文，不加密，内容可能会被窃听TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等">
@@ -194,7 +194,7 @@
 <h3 id="一、http缺点"><a href="#一、http缺点" class="headerlink" title="一、http缺点"></a>一、http缺点</h3><h4 id="1-通信使用明文，不加密，内容可能会被窃听"><a href="#1-通信使用明文，不加密，内容可能会被窃听" class="headerlink" title="1. 通信使用明文，不加密，内容可能会被窃听"></a>1. 通信使用明文，不加密，内容可能会被窃听</h4><p style="font-size:13px;color:#565656"><br>TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视<br>其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/1.png" alt="窃听" title="">
+                    <img src="/images/https/1.png" alt="窃听" title>
                 </div>
                 <div class="image-caption">窃听</div>
             </figure><br></p>
@@ -203,7 +203,7 @@
 <h4 id="2-不验证通信方身份，可能遭遇伪装"><a href="#2-不验证通信方身份，可能遭遇伪装" class="headerlink" title="2. 不验证通信方身份，可能遭遇伪装"></a>2. 不验证通信方身份，可能遭遇伪装</h4><p style="font-size:13px;color:#565656"><br>http协议通信时，由于不存在确认通信方的处理步骤，任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个相应<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/2.png" alt="窃听" title="">
+                    <img src="/images/https/2.png" alt="窃听" title>
                 </div>
                 <div class="image-caption">窃听</div>
             </figure><br> 1. 伪装服务器（无法确定请求来自何方、出自谁手）<br> 2. 伪装客户端<br> 3. 无法阻止海量请求，DOS攻击<br></p>
@@ -211,13 +211,13 @@
 <h4 id="3-无法证明报文完整性，篡改报文"><a href="#3-无法证明报文完整性，篡改报文" class="headerlink" title="3. 无法证明报文完整性，篡改报文"></a>3. 无法证明报文完整性，篡改报文</h4><p style="font-size:13px;color:#565656"><br>无法证明信息的准确度，无法确认发出的请求/相应和接受的请求/相应是前后相同的<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/3.png" alt="无法确定准确度" title="">
+                    <img src="/images/https/3.png" alt="无法确定准确度" title>
                 </div>
                 <div class="image-caption">无法确定准确度</div>
             </figure><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/4.png" alt="中间人攻击" title="">
+                    <img src="/images/https/4.png" alt="中间人攻击" title>
                 </div>
                 <div class="image-caption">中间人攻击</div>
             </figure><br></p>
@@ -225,7 +225,7 @@
 <h3 id="二、SSL"><a href="#二、SSL" class="headerlink" title="二、SSL"></a>二、SSL</h3><p style="font-size:13px;color:#565656"><br><strong>SSL： </strong>安全套接层<br><br>用SSL建立安全通信线路后，就可以在这条线路进行HTTP通信，与SSL组合使用的HTTP称为HTTPS<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/5.png" alt="安全的通信线路" title="">
+                    <img src="/images/https/5.png" alt="安全的通信线路" title>
                 </div>
                 <div class="image-caption">安全的通信线路</div>
             </figure><br></p>
@@ -233,7 +233,7 @@
 <h4 id="1-证书"><a href="#1-证书" class="headerlink" title="1.证书"></a>1.证书</h4><p style="font-size:13px;color:#565656"><br>使用HTTP协议无法确定通信方，但是SSL则可以，SSL不仅提供加密，还使用称为 <strong>证书</strong>的手段，用于确定通信双方。<br>证书由值得信任的第三方机构颁发，用来 <strong>证明服务器和客户端是实际存在的</strong><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/6.png" alt="证书" title="">
+                    <img src="/images/https/6.png" alt="证书" title>
                 </div>
                 <div class="image-caption">证书</div>
             </figure><br></p>
@@ -245,7 +245,7 @@
 <p>不需要发送密钥了<br>加密算法公开，密钥保密<br>密钥被窃取，加密也就没有意义了(因为不需要发送密钥，也就不懂担心密钥被窃取了)<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/9.png" alt="加密" title="">
+                    <img src="/images/https/9.png" alt="加密" title>
                 </div>
                 <div class="image-caption">加密</div>
             </figure></p>
@@ -263,7 +263,7 @@
 <li>接收到证书的客户端使用数字证书认证机构的公开密钥对证书上的数字签名进行验证，一旦通过，就能确定这个公开密钥真实有效且值得信赖<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/10.png" alt="加密" title="">
+                    <img src="/images/https/10.png" alt="加密" title>
                 </div>
                 <div class="image-caption">加密</div>
             </figure>
@@ -277,13 +277,13 @@
 <h3 id="三、HTTP-加密-认证-完整性保护-HTTPS"><a href="#三、HTTP-加密-认证-完整性保护-HTTPS" class="headerlink" title="三、HTTP+加密+认证+完整性保护=HTTPS"></a>三、HTTP+加密+认证+完整性保护=HTTPS</h3><p>HTTPS使用SSL和TLS两种协议<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/7.png" alt="证书" title="">
+                    <img src="/images/https/7.png" alt="证书" title>
                 </div>
                 <div class="image-caption">证书</div>
             </figure><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/8.png" alt="HTTPS" title="">
+                    <img src="/images/https/8.png" alt="HTTPS" title>
                 </div>
                 <div class="image-caption">HTTPS</div>
             </figure></p>
@@ -296,7 +296,7 @@
 <h4 id="2-https的通信机制"><a href="#2-https的通信机制" class="headerlink" title="2.https的通信机制"></a>2.https的通信机制</h4><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/11.png" alt="通信步骤" title="">
+                    <img src="/images/https/11.png" alt="通信步骤" title>
                 </div>
                 <div class="image-caption">通信步骤</div>
             </figure>
@@ -332,7 +332,7 @@
 <h3 id="四、HTTPS的缺点"><a href="#四、HTTPS的缺点" class="headerlink" title="四、HTTPS的缺点"></a>四、HTTPS的缺点</h3><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="/images/https/13.png" alt="HTTPS比HTTP要慢2到100倍" title="">
+                    <img src="/images/https/13.png" alt="HTTPS比HTTP要慢2到100倍" title>
                 </div>
                 <div class="image-caption">HTTPS比HTTP要慢2到100倍</div>
             </figure>
@@ -355,7 +355,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2020-01-06T13:48:34.176Z" itemprop="dateUpdated">2020-01-06 21:48:34</time>
+    最后更新时间：<time datetime="2020-01-09T02:26:25.366Z" itemprop="dateUpdated">2020-01-09 10:26:25</time>
 </span><br>
 
 
