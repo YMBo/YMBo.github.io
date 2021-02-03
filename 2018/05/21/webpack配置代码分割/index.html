@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>webpack配置代码分割 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="webpack">
+    <meta name="description" content="一、前言webpack 4.0 使用 optimization.splitChunks.cacheGroups 配置项来进行包的拆分，其实默认情况下，webpack是会自动帮我们分割的，但是有时候我们可能也需要自定义配置，下面来说下我对这个配置项的理解，如有错误，烦请指出 二、配置项说明  cacheGroups                            用这个配置项来自定义生成的文件">
+<meta name="keywords" content="webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack配置代码分割">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/webpack配置代码分割/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言webpack 4.0 使用 optimization.splitChunks.cacheGroups 配置项来进行包的拆分，其实默认情况下，webpack是会自动帮我们分割的，但是有时候我们可能也需要自定义配置，下面来说下我对这个配置项的理解，如有错误，烦请指出 二、配置项说明  cacheGroups                            用这个配置项来自定义生成的文件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/webpack配置代码分割/1.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/webpack配置代码分割/2.png">
+<meta property="og:image" content="http://yoursite.com/images/webpack配置代码分割/3.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/webpack配置代码分割/4.jpeg">
+<meta property="og:updated_time" content="2021-01-25T10:48:26.380Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack配置代码分割">
+<meta name="twitter:description" content="一、前言webpack 4.0 使用 optimization.splitChunks.cacheGroups 配置项来进行包的拆分，其实默认情况下，webpack是会自动帮我们分割的，但是有时候我们可能也需要自定义配置，下面来说下我对这个配置项的理解，如有错误，烦请指出 二、配置项说明  cacheGroups                            用这个配置项来自定义生成的文件">
+<meta name="twitter:image" content="http://yoursite.com/images/webpack配置代码分割/1.jpeg">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">webpack配置代码分割</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">webpack配置代码分割</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-21T10:05:27.000Z" itemprop="datePublished" class="page-time">
+  2018-05-21
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、配置项说明"><span class="post-toc-text">二、配置项说明</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、疑难配置项"><span class="post-toc-text">三、疑难配置项</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、总结"><span class="post-toc-text">四、总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-webpack配置代码分割"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">webpack配置代码分割</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-21 18:05:27" datetime="2018-05-21T10:05:27.000Z"  itemprop="datePublished">2018-05-21</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>webpack 4.0 使用 <code>optimization.splitChunks.cacheGroups</code> 配置项来进行包的拆分，其实默认情况下，webpack是会自动帮我们分割的，但是有时候我们可能也需要自定义配置，下面来说下我对这个配置项的理解，如有错误，烦请指出</p>
+<h2 id="二、配置项说明"><a href="#二、配置项说明" class="headerlink" title="二、配置项说明"></a>二、配置项说明</h2><ol>
+<li><strong> cacheGroups</strong>                           <ul>
+<li>用这个配置项来自定义生成的文件</li>
+</ul>
+</li>
+<li><strong> test </strong>                                              <ul>
+<li>限制范围，可以是正则，匹配文件夹或文件</li>
+</ul>
+</li>
+<li><strong> name</strong>                                            <ul>
+<li>生成的文件名</li>
+</ul>
+</li>
+<li><strong> priority</strong>                                         <ul>
+<li>优先级，当有chunks满足多个分组条件的时候，优先选择优先级高的</li>
+</ul>
+</li>
+<li><strong> minSize</strong>                                        <ul>
+<li>分出来的包最小尺寸必须大于此值，默认30000B</li>
+</ul>
+</li>
+<li><strong> minChunks</strong>                                   <ul>
+<li>表示分离前被引用次数,默认为1</li>
+</ul>
+</li>
+<li><strong> maxInitialRequests</strong>                       <ul>
+<li>最大初始化加载次数，一个入口文件可以并行加载的最大文件数量，默认1</li>
+</ul>
+</li>
+<li><strong> maxAsyncRequests</strong>                      <ul>
+<li>最大按需加载次数，最大异步加载次数，默认1</li>
+</ul>
+</li>
+<li><strong> enforce: true</strong>                                <ul>
+<li>优先处理，这一项好像和priority有些重叠了</li>
+</ul>
+</li>
+<li><strong> reuseExistingChunk:true</strong>            <ul>
+<li>表示可以使用已经存在的块，即如果满足条件的块已经存在就是用己有的的，不再创建一个新的块</li>
+</ul>
+</li>
+<li><strong> chunks 值为”initial”, “async”（默认） 或 “all”</strong> <ul>
+<li>initial 入口chunk，对于异步导入的文件不处理</li>
+<li>async 异步chunk，只对异步导入的文件处理</li>
+<li>all 全部chunk</li>
+</ul>
+</li>
+</ol>
+<p>12.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">runtimeChunk: &#123;</span><br><span class="line">    name: <span class="string">'manifest'</span></span><br><span class="line">        <span class="comment">/* 管理被分出来的包，runtime 指的是 webpack 的运行环境(具体作用就是模块解析, 加载) 和 模块信息清单，</span></span><br><span class="line"><span class="comment">                    模块信息清单在每次有模块变更(hash 变更)时都会变更 */</span></span><br><span class="line">&#125;,</span><br><span class="line">cacheGroups:&#123;<span class="comment">//设置缓存chunks</span></span><br><span class="line">    priority: <span class="number">0</span>,<span class="comment">//缓存组优先级</span></span><br><span class="line">    <span class="comment">//当需要优先匹配缓存组的规则时，priority需要设置为正数，当需要优先匹配默认设置时，缓存组需设置为负数，0为两者分割线</span></span><br><span class="line">    <span class="keyword">default</span>:&#123;<span class="comment">//设置缓存组默认配置，可通过default:false禁用默认缓存组，</span></span><br><span class="line">    <span class="comment">//然后就可以自定义缓存组，将初始化加载时被重复引用的模块进行拆分</span></span><br><span class="line">        minChunks:<span class="number">2</span>,<span class="comment">//引用两次</span></span><br><span class="line">        priority:<span class="number">-20</span>,<span class="comment">//缓存组优先级为-20</span></span><br><span class="line">        reuseExistingChunk:<span class="literal">true</span>,<span class="comment">//表示可以使用已经存在的块，即如果满足条件的块已经存在就是用己有的的，不再创建一个新的块</span></span><br><span class="line">    &#125;，</span><br><span class="line">    [key]:&#123;<span class="comment">//自定义缓存组，可以根据需求，自由创建</span></span><br><span class="line">        chunks:<span class="string">'initial'</span>,</span><br><span class="line">        test: <span class="regexp">/vue/</span>,<span class="comment">//正则规则验证，如符合就提取chunk放入当前缓存组，值可以是function、boolean、string、RegExp，默认为空</span></span><br><span class="line">        enforce: <span class="literal">true</span><span class="comment">//优先处理</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、疑难配置项"><a href="#三、疑难配置项" class="headerlink" title="三、疑难配置项"></a>三、疑难配置项</h2><p><strong> maxInitialRequests</strong> :<br>这个配置项我一直很不理解，网上的很多资源都是千篇一律，有用的基本没有，后来我发现了这篇文章  <a href="https://www.cnblogs.com/wmhuang/p/8967639.html" target="_blank" rel="noopener">关于webpack模块拆分规则</a>  让我有对这个配置项有了点浅显的了解</p>
+<p>现在说说我的理解，举个小例子：<br>这是一个多页应用，index.js和shop.js是入口文件<br>我的目录结构：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/webpack配置代码分割/1.jpeg" alt="目录结构" title>
+                </div>
+                <div class="image-caption">目录结构</div>
+            </figure>；</p>
+<p>这是webpack分割代码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">runtimeChunk: &#123;</span><br><span class="line">    name: <span class="string">'manifest'</span></span><br><span class="line">&#125;,</span><br><span class="line">splitChunks: &#123;</span><br><span class="line">    cacheGroups: &#123;</span><br><span class="line">        <span class="comment">//项目公共组件</span></span><br><span class="line">        common: &#123;</span><br><span class="line">            chunks: <span class="string">'initial'</span>, </span><br><span class="line">            name: <span class="string">'common'</span>,</span><br><span class="line">            minChunks: <span class="number">2</span>, </span><br><span class="line">            maxInitialRequests: <span class="number">3</span>, <span class="comment">//最大初始化加载次数，一个入口文件可以并行加载的最大文件数量，默认1</span></span><br><span class="line">            minSize: <span class="number">0</span> <span class="comment">//表示在分离前的最小模块大小，默认为0，最小为30000</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//第三方组件</span></span><br><span class="line">        vendor: &#123;</span><br><span class="line">            test: <span class="regexp">/node_modules/</span>,</span><br><span class="line">            chunks: <span class="string">"initial"</span>,</span><br><span class="line">            name: <span class="string">"vendor"</span>,</span><br><span class="line">            priority: <span class="number">10</span>,</span><br><span class="line">            enforce: <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>现在先别急着看分包结果，先来分析一下：<br>其中除了React、ReactDOM是第三方包以外剩下的都是自定义组件</p>
+<p><strong>index.js(入口文件)</strong>：React、ReactDom、index.jsx(index目录下)<br><strong>shop.js(入口文件)</strong>：React、ReactDom、index.jsx(shop目录下)<br><strong>index.jsx(shop目录下)</strong>：React、Header.jsx、A.jsx、B.jsx、shop.css<br><strong>index.jsx(index目录下)</strong>：React、A.jsx、index.css<br><strong>A.jsx</strong>：React、Common.css<br><strong>B.jsx</strong>：React、b.css、common.css<br>那么画出的依赖图就是这个样子：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/webpack配置代码分割/2.png" alt="目录结构" title>
+                </div>
+                <div class="image-caption">目录结构</div>
+            </figure></p>
+<p>这里来自 <code>node_modules</code> 的包肯定是被打包到 <code>vender</code> 里了，不用管这个，主要是看 <code>common</code> 这个包的信息</p>
+<p>暂且忽略掉<strong>maxInitialRequests</strong>这个配置（当然代码里是不能忽略的因为有默认值，想象这一项不起作用就行了），如果按照使用次数超过2次，大小超过0的包，打包到一起，那么结果是这样的：</p>
+<blockquote>
+<p>Common（chunks）：A.jsx、Common.css<br>vender（chunks）：第三方<br>shop.js（chunks）：Header.jsx、B.jsx、b.css、shop.css<br>index.js（chunks）：index.css</p>
+</blockquote>
+<p>那么此时的maxInitialRequests（初始加载次数）是：<br><code>shop页入口</code>：shop.js、vender、Common     <strong>一共三次</strong></p>
+<p><code>index页入口</code>：index.js、vender(chunks)、Common   <strong>一共三次</strong></p>
+<hr>
+<p>如果此时我限制了 <strong>maxInitialRequests：2</strong> 为2的话，那么结果是这样的</p>
+<blockquote>
+<p>vender（chunks）：第三方<br>shop.js（chunks）：Header.jsx、B.jsx、b.css、shop.css、A.jsx、Common.css<br>index.js（chunks）：index.css、A.jsx、Common.css</p>
+</blockquote>
+<p><code>shop页入口</code>：shop.js、vender <strong>一共两次</strong></p>
+<p><code>index页入口</code>：index.js、vender<strong>一共两次</strong><br>看截图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/webpack配置代码分割/3.jpeg" alt="maxInitialRequests：2的情况" title>
+                </div>
+                <div class="image-caption">maxInitialRequests：2的情况</div>
+            </figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/webpack配置代码分割/4.jpeg" alt="maxInitialRequests：3或大于三的情况" title>
+                </div>
+                <div class="image-caption">maxInitialRequests：3或大于三的情况</div>
+            </figure>
+<p>可以看到以上的分析是正确的</p>
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>不过话说会来，如果每次配置wepback的这一项都按这么分析，那得累死，可以这么分析，每次页面初始加载我想让它的并发请求不超过自己的预期就可以了</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-25T10:48:26.380Z" itemprop="dateUpdated">2021-01-25 18:48:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/21/webpack配置代码分割/&title=《webpack配置代码分割》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/21/webpack配置代码分割/&title=《webpack配置代码分割》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/21/webpack配置代码分割/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack配置代码分割》 — DHYANA&url=http://yoursite.com/2018/05/21/webpack配置代码分割/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/21/webpack配置代码分割/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/08/09/python格式化字符/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">python格式化字符</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/12/webpack4-0中的mode和-babelrc的env-development配置项目/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">webpack4.0中的mode和.babelrc的env.development配置项目</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'webpack配置代码分割',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/05/21/webpack配置代码分割/&title=《webpack配置代码分割》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/05/21/webpack配置代码分割/&title=《webpack配置代码分割》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/05/21/webpack配置代码分割/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《webpack配置代码分割》 — DHYANA&url=http://yoursite.com/2018/05/21/webpack配置代码分割/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/05/21/webpack配置代码分割/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACK0lEQVR42u3aQY6EMAwFUe5/aWY7EhO6vk2PhFNZtRBK8li4HTvHgcf5a1yfr35fx/VNsspjQ4YMGa9lnLeDbGu1ifsZ7vfA9yZDhox9GKsItnqHb5rHRrLu8rkMGTJkYEaaLPJ0U4YMGTI4gyx/Pw8/xMqQIUNGeoh96sB5X1D7+llchgwZL2Twqvv///5Kf0OGDBmvYpzhSMttJDXk4XW5KxkyZIxm8ADHE7L0Tf78wyoyZMgYyuhcgCDtAX7c5e2HP96UIUPGaEatTJYWvzrlOYKUIUPGnoz06kMtRHI8Si5lyJAxlNFpMXIwD9y1BqcMGTJ2YHQ6gzz54xe/Yp4MGTK2YdynYnz5WqE/bXAuA64MGTLGMXiiRni8oFb7TKgTK0OGjKEMkpalzcv+8ZWDZciQsQ+DXHTg5X6+RRLcg4KgDBkyRjPIRDwg8oZBZ0WUGsqQIWMEoxb++o3P/mWLI/1aMmTIGMpIQyp/zoMv2a0MGTJmM2pJW+2eQ5qGPnbxQoYMGS9ndAIr30pn/vgQK0OGjKGMtChWS+A6bcsPz2XIkLEZg1zCqB1Eax8FzS9DhoyhjDMcKS8tnxWpMmTIGM3gIyXVDqVpoyKGyZAh47WMWiE+TRZrDc4g4MqQIWMDRi3wdcpnPH1E/xUyZMiQgcNo2vLsXz6TIUOGjFrhnsz27OeQIUPGDoxOe5Iki2SGNEGUIUPGPozW0bEUdvnnqKWVMmTIGMT4ATeyA/EOtetyAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>认识pushstate、popstate,无刷新改变URL | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="HTML5">
+    <meta name="description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
+<meta name="keywords" content="HTML5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="认识pushstate、popstate,无刷新改变URL">
+<meta property="og:url" content="http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/1.png">
+<meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/2.png">
+<meta property="og:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/3.gif">
+<meta property="og:updated_time" content="2021-01-25T10:48:26.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="认识pushstate、popstate,无刷新改变URL">
+<meta name="twitter:description" content="一、回顾 window.historyhistory对象包含用户（在浏览器窗口中）访问过的url12345678910//回退history.back();//前进history.forward();//跳转history.go();//历史记录条数（当前网页的，不是浏览器的）history.length//状态history.state 二、认识新特性HTML5扩展了history,使历史记录更">
+<meta name="twitter:image" content="http://yoursite.com/images/认识pushstate、popstate-无刷新改变URL/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">认识pushstate、popstate,无刷新改变URL</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">认识pushstate、popstate,无刷新改变URL</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-22T06:39:04.000Z" itemprop="datePublished" class="page-time">
+  2017-09-22
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#一、回顾-window-history"><span class="post-toc-text">一、回顾 window.history</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#二、认识新特性"><span class="post-toc-text">二、认识新特性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-1-存储历史记录点"><span class="post-toc-text">2.1.存储历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-2-替换历史记录点"><span class="post-toc-text">2.2.替换历史记录点</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-3-监听历史记录点"><span class="post-toc-text">2.3.监听历史记录点</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#四、用途"><span class="post-toc-text">四、用途</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#五、补充"><span class="post-toc-text">五、补充</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-认识pushstate、popstate-无刷新改变URL"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">认识pushstate、popstate,无刷新改变URL</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-22 14:39:04" datetime="2017-09-22T06:39:04.000Z"  itemprop="datePublished">2017-09-22</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="一、回顾-window-history"><a href="#一、回顾-window-history" class="headerlink" title="一、回顾 window.history"></a>一、回顾 <code>window.history</code></h1><p><code>history</code>对象包含用户（在浏览器窗口中）访问过的url<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//回退</span></span><br><span class="line">history.back();</span><br><span class="line"><span class="comment">//前进</span></span><br><span class="line">history.forward();</span><br><span class="line"><span class="comment">//跳转</span></span><br><span class="line">history.go();</span><br><span class="line"><span class="comment">//历史记录条数（当前网页的，不是浏览器的）</span></span><br><span class="line">history.length</span><br><span class="line"><span class="comment">//状态</span></span><br><span class="line">history.state</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、认识新特性"><a href="#二、认识新特性" class="headerlink" title="二、认识新特性"></a>二、认识新特性</h1><p>HTML5扩展了<code>history</code>,使历史记录更加灵活，可以在历史记录中存储指定记录点、替换当前历史记录点，监听历史记录点</p>
+<h2 id="2-1-存储历史记录点"><a href="#2-1-存储历史记录点" class="headerlink" title="2.1.存储历史记录点"></a>2.1.存储历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.pushState(<span class="string">'新添加的'</span>,<span class="string">''</span>,<span class="string">'?page=3'</span>);</span><br><span class="line"><span class="comment">// 第一个参数：设置state</span></span><br><span class="line"><span class="comment">// 第二个参数：页面标题，但是所有浏览器都忽略了，传空字符串就行</span></span><br><span class="line"><span class="comment">// 第三个删除：想要添加的链接</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//`注意，这个api会改变当前的网址，会添加一条历史记录，不是push到后面，这样会添加一条历史`</span></span><br></pre></td></tr></table></figure>
+<p>执行后，页面的URL为当前url？page=3<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/认识pushstate、popstate-无刷新改变URL/1.png" alt="执行前" title>
+                </div>
+                <div class="image-caption">执行前</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/认识pushstate、popstate-无刷新改变URL/2.png" alt="执行后" title>
+                </div>
+                <div class="image-caption">执行后</div>
+            </figure><br>此时的<code>history.length</code>也会+1，新增了历史记录点</p>
+<h2 id="2-2-替换历史记录点"><a href="#2-2-替换历史记录点" class="headerlink" title="2.2.替换历史记录点"></a>2.2.替换历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.history.replaceState(<span class="string">'新添加的'</span>,<span class="string">''</span>,<span class="string">'?page=3'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//`注意，这个api会改变当前的网址(不跳转)，不会添加一条历史记录，注意与上面pushState区别`</span></span><br><span class="line"></span><br><span class="line">&gt; 补充：location.replace()也是替换当前网址，但是页面会跳转，而且不会添加历史记录</span><br></pre></td></tr></table></figure>
+<p>区别：<br>1.history.length不会变<br>2.替换了当前页的历史记录点</p>
+<h2 id="2-3-监听历史记录点"><a href="#2-3-监听历史记录点" class="headerlink" title="2.3.监听历史记录点"></a>2.3.监听历史记录点</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>浏览器前进后退都会触发这个事件<br>比如可以这样：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.onpopstate=<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(event.state)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>后退操作时，就会打印出后退到的历史记录点的state信息。</p>
+<h1 id="四、用途"><a href="#四、用途" class="headerlink" title="四、用途"></a>四、用途</h1><p>在我写<code>react</code>饿了么的项目时，点击首页的定位信息，会从右滑动出一个新的页面，此时再通过浏览器的前进后退按钮也可以实现页面的滑动<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/认识pushstate、popstate-无刷新改变URL/3.gif" alt="浏览器控制动画" title>
+                </div>
+                <div class="image-caption">浏览器控制动画</div>
+            </figure><br>具体制作过程看我的github：<a href="https://github.com/YMBo/react-ele" target="_blank" rel="noopener">ele项目</a> </p>
+<h1 id="五、补充"><a href="#五、补充" class="headerlink" title="五、补充"></a>五、补充</h1><p>在用 <code>document.referrer</code> 做返回按钮的时候，是只有 <code>a标签</code> 才能添加一条来源的。<br>比如我通过点击页面的一个 <code>链接</code> 调到了对应的页面，那么此时 <code>document.referrer</code> 是有值的，通过 <code>history.pushState</code> 添加的历史记录跳转的页面,不会添加一条 <code>document.referrer</code> 来源 </p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-25T10:48:26.382Z" itemprop="dateUpdated">2021-01-25 18:48:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML5/">HTML5</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/&title=《认识pushstate、popstate,无刷新改变URL》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/&title=《认识pushstate、popstate,无刷新改变URL》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《认识pushstate、popstate,无刷新改变URL》 — DHYANA&url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/27/react中跨域请求数据/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">react中跨域请求数据</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/09/13/position的sticky属性/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">position的sticky属性</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: '认识pushstate、popstate,无刷新改变URL',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/&title=《认识pushstate、popstate,无刷新改变URL》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/&title=《认识pushstate、popstate,无刷新改变URL》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《认识pushstate、popstate,无刷新改变URL》 — DHYANA&url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/22/认识pushstate、popstate-无刷新改变URL/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACv0lEQVR42u3aQW4jMQwEwPz/09mrgcRONyl5fSifjCSWVRNgqGny6yt+fT+8Hn/y7P3P17PVknV+/vbwCw8PD2+x9ddf/GyjrzeUrP96b/lF/GVNPDw8vGu8fOl8K68vx+azyTp4eHh4n8NLykZeQl4XieTwjYeHh/f5vPx5Pykhm/QADw8P7//y8uXy0GEWW7RH9mNZCx4eHt48O63j1Pe/v9Lfw8PDw1t31fNmWLtCO44w3C0eHh7eBV7b3Mrj2tnxuh1cSIbD8PDw8M7y2mB0FkPkAW7+jdFFx8PDw3sLLwe35WH2Lauf4+Hh4V3m5bfd9la+GedKGEUMgYeHh/cW3uawO+tJ5aSia4eHh4d3iNeWhLyJtYkkNhFw/fSAh4eHdyHGzY+zs1GtfJ22jOHh4eHd4M1aXLMjeD4ocDjCwMPDw7vA28QQyeE7GVedja6uygMeHh7empczkhBhv63DWQseHh7eUd7mJt42sWatrLao1HMNeHh4eJO7et0MS7Y4a4zl4KLi4eHh4R3izRpg+bE7//v65p7sEA8PD+8Cb1YSZmNY7SG7bbmtnh7w8PDwSl4bE7TNp1n428YWf/zH8PDw8I7yksB0FqqeGtjalBk8PDy8s7z8uNxuLrmi+6JSVzw8PDy8NW/WZ29bXG3Imx+s66wFDw8P70LOmWPyQ3bSKmsLSf2UgIeHh3eBN4sV2ibZZqR1OGqAh4eH9xZe8vdtOyq/iLOI4eLQKh4eHt7D++/y1YYCs/vzbBjrl+/Cw8PDu8Brb7uzC5Fsrm3CrZpeeHh4eGve7IBbd9JGn807eH88MeDh4eFd4M2GBk6VhGFEmxym8fDw8D6AlwcB7aDVlTECPDw8vA/g7bdy42D9dB08PDy8a7x8uCrH582qUwn008KAh4eHd5Q3+9hmKCq/ZBfHBfDw8PAmvH+fbtjuOzA5MQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
