@@ -36,7 +36,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Blob/3.jpeg">
 <meta property="og:image" content="http://yoursite.com/images/Blob/1.png">
 <meta property="og:image" content="http://yoursite.com/images/Blob/2.png">
-<meta property="og:updated_time" content="2021-03-04T04:05:44.278Z">
+<meta property="og:updated_time" content="2021-03-04T06:45:16.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Blob">
 <meta name="twitter:description" content="前情提要arrayBuffer                                                                                             Blob              一、概念表示一个不可变、原始数据的类文件对象文件对象 File 继承了所有 Blob 的属性 二、用途">
@@ -157,7 +157,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前情提要"><span class="post-toc-text">前情提要</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、概念"><span class="post-toc-text">一、概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、用途"><span class="post-toc-text">二、用途</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、例子"><span class="post-toc-text">三、例子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、文件下载"><span class="post-toc-text">1、文件下载</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、Blob-文件分片上传"><span class="post-toc-text">2、Blob 文件分片上传</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、Blob-资源转换"><span class="post-toc-text">四、Blob 资源转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、FileReader"><span class="post-toc-text">1、FileReader</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、Blob-File"><span class="post-toc-text">2、Blob/File</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、Blob-数据分析"><span class="post-toc-text">四、Blob 数据分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-当-blob-转换为-Arraybuffer-后，数据是按什么规则转换的？"><span class="post-toc-text">1. 当 blob 转换为 Arraybuffer 后，数据是按什么规则转换的？</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前情提要"><span class="post-toc-text">前情提要</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、概念"><span class="post-toc-text">一、概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、用途"><span class="post-toc-text">二、用途</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、例子"><span class="post-toc-text">三、例子</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、文件下载"><span class="post-toc-text">1、文件下载</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、Blob-文件分片上传"><span class="post-toc-text">2、Blob 文件分片上传</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、Blob-资源转换"><span class="post-toc-text">四、Blob 资源转换</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、FileReader"><span class="post-toc-text">1、FileReader</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、Blob-File"><span class="post-toc-text">2、Blob/File</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、Blob-数据分析"><span class="post-toc-text">四、Blob 数据分析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-当-blob-转换为-Arraybuffer-后，数据是按什么规则转换的？"><span class="post-toc-text">1. 当 blob 转换为 Arraybuffer 后，数据是按什么规则转换的？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、什么样的数据-createObjectURL-后才能赋值给-img-src-展示出来？"><span class="post-toc-text">2、什么样的数据 createObjectURL 后才能赋值给 img.src 展示出来？</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -244,6 +244,7 @@
             </figure>
 <p>可以看到’a’的 arrayBuffer 是 97，所以转换规则应该是这样的：<br><code>将字符串转成的 Unicode 编码</code></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">97</span>);</span><br><span class="line"><span class="comment">// "a"</span></span><br><span class="line"><span class="string">'a'</span>.charCodeAt();</span><br><span class="line"><span class="comment">// 97</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、什么样的数据-createObjectURL-后才能赋值给-img-src-展示出来？"><a href="#2、什么样的数据-createObjectURL-后才能赋值给-img-src-展示出来？" class="headerlink" title="2、什么样的数据 createObjectURL 后才能赋值给 img.src 展示出来？"></a>2、什么样的数据 createObjectURL 后才能赋值给 img.src 展示出来？</h4><p>blob 存储的内容是一个数组，通过 input type=’file’标签传的图片可以直接 createrObjectUrl 就能给 img.src 直接展示，<br><strong>这种情况下 blob 存储的是图片文件的 base64 内容</strong><br>而在一些情况下比如<code>readPixels()</code>返回的数据里，<strong>存储的是图像的像素点 rgba</strong>，所以不能直接用 createrObjectUrl 转换成图片显示</p>
 
         </div>
 
@@ -251,7 +252,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2021-03-04T04:05:44.278Z" itemprop="dateUpdated">2021-03-04 12:05:44</time>
+    最后更新时间：<time datetime="2021-03-04T06:45:16.765Z" itemprop="dateUpdated">2021-03-04 14:45:16</time>
 </span><br>
 
 
