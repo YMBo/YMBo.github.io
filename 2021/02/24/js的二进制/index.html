@@ -25,23 +25,23 @@
     
     
     <meta name="keywords" content="javascript,ArrayBuffer">
-    <meta name="description" content="前言本篇是关于 js 二进制从操作的一些介绍，其中提出问题相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注 ArrayBuffer 概念用来表示通用的、固定长度的原始二进制数据缓冲区它是一个字节数组，每一位表示一个字节 特点不能读写，只能通过 TypedArray 视图和 DataView 视图来读写 关于类型12// 创建一个 32 字节的内存空间，默认值0let">
+    <meta name="description" content="一、前言blob 本篇是关于 js 二进制从操作的一些介绍，其中提出问题相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注 二、ArrayBuffer 概念用来表示通用的、固定长度的原始二进制数据缓冲区它是一个字节数组，每一位表示一个字节 三、特点不能读写，只能通过 TypedArray 视图和 DataView 视图来读写 四、关于类型12// 创建一个 32 字节的">
 <meta name="keywords" content="javascript,ArrayBuffer">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js的二进制">
 <meta property="og:url" content="http://yoursite.com/2021/02/24/js的二进制/index.html">
 <meta property="og:site_name" content="DHYANA">
-<meta property="og:description" content="前言本篇是关于 js 二进制从操作的一些介绍，其中提出问题相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注 ArrayBuffer 概念用来表示通用的、固定长度的原始二进制数据缓冲区它是一个字节数组，每一位表示一个字节 特点不能读写，只能通过 TypedArray 视图和 DataView 视图来读写 关于类型12// 创建一个 32 字节的内存空间，默认值0let">
+<meta property="og:description" content="一、前言blob 本篇是关于 js 二进制从操作的一些介绍，其中提出问题相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注 二、ArrayBuffer 概念用来表示通用的、固定长度的原始二进制数据缓冲区它是一个字节数组，每一位表示一个字节 三、特点不能读写，只能通过 TypedArray 视图和 DataView 视图来读写 四、关于类型12// 创建一个 32 字节的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/images/js的二进制/1.png">
 <meta property="og:image" content="http://yoursite.com/images/js的二进制/2.png">
 <meta property="og:image" content="http://yoursite.com/images/js的二进制/3.png">
 <meta property="og:image" content="http://yoursite.com/images/js的二进制/4.png">
 <meta property="og:image" content="http://yoursite.com/images/js的二进制/5.png">
-<meta property="og:updated_time" content="2021-02-26T08:36:54.789Z">
+<meta property="og:updated_time" content="2021-03-04T04:03:52.021Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js的二进制">
-<meta name="twitter:description" content="前言本篇是关于 js 二进制从操作的一些介绍，其中提出问题相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注 ArrayBuffer 概念用来表示通用的、固定长度的原始二进制数据缓冲区它是一个字节数组，每一位表示一个字节 特点不能读写，只能通过 TypedArray 视图和 DataView 视图来读写 关于类型12// 创建一个 32 字节的内存空间，默认值0let">
+<meta name="twitter:description" content="一、前言blob 本篇是关于 js 二进制从操作的一些介绍，其中提出问题相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注 二、ArrayBuffer 概念用来表示通用的、固定长度的原始二进制数据缓冲区它是一个字节数组，每一位表示一个字节 三、特点不能读写，只能通过 TypedArray 视图和 DataView 视图来读写 四、关于类型12// 创建一个 32 字节的">
 <meta name="twitter:image" content="http://yoursite.com/images/js的二进制/1.png">
     
     <link rel="shortcut icon" href="/favicon.ico">
@@ -159,7 +159,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ArrayBuffer-概念"><span class="post-toc-text">ArrayBuffer 概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#特点"><span class="post-toc-text">特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于类型"><span class="post-toc-text">关于类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ArrayBuffer-读写"><span class="post-toc-text">ArrayBuffer 读写</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、通过-DataView-视图读写"><span class="post-toc-text">1、通过 DataView 视图读写</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、通过-typesArray-视图读写"><span class="post-toc-text">2、通过 typesArray 视图读写</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#关于溢出"><span class="post-toc-text">关于溢出</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、ArrayBuffer-概念"><span class="post-toc-text">二、ArrayBuffer 概念</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、特点"><span class="post-toc-text">三、特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、关于类型"><span class="post-toc-text">四、关于类型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、ArrayBuffer-读写"><span class="post-toc-text">五、ArrayBuffer 读写</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、通过-DataView-视图读写"><span class="post-toc-text">1、通过 DataView 视图读写</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、通过-typesArray-视图读写"><span class="post-toc-text">2、通过 typesArray 视图读写</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#六、关于溢出"><span class="post-toc-text">六、关于溢出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#七、arrayBuffer-转-base64"><span class="post-toc-text">七、arrayBuffer 转 base64</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、第一种方法"><span class="post-toc-text">1、第一种方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、第二种方法"><span class="post-toc-text">2、第二种方法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、第三种方法"><span class="post-toc-text">3、第三种方法</span></a></li></ol></li></ol>
         </nav>
     </aside>
     
@@ -182,10 +182,11 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>本篇是关于 js 二进制从操作的一些介绍，其中<strong>提出问题</strong>相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注</p>
-<h3 id="ArrayBuffer-概念"><a href="#ArrayBuffer-概念" class="headerlink" title="ArrayBuffer 概念"></a>ArrayBuffer 概念</h3><p>用来表示通用的、固定长度的原始二进制数据缓冲区<br>它是一个字节数组，每一位表示一个字节</p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>不能读写，只能通过 TypedArray 视图和 DataView 视图来读写</p>
-<h3 id="关于类型"><a href="#关于类型" class="headerlink" title="关于类型"></a>关于类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 32 字节的内存空间，默认值0</span></span><br><span class="line"><span class="keyword">let</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">32</span>);</span><br></pre></td></tr></table></figure>
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p><a href="https://ymbo.github.io/2021/02/24/js%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6/" target="_blank" rel="noopener">blob</a></p>
+<p>本篇是关于 js 二进制从操作的一些介绍，其中<strong>提出问题</strong>相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注</p>
+<h3 id="二、ArrayBuffer-概念"><a href="#二、ArrayBuffer-概念" class="headerlink" title="二、ArrayBuffer 概念"></a>二、ArrayBuffer 概念</h3><p>用来表示通用的、固定长度的原始二进制数据缓冲区<br>它是一个字节数组，每一位表示一个字节</p>
+<h3 id="三、特点"><a href="#三、特点" class="headerlink" title="三、特点"></a>三、特点</h3><p>不能读写，只能通过 TypedArray 视图和 DataView 视图来读写</p>
+<h3 id="四、关于类型"><a href="#四、关于类型" class="headerlink" title="四、关于类型"></a>四、关于类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个 32 字节的内存空间，默认值0</span></span><br><span class="line"><span class="keyword">let</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">32</span>);</span><br></pre></td></tr></table></figure>
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
@@ -197,7 +198,7 @@
 <blockquote>
 <p><strong>提出问题</strong>：为什么每种视图长度不一样？<br>1 字节=8 位<br>32 字节=8*32 位<br>所以在<code>有符号8位整数类型</code>（一项表示一字节）中的长度是 32<br><code>有符号16位整数类型</code>（一项表示两个字节）中的长度是 16<br><code>有符号32位整数类型</code>（一项表示四个字节）中的长度是 8<br><code>无符号8位整数类型</code>（一项表示一字节）中的长度是 32</p>
 </blockquote>
-<h3 id="ArrayBuffer-读写"><a href="#ArrayBuffer-读写" class="headerlink" title="ArrayBuffer 读写"></a>ArrayBuffer 读写</h3><blockquote>
+<h3 id="五、ArrayBuffer-读写"><a href="#五、ArrayBuffer-读写" class="headerlink" title="五、ArrayBuffer 读写"></a>五、ArrayBuffer 读写</h3><blockquote>
 <p>tip:写操作是针对于内存的，所以通过视图修改字节后，原始 buffer 也同步变化</p>
 </blockquote>
 <h4 id="1、通过-DataView-视图读写"><a href="#1、通过-DataView-视图读写" class="headerlink" title="1、通过 DataView 视图读写"></a>1、通过 DataView 视图读写</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  buf也同步改变</span></span><br><span class="line"><span class="keyword">const</span> buf = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">32</span>);</span><br><span class="line"><span class="keyword">const</span> dataView = <span class="keyword">new</span> <span class="built_in">DataView</span>(buf);</span><br><span class="line"><span class="comment">// 设置第一个字节为整数1，第二个字节为整数2，并获取第二个字节</span></span><br><span class="line"><span class="comment">// 其他类型同理</span></span><br><span class="line">dataView.setInt8(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">dataView.setInt8(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">dataView.getInt8(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">console</span>.log(buf);</span><br></pre></td></tr></table></figure>
@@ -213,7 +214,7 @@
 </blockquote>
 <h4 id="2、通过-typesArray-视图读写"><a href="#2、通过-typesArray-视图读写" class="headerlink" title="2、通过 typesArray 视图读写"></a>2、通过 typesArray 视图读写</h4><p>Uint8Array、Int8Array、Int16Array 的实例是<strong>类数组对象</strong>，不是数组但可以用数组的一些方法 map、every 等</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">12</span>);</span><br><span class="line"><span class="keyword">const</span> x1 = <span class="keyword">new</span> <span class="built_in">Int8Array</span>(buffer);</span><br><span class="line">x1[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> x2 = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buffer);</span><br></pre></td></tr></table></figure>
-<h3 id="关于溢出"><a href="#关于溢出" class="headerlink" title="关于溢出"></a>关于溢出</h3><p>转换规则：<br><strong>正向溢出（overflow）</strong>：当输入值大于当前数据类型的最大值，结果等于当前数据类型的最小值加上余值，再减去 1。<br><strong>负向溢出（underflow）</strong>：当输入值小于当前数据类型的最小值，结果等于当前数据类型的最大值减去余值的绝对值，再加上 1。</p>
+<h3 id="六、关于溢出"><a href="#六、关于溢出" class="headerlink" title="六、关于溢出"></a>六、关于溢出</h3><p>转换规则：<br><strong>正向溢出（overflow）</strong>：当输入值大于当前数据类型的最大值，结果等于当前数据类型的最小值加上余值，再减去 1。<br><strong>负向溢出（underflow）</strong>：当输入值小于当前数据类型的最小值，结果等于当前数据类型的最大值减去余值的绝对值，再加上 1。</p>
 <blockquote>
 <p>一个有符号 8 位整数的范围是[-128,127],那如果赋值<code>130</code>会变成啥数呢？<br>130%127=3<br>-128+3-1=-126<br>所以最后的值是-126<br><figure class="image-bubble">
                 <div class="img-lightbox">
@@ -238,6 +239,14 @@
                 <div class="image-caption">表盘</div>
             </figure></p>
 </blockquote>
+<h3 id="七、arrayBuffer-转-base64"><a href="#七、arrayBuffer-转-base64" class="headerlink" title="七、arrayBuffer 转 base64"></a>七、arrayBuffer 转 base64</h3><h4 id="1、第一种方法"><a href="#1、第一种方法" class="headerlink" title="1、第一种方法"></a>1、第一种方法</h4><p><code>btoa</code>:用于创建一个 base-64 编码的字符串。参数是字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(<span class="number">12</span>);</span><br><span class="line"><span class="keyword">const</span> uint8Array = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buffer);</span><br><span class="line"><span class="keyword">let</span> str = <span class="built_in">String</span>.fromCharCode(...uint8Array);</span><br><span class="line"><span class="comment">// 拼上文件头</span></span><br><span class="line"><span class="keyword">let</span> base64 = <span class="string">`data:image/jpeg;base64,<span class="subst">$&#123;<span class="built_in">window</span>.btoa(str)&#125;</span>`</span>;</span><br></pre></td></tr></table></figure>
+<p><code>注意注意！！</code> 这种方式如果 buffer 太大就会转换失败，<code>fromCharCode参数太大就会这样</code><br><code>Uncaught (in promise) RangeError: Maximum call stack size exceeded</code></p>
+<h4 id="2、第二种方法"><a href="#2、第二种方法" class="headerlink" title="2、第二种方法"></a>2、第二种方法</h4><p>tips:这种方法大图片特别费时间</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> binary = <span class="string">''</span>;</span><br><span class="line"><span class="keyword">var</span> bytes = <span class="keyword">new</span> <span class="built_in">Uint8Array</span>(buffer);</span><br><span class="line"><span class="keyword">var</span> len = bytes.byteLength;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">  binary += <span class="built_in">String</span>.fromCharCode(bytes[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">window</span>.btoa(binary);</span><br></pre></td></tr></table></figure>
+<h4 id="3、第三种方法"><a href="#3、第三种方法" class="headerlink" title="3、第三种方法"></a>3、第三种方法</h4><p>tips：这种方法不会出现转换失败和费时间</p>
+<p>先将 buffer 转为 blob 对象，再把 blob 转为 base64</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> buffer = <span class="keyword">new</span> <span class="built_in">ArrayBuffer</span>(buffer数据);</span><br><span class="line"><span class="keyword">let</span> blob = <span class="keyword">new</span> Blob([buffer]);</span><br><span class="line"><span class="keyword">let</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> base = reader.result;</span><br><span class="line">  <span class="built_in">console</span>.log(base);</span><br><span class="line">&#125;;</span><br><span class="line">reader.readAsDataURL(blob);</span><br></pre></td></tr></table></figure>
 
         </div>
 
@@ -245,7 +254,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2021-02-26T08:36:54.789Z" itemprop="dateUpdated">2021-02-26 16:36:54</time>
+    最后更新时间：<time datetime="2021-03-04T04:03:52.021Z" itemprop="dateUpdated">2021-03-04 12:03:52</time>
 </span><br>
 
 
@@ -323,7 +332,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/03/01/Blob/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Blob</h4>
+      </a>
+    </div>
   
 
   
