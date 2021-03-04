@@ -136,3 +136,9 @@ String.fromCharCode(97);
 'a'.charCodeAt();
 // 97
 ```
+
+#### 2、什么样的数据 createObjectURL 后才能赋值给 img.src 展示出来？
+
+blob 存储的内容是一个数组，通过 input type='file'标签传的图片可以直接 createrObjectUrl 就能给 img.src 直接展示，
+**这种情况下 blob 存储的是图片文件的 base64 内容**
+而在一些情况下比如`readPixels()`返回的数据里，**存储的是图像的像素点 rgba**，所以不能直接用 createrObjectUrl 转换成图片显示
