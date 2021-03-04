@@ -4,20 +4,22 @@ date: 2021-02-24 19:13:16
 tags: [javascript, ArrayBuffer]
 ---
 
-### 前言
+### 一、前言
+
+[blob](https://ymbo.github.io/2021/02/24/js%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6/)
 
 本篇是关于 js 二进制从操作的一些介绍，其中**提出问题**相关是我在操作过程中的一些疑问，在多次尝试并搜索相关资料后得出的结论，重点关注
 
-### ArrayBuffer 概念
+### 二、ArrayBuffer 概念
 
 用来表示通用的、固定长度的原始二进制数据缓冲区
 它是一个字节数组，每一位表示一个字节
 
-### 特点
+### 三、特点
 
 不能读写，只能通过 TypedArray 视图和 DataView 视图来读写
 
-### 关于类型
+### 四、关于类型
 
 ```javascript
 // 创建一个 32 字节的内存空间，默认值0
@@ -36,7 +38,7 @@ let buf = new ArrayBuffer(32);
 > `有符号32位整数类型`（一项表示四个字节）中的长度是 8
 > `无符号8位整数类型`（一项表示一字节）中的长度是 32
 
-### ArrayBuffer 读写
+### 五、ArrayBuffer 读写
 
 > tip:写操作是针对于内存的，所以通过视图修改字节后，原始 buffer 也同步变化
 
@@ -74,7 +76,7 @@ x1[0] = 1;
 const x2 = new Uint8Array(buffer);
 ```
 
-### 关于溢出
+### 六、关于溢出
 
 转换规则：
 **正向溢出（overflow）**：当输入值大于当前数据类型的最大值，结果等于当前数据类型的最小值加上余值，再减去 1。
@@ -91,3 +93,51 @@ const x2 = new Uint8Array(buffer);
 > ![-120](/images/js的二进制/4.png)
 > 其实这个东西相当于一个表盘，从-128 开始 127 结束
 > ![表盘](/images/js的二进制/5.png)
+
+### 七、arrayBuffer 转 base64
+
+#### 1、第一种方法
+
+`btoa`:用于创建一个 base-64 编码的字符串。参数是字符串
+
+```javascript
+const buffer = new ArrayBuffer(12);
+const uint8Array = new Uint8Array(buffer);
+let str = String.fromCharCode(...uint8Array);
+// 拼上文件头
+let base64 = `data:image/jpeg;base64,${window.btoa(str)}`;
+```
+
+`注意注意！！` 这种方式如果 buffer 太大就会转换失败，`fromCharCode参数太大就会这样`
+`Uncaught (in promise) RangeError: Maximum call stack size exceeded`
+
+#### 2、第二种方法
+
+tips:这种方法大图片特别费时间
+
+```javascript
+var binary = '';
+var bytes = new Uint8Array(buffer);
+var len = bytes.byteLength;
+for (var i = 0; i < len; i++) {
+  binary += String.fromCharCode(bytes[i]);
+}
+window.btoa(binary);
+```
+
+#### 3、第三种方法
+
+tips：这种方法不会出现转换失败和费时间
+
+先将 buffer 转为 blob 对象，再把 blob 转为 base64
+
+```javascript
+const buffer = new ArrayBuffer(buffer数据);
+let blob = new Blob([buffer]);
+let reader = new FileReader();
+reader.onload = function () {
+  const base = reader.result;
+  console.log(base);
+};
+reader.readAsDataURL(blob);
+```
