@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>HTTPS | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="http">
+    <meta name="description" content="前言以下是我对《图解HTTP》这本书阅读后的知识梳理，为了加深印象和忘了的时候能不瞎找 一、http缺点1. 通信使用明文，不加密，内容可能会被窃听TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等">
+<meta name="keywords" content="http">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTPS">
+<meta property="og:url" content="http://yoursite.com/2019/11/20/HTTPS/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="前言以下是我对《图解HTTP》这本书阅读后的知识梳理，为了加深印象和忘了的时候能不瞎找 一、http缺点1. 通信使用明文，不加密，内容可能会被窃听TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/https/1.png">
+<meta property="og:image" content="http://yoursite.com/images/https/2.png">
+<meta property="og:image" content="http://yoursite.com/images/https/3.png">
+<meta property="og:image" content="http://yoursite.com/images/https/4.png">
+<meta property="og:image" content="http://yoursite.com/images/https/5.png">
+<meta property="og:image" content="http://yoursite.com/images/https/6.png">
+<meta property="og:image" content="http://yoursite.com/images/https/9.png">
+<meta property="og:image" content="http://yoursite.com/images/https/10.png">
+<meta property="og:image" content="http://yoursite.com/images/https/7.png">
+<meta property="og:image" content="http://yoursite.com/images/https/8.png">
+<meta property="og:image" content="http://yoursite.com/images/https/11.png">
+<meta property="og:image" content="http://yoursite.com/images/https/12.png">
+<meta property="og:image" content="http://yoursite.com/images/https/13.png">
+<meta property="og:updated_time" content="2021-01-25T10:48:26.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTPS">
+<meta name="twitter:description" content="前言以下是我对《图解HTTP》这本书阅读后的知识梳理，为了加深印象和忘了的时候能不瞎找 一、http缺点1. 通信使用明文，不加密，内容可能会被窃听TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等">
+<meta name="twitter:image" content="http://yoursite.com/images/https/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HTTPS</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">HTTPS</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-20T07:02:14.000Z" itemprop="datePublished" class="page-time">
+  2019-11-20
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、http缺点"><span class="post-toc-text">一、http缺点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-通信使用明文，不加密，内容可能会被窃听"><span class="post-toc-text">1. 通信使用明文，不加密，内容可能会被窃听</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-不验证通信方身份，可能遭遇伪装"><span class="post-toc-text">2. 不验证通信方身份，可能遭遇伪装</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-无法证明报文完整性，篡改报文"><span class="post-toc-text">3. 无法证明报文完整性，篡改报文</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、SSL"><span class="post-toc-text">二、SSL</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-证书"><span class="post-toc-text">1.证书</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-加密（公开密钥加密）"><span class="post-toc-text">2.加密（公开密钥加密）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#𝟙-流程"><span class="post-toc-text">𝟙.流程</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#𝟚-存在的问题—无法证明公开密钥本身就是货真价实的公开密钥"><span class="post-toc-text">𝟚.存在的问题—无法证明公开密钥本身就是货真价实的公开密钥</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-加密（共享密钥加密）"><span class="post-toc-text">2.加密（共享密钥加密）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-两种加密方式的对比"><span class="post-toc-text">3.两种加密方式的对比</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、HTTP-加密-认证-完整性保护-HTTPS"><span class="post-toc-text">三、HTTP+加密+认证+完整性保护=HTTPS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-https的加密（混合加密）"><span class="post-toc-text">1.https的加密（混合加密）</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-https的通信机制"><span class="post-toc-text">2.https的通信机制</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-HTTPS通信过程总结"><span class="post-toc-text">3.HTTPS通信过程总结</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-客户端认证"><span class="post-toc-text">4.客户端认证</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、HTTPS的缺点"><span class="post-toc-text">四、HTTPS的缺点</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#因为使用了SSL，它的处理速度会变慢"><span class="post-toc-text">因为使用了SSL，它的处理速度会变慢</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#消耗资源"><span class="post-toc-text">消耗资源</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#费钱"><span class="post-toc-text">费钱</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、想法"><span class="post-toc-text">五、想法</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-HTTPS"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HTTPS</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-20 15:02:14" datetime="2019-11-20T07:02:14.000Z"  itemprop="datePublished">2019-11-20</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>以下是我对《图解HTTP》这本书阅读后的知识梳理，为了加深印象和忘了的时候能不瞎找</p>
+<h3 id="一、http缺点"><a href="#一、http缺点" class="headerlink" title="一、http缺点"></a>一、http缺点</h3><h4 id="1-通信使用明文，不加密，内容可能会被窃听"><a href="#1-通信使用明文，不加密，内容可能会被窃听" class="headerlink" title="1. 通信使用明文，不加密，内容可能会被窃听"></a>1. 通信使用明文，不加密，内容可能会被窃听</h4><p style="font-size:13px;color:#565656"><br>TCP/IP协议族工作机制，通信内容在所有的通信线路上都有可能遭到窥视<br>其实加密也会被窥视，只不过通信经过加密，报文信息无法被破解，但还是能看到的，用抓包工具Wireshark等<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/1.png" alt="窃听" title>
+                </div>
+                <div class="image-caption">窃听</div>
+            </figure><br></p>
+
+
+<h4 id="2-不验证通信方身份，可能遭遇伪装"><a href="#2-不验证通信方身份，可能遭遇伪装" class="headerlink" title="2. 不验证通信方身份，可能遭遇伪装"></a>2. 不验证通信方身份，可能遭遇伪装</h4><p style="font-size:13px;color:#565656"><br>http协议通信时，由于不存在确认通信方的处理步骤，任何人都可以发起请求，另外，服务器只要接收到请求，不管对方是谁都会返回一个相应<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/2.png" alt="窃听" title>
+                </div>
+                <div class="image-caption">窃听</div>
+            </figure><br> 1. 伪装服务器（无法确定请求来自何方、出自谁手）<br> 2. 伪装客户端<br> 3. 无法阻止海量请求，DOS攻击<br></p>
+
+<h4 id="3-无法证明报文完整性，篡改报文"><a href="#3-无法证明报文完整性，篡改报文" class="headerlink" title="3. 无法证明报文完整性，篡改报文"></a>3. 无法证明报文完整性，篡改报文</h4><p style="font-size:13px;color:#565656"><br>无法证明信息的准确度，无法确认发出的请求/相应和接受的请求/相应是前后相同的<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/3.png" alt="无法确定准确度" title>
+                </div>
+                <div class="image-caption">无法确定准确度</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/4.png" alt="中间人攻击" title>
+                </div>
+                <div class="image-caption">中间人攻击</div>
+            </figure><br></p>
+
+<h3 id="二、SSL"><a href="#二、SSL" class="headerlink" title="二、SSL"></a>二、SSL</h3><p style="font-size:13px;color:#565656"><br><strong>SSL： </strong>安全套接层<br><br>用SSL建立安全通信线路后，就可以在这条线路进行HTTP通信，与SSL组合使用的HTTP称为HTTPS<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/5.png" alt="安全的通信线路" title>
+                </div>
+                <div class="image-caption">安全的通信线路</div>
+            </figure><br></p>
+
+<h4 id="1-证书"><a href="#1-证书" class="headerlink" title="1.证书"></a>1.证书</h4><p style="font-size:13px;color:#565656"><br>使用HTTP协议无法确定通信方，但是SSL则可以，SSL不仅提供加密，还使用称为 <strong>证书</strong>的手段，用于确定通信双方。<br>证书由值得信任的第三方机构颁发，用来 <strong>证明服务器和客户端是实际存在的</strong><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/6.png" alt="证书" title>
+                </div>
+                <div class="image-caption">证书</div>
+            </figure><br></p>
+
+<h4 id="2-加密（公开密钥加密）"><a href="#2-加密（公开密钥加密）" class="headerlink" title="2.加密（公开密钥加密）"></a>2.加密（公开密钥加密）</h4><p style="font-size:13px;color:#565656"><br>SSL采用<strong>公开密钥加密</strong>的加密方式<br><br>使用一对非对称的密钥，一个叫私有秘钥（不能让别人知道），一个叫公有密钥（受任何人都可以知道）<br><br><br></p>
+
+<h5 id="𝟙-流程"><a href="#𝟙-流程" class="headerlink" title="𝟙.流程"></a>𝟙.流程</h5><p>发送密文一方使用对方的公开密钥进行加密，对方收到加密的信息后，再用自己的私钥解密</p>
+<blockquote>
+<p>不需要发送密钥了<br>加密算法公开，密钥保密<br>密钥被窃取，加密也就没有意义了(因为不需要发送密钥，也就不懂担心密钥被窃取了)<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/9.png" alt="加密" title>
+                </div>
+                <div class="image-caption">加密</div>
+            </figure></p>
+</blockquote>
+<h5 id="𝟚-存在的问题—无法证明公开密钥本身就是货真价实的公开密钥"><a href="#𝟚-存在的问题—无法证明公开密钥本身就是货真价实的公开密钥" class="headerlink" title="𝟚.存在的问题—无法证明公开密钥本身就是货真价实的公开密钥"></a>𝟚.存在的问题—无法证明公开密钥本身就是货真价实的公开密钥</h5><p>当然也存在解决办法，那就是使用由数字证书认证机构和其相关机构办法的公开密钥和证书</p>
+<blockquote>
+<p><strong>数字证书认证机构（CA）</strong>，处于客户端与服务器双方都可信赖的第三方机构，颁发的数字证书为最终用户数据加密的公共密钥。在这个过程中，CA的责任是确保公司或用户接收一个<strong>唯一的证书是一个有效的身份的认证</strong>。</p>
+</blockquote>
+<blockquote>
+<p><strong>流程</strong></p>
+<ol>
+<li>服务器运营人员向数字证书认证机构提出<strong>公开密钥的申请</strong></li>
+<li>机构在判明提出申请者身份后，会对<strong>已申请的公开密钥</strong>做<strong>数字签名</strong>，然后<strong>分配这个已签名的公开密钥</strong>，并将该公开密钥放入公钥证书后绑定一起</li>
+<li>服务器会将这个公钥证书发送给客户端，<strong>公钥证书也叫数字证书或证书</strong></li>
+<li>接收到证书的客户端使用数字证书认证机构的公开密钥对证书上的数字签名进行验证，一旦通过，就能确定这个公开密钥真实有效且值得信赖<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/10.png" alt="加密" title>
+                </div>
+                <div class="image-caption">加密</div>
+            </figure>
+</li>
+</ol>
+</blockquote>
+<h4 id="2-加密（共享密钥加密）"><a href="#2-加密（共享密钥加密）" class="headerlink" title="2.加密（共享密钥加密）"></a>2.加密（共享密钥加密）</h4><p>加密和解密用同一个密钥的方式称为共享密钥加密也叫对称密钥加密</p>
+<h4 id="3-两种加密方式的对比"><a href="#3-两种加密方式的对比" class="headerlink" title="3.两种加密方式的对比"></a>3.两种加密方式的对比</h4><p>公开密钥加密处理速度慢于共享密钥加密</p>
+<p><strong>公开密钥优势</strong> 不需要交换共享密钥，所以不用担心共享密钥会暴露<br><strong>公开密钥劣势</strong> 耗费资源，必须经过数字证书验证 </p>
+<p><strong>共享密钥优势</strong> 不需要经过数字证书验证，速度优于公开密钥<br><strong>共享密钥劣势</strong> 需要发送共享密钥，有暴露的风向</p>
+<h3 id="三、HTTP-加密-认证-完整性保护-HTTPS"><a href="#三、HTTP-加密-认证-完整性保护-HTTPS" class="headerlink" title="三、HTTP+加密+认证+完整性保护=HTTPS"></a>三、HTTP+加密+认证+完整性保护=HTTPS</h3><p>HTTPS使用SSL和TLS两种协议<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/7.png" alt="证书" title>
+                </div>
+                <div class="image-caption">证书</div>
+            </figure><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/8.png" alt="HTTPS" title>
+                </div>
+                <div class="image-caption">HTTPS</div>
+            </figure></p>
+<p><strong>问题：</strong><code>共享密钥的方式加密时必须将密钥也发给对方，那怎么安全发送呢？</code></p>
+<h4 id="1-https的加密（混合加密）"><a href="#1-https的加密（混合加密）" class="headerlink" title="1.https的加密（混合加密）"></a>1.https的加密（混合加密）</h4><p>两个步骤</p>
+<ol>
+<li><strong>交换密钥环节</strong>：使用公开密钥加密（主要是为了传递共享秘钥加密方式里的密钥）</li>
+<li><strong>通信</strong>：确保密钥是安全的前提下，<strong>使用共享密钥进行通信</strong></li>
+</ol>
+<h4 id="2-https的通信机制"><a href="#2-https的通信机制" class="headerlink" title="2.https的通信机制"></a>2.https的通信机制</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/11.png" alt="通信步骤" title>
+                </div>
+                <div class="image-caption">通信步骤</div>
+            </figure>
+<p>步骤1. 客户端发送Client Hello 报文开始SSL通信。报文中含客户端支持的SSL的指定版本、加密组件列表（使用的加密算法和秘钥长度）</p>
+<p>步骤2. 服务器可进行SSL通信时，会以server Hello报文作为应答，报文中包含SSL版本和加密组件，加密组件内容是从接收到的客户端加密组件内筛选出来的</p>
+<p>步骤3. 服务器发送certificate报文，报文中含有公开密钥证书</p>
+<p>步骤4. 服务器发送 server Hello Done报文通知客户端，最初阶段的SSL握手协商部分结束</p>
+<p>步骤5. SSL第一次握手结束后，客户端以Client Key Exchange 报文最为回应，报文中包含通信加密中使用的一种被称为Pre-master secret的随机密码串。该报文用步骤3中的公开密钥加密（告知服务端共享秘钥）</p>
+<p>步骤6. 接着客户端发送change cipher spec报文，该报文会提示服务器，在此报文之后的通信会采用Pre-master secret 密钥加密</p>
+<p>步骤7. 客户端发送Finished报文。该报文包含连接至今全部报文的整体校验值，这次握手协商是否能成功，要以服务器是否能够正确解密该报文作为判定标准 （如果服务器能正确解密，则这次握手协商成功）</p>
+<p>步骤8. 服务器同样发送Change cipher spec 报文</p>
+<p>步骤9. 服务器发送Finished报文</p>
+<p>步骤10. 服务器和客户端的Finished报文交换完毕后，SSL连接就算建立完成，当然，通信会受到SSL保护，从此处开始进行应用层协议的通信，即发送HTTP相求</p>
+<p>步骤11. 应用层协议通信，即发送HTTP响应</p>
+<p>步骤12。 最后由客户端断开连接，断开连接时，发送close_notify 报文</p>
+<p>再发送TCP FIN报文来关闭与TCP的通信</p>
+<p>应用层发送数据时会附加一种加MAC（Message Authentication Code）的报文摘要。MAC能够查知报文是否遭到篡改，从而保护报文的完整新</p>
+<p><img src="/images/https/12.png" alt="共享秘钥的生成过程"></p>
+<h4 id="3-HTTPS通信过程总结"><a href="#3-HTTPS通信过程总结" class="headerlink" title="3.HTTPS通信过程总结"></a>3.HTTPS通信过程总结</h4><ol>
+<li>客户端和服务端协商决定加密组件</li>
+<li>服务端发送公开密钥证书（当然服务器也存在配对的私有秘钥）</li>
+<li>客户端确认这个证书的有效性，然后取出公开密钥</li>
+<li>客户端生成一个 pre-master secret （随机数），然后用刚刚的公开密钥加密</li>
+<li>客户端发送加密好的pre-master secret ，服务端用私有秘钥解密</li>
+<li>上面的pre-master secret 就是共享秘钥，现在两边都有了</li>
+<li>进行正常的http通信</li>
+</ol>
+<h4 id="4-客户端认证"><a href="#4-客户端认证" class="headerlink" title="4.客户端认证"></a>4.客户端认证</h4><ol>
+<li>basic jwt等这种认证</li>
+<li>SSL客户端认证，一般登录个人网银时，需要下载证书安装</li>
+<li>表单认证，就是开始登录网站需要输入的账号密码</li>
+</ol>
+<h3 id="四、HTTPS的缺点"><a href="#四、HTTPS的缺点" class="headerlink" title="四、HTTPS的缺点"></a>四、HTTPS的缺点</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/https/13.png" alt="HTTPS比HTTP要慢2到100倍" title>
+                </div>
+                <div class="image-caption">HTTPS比HTTP要慢2到100倍</div>
+            </figure>
+<h4 id="因为使用了SSL，它的处理速度会变慢"><a href="#因为使用了SSL，它的处理速度会变慢" class="headerlink" title="因为使用了SSL，它的处理速度会变慢"></a>因为使用了SSL，它的处理速度会变慢</h4><blockquote>
+<p>SSL慢分两种</p>
+<ul>
+<li>SSL通信慢</li>
+<li>由于大量消耗CPU及内存资源，导致处理速度变慢</li>
+</ul>
+</blockquote>
+<h4 id="消耗资源"><a href="#消耗资源" class="headerlink" title="消耗资源"></a>消耗资源</h4><blockquote>
+<p>加密通信会消耗更多的CPU内存和资源，那么计算机能够处理的请求数量就会减少，所以在传递一些敏感数据时采用HTTPS</p>
+</blockquote>
+<h4 id="费钱"><a href="#费钱" class="headerlink" title="费钱"></a>费钱</h4><p>购买证书要花钱的</p>
+<h3 id="五、想法"><a href="#五、想法" class="headerlink" title="五、想法"></a>五、想法</h3><p>关于http我觉得还有些不足，比如不具备服务端主动推送供，每次想知道服务器内容是否更新等都需要客户端轮询做http请求等功能，所以我也总结了别的常用的通信方式，<a href="/2019/11/21/通信方式/">通信方式</a></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-25T10:48:26.372Z" itemprop="dateUpdated">2021-01-25 18:48:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/20/HTTPS/&title=《HTTPS》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/20/HTTPS/&title=《HTTPS》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/20/HTTPS/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTTPS》 — DHYANA&url=http://yoursite.com/2019/11/20/HTTPS/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/20/HTTPS/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/21/通信方式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">通信方式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/19/http首部字段/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">http首部字段</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'HTTPS',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2019/11/20/HTTPS/&title=《HTTPS》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2019/11/20/HTTPS/&title=《HTTPS》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/11/20/HTTPS/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTTPS》 — DHYANA&url=http://yoursite.com/2019/11/20/HTTPS/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2019/11/20/HTTPS/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABs0lEQVR42u3aS4rDQAwFQN//0h6YbZj4qeWWzVC9Cia4K1kI/Y4jPufvSZ6fX8/nd44dBxcXt83NL8h/wPef8fmGxICLizvP/R6kLl5RDILJ3/Hnc1xc3Jdx86wjoePi4v4Pbl7GVCm4uLjv5FYbGXmx1HkbLi7uU9xqAbPj88b+Li4ubpF7Fk8SwvJhSfl2XFzcEe7amCQBVYcxeQsVFxd3klsdjnYGLa32Ky4u7kPcZN1qx/MosOLi4o5w11Yu1oJRNSW6CIu4uLibudVBaT/FyQukaDKMi4u7gZs3PloXFJun5QkPLi7uTdy14qezflFtlODi4s5zqyVQDr23IYuLizvJrbY81kqaTkMEFxd3klsdnORrE2upz8WNuLi4I9xqS2It3ekXRbi4uJPcu8JNQq8WV7i4uM9y1zqT+XDlrhELLi7uJHf3mOSupQ1cXNwZbmeOma9frIW/wuQHFxd3A/eu4NVpixSCIy4u7iB3LR2pXtkqfnBxcV/JreZK1ZFMVBTh4uK+kpu3VPphERcX91nu2iJFvq7RaYUstkVwcXEb3M54tbOAVV34wMXFHeH+ADo43URIGFJ7AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

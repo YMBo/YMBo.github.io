@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>create-react-app配置webpack | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="react,webpack,create-react-app,px2rem,less">
+    <meta name="description" content="在学习react过程中，每次都要配置webpack，非常的麻烦，我是要写react的，不是配置这东西哒！！好在有了’create-react-app’，通过npm安装后，创建项目变得非常简单但是它里面没有做less等你实际项目需要的loader或者plugins，所以这里记录的是怎么定制create-react-app创建的项目的webpack 一、先配置less1.创建一个项目我创建的叫test">
+<meta name="keywords" content="react,webpack,create-react-app,px2rem,less">
+<meta property="og:type" content="article">
+<meta property="og:title" content="create-react-app配置webpack">
+<meta property="og:url" content="http://yoursite.com/2017/09/06/create-react-app配置webpack/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="在学习react过程中，每次都要配置webpack，非常的麻烦，我是要写react的，不是配置这东西哒！！好在有了’create-react-app’，通过npm安装后，创建项目变得非常简单但是它里面没有做less等你实际项目需要的loader或者plugins，所以这里记录的是怎么定制create-react-app创建的项目的webpack 一、先配置less1.创建一个项目我创建的叫test">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/create-react-app配置webpack/1.png">
+<meta property="og:image" content="http://yoursite.com/images/create-react-app配置webpack/2.png">
+<meta property="og:image" content="http://yoursite.com/images/create-react-app配置webpack/3.png">
+<meta property="og:image" content="http://yoursite.com/images/create-react-app配置webpack/4.png">
+<meta property="og:updated_time" content="2021-01-25T10:48:26.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="create-react-app配置webpack">
+<meta name="twitter:description" content="在学习react过程中，每次都要配置webpack，非常的麻烦，我是要写react的，不是配置这东西哒！！好在有了’create-react-app’，通过npm安装后，创建项目变得非常简单但是它里面没有做less等你实际项目需要的loader或者plugins，所以这里记录的是怎么定制create-react-app创建的项目的webpack 一、先配置less1.创建一个项目我创建的叫test">
+<meta name="twitter:image" content="http://yoursite.com/images/create-react-app配置webpack/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">create-react-app配置webpack</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">create-react-app配置webpack</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-09-06T08:42:15.000Z" itemprop="datePublished" class="page-time">
+  2017-09-06
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、先配置less"><span class="post-toc-text">一、先配置less</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-创建一个项目"><span class="post-toc-text">1.创建一个项目</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-找到webpack-config-dev-js和webpack-config-prod-js"><span class="post-toc-text">2.找到webpack.config.dev.js和webpack.config.prod.js</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-测试"><span class="post-toc-text">3.测试</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、配置px2rem"><span class="post-toc-text">二、配置px2rem</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-解释"><span class="post-toc-text">1.解释</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-安装"><span class="post-toc-text">2.安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-配置"><span class="post-toc-text">3.配置</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-测试"><span class="post-toc-text">4.测试</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-总结"><span class="post-toc-text">5.总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-create-react-app配置webpack"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">create-react-app配置webpack</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-09-06 16:42:15" datetime="2017-09-06T08:42:15.000Z"  itemprop="datePublished">2017-09-06</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>在学习react过程中，每次都要配置webpack，非常的麻烦，我是要写react的，不是配置这东西哒！！<br>好在有了’create-react-app’，通过npm安装后，创建项目变得非常简单<br>但是它里面没有做<code>less</code>等你实际项目需要的<code>loader</code>或者<code>plugins</code>，所以这里记录的是怎么定制<code>create-react-app创建的项目的webpack</code></p>
+<h2 id="一、先配置less"><a href="#一、先配置less" class="headerlink" title="一、先配置less"></a>一、先配置less</h2><h3 id="1-创建一个项目"><a href="#1-创建一个项目" class="headerlink" title="1.创建一个项目"></a>1.创建一个项目</h3><p>我创建的叫<code>test</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/create-react-app配置webpack/1.png" alt="test测试项目" title>
+                </div>
+                <div class="image-caption">test测试项目</div>
+            </figure><br>创建完毕后，进入创建的项目，运行<code>npm start</code>启动此项目<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/create-react-app配置webpack/2.png" alt="启动" title>
+                </div>
+                <div class="image-caption">启动</div>
+            </figure></p>
+<h3 id="2-找到webpack-config-dev-js和webpack-config-prod-js"><a href="#2-找到webpack-config-dev-js和webpack-config-prod-js" class="headerlink" title="2.找到webpack.config.dev.js和webpack.config.prod.js"></a>2.找到<code>webpack.config.dev.js</code>和<code>webpack.config.prod.js</code></h3><p>运行<code>npm run eject</code><br>安装<code>less-loader</code>和<code>less</code><br>进入<code>config</code>文件夹，这里会有两个文件<code>webpack.config.dev.js</code>和<code>webpack.config.prod.js</code>应该一个是开发环境一个生产环境的配置文件，两个文件都要修改<br>打开<code>webpack.config.dev.js</code><br>找到<code>module rules</code>部分，也就是配置loader的部分，找到配置<code>css</code>文件的test（<code>/\.(css)$/</code>）修改为<code>test:/\.(css|less)$/</code>,添加一个loader：<code>{ loader: require.resolve(&#39;less-loader&#39;) },</code>放在最下面<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	test: <span class="regexp">/\.css$/</span>,</span><br><span class="line">	use: [<span class="built_in">require</span>.resolve(<span class="string">'style-loader'</span>), &#123;</span><br><span class="line">		loader: <span class="built_in">require</span>.resolve(<span class="string">'css-loader'</span>),</span><br><span class="line">		options: &#123;</span><br><span class="line">			importLoaders: <span class="number">1</span>,</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		loader: <span class="built_in">require</span>.resolve(<span class="string">'postcss-loader'</span>),</span><br><span class="line">		options: &#123;</span><br><span class="line">			<span class="comment">// Necessary for external CSS imports to work</span></span><br><span class="line">			<span class="comment">// https://github.com/facebookincubator/create-react-app/issues/2677</span></span><br><span class="line">			ident: <span class="string">'postcss'</span>,</span><br><span class="line">			plugins: () = &gt;[<span class="built_in">require</span>(<span class="string">'postcss-flexbugs-fixes'</span>), autoprefixer(&#123;</span><br><span class="line">				browsers: [<span class="string">'&gt;1%'</span>, <span class="string">'last 4 versions'</span>, <span class="string">'Firefox ESR'</span>, <span class="string">'not ie &lt; 9'</span>, <span class="comment">// React doesn't support IE8 anyway</span></span><br><span class="line">				],</span><br><span class="line">				flexbox: <span class="string">'no-2009'</span>,</span><br><span class="line">			&#125;), ],</span><br><span class="line">		&#125;,</span><br><span class="line">	&#125;,</span><br><span class="line">	&#123;</span><br><span class="line">		loader: <span class="built_in">require</span>.resolve(<span class="string">'less-loader'</span>)</span><br><span class="line">	&#125;,</span><br><span class="line">	],</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-测试"><a href="#3-测试" class="headerlink" title="3.测试"></a>3.测试</h3><p>现在我们做一下测试<br>可以随便在<code>css</code>文件中加入<code>less</code>语法<br>我在<code>App.css</code>中设置了整体的背景颜色：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@base: pink;</span><br><span class="line"><span class="selector-class">.App-header</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: @base;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">150px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">20px</span>;</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为我们修改了webpack的配置项，所以需要重新启动服务器：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/create-react-app配置webpack/3.png" alt="添加成功" title>
+                </div>
+                <div class="image-caption">添加成功</div>
+            </figure><br>可以看到，配置已经成功</p>
+<h2 id="二、配置px2rem"><a href="#二、配置px2rem" class="headerlink" title="二、配置px2rem"></a>二、配置px2rem</h2><h3 id="1-解释"><a href="#1-解释" class="headerlink" title="1.解释"></a>1.解释</h3><p><code>px2rem</code>是做移动端页面开发的时候，自动将<code>px</code>单位转换为<code>rem</code>，非常的方便<br>这里要用支持<code>webpack</code>的对应<code>loader</code>，我用的是<code>postcss-px2rem</code><br>配置这个功能相对来说有些复杂</p>
+<h3 id="2-安装"><a href="#2-安装" class="headerlink" title="2.安装"></a>2.安装</h3><p><code>npm install postcss-px2rem postcss-loader  --save</code>执行这个命令安装</p>
+<h3 id="3-配置"><a href="#3-配置" class="headerlink" title="3.配置"></a>3.配置</h3><p>还是<code>webpack.config.dev.js</code>，引入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> px2rem = <span class="built_in">require</span>(<span class="string">'postcss-px2rem'</span>)</span><br></pre></td></tr></table></figure></p>
+<p>添加在的<code>autoprefixer</code>下面添加，好像loaders里只能有一个<code>postcss</code>，多个的话不会报错，对应的功能会不管用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  loader: <span class="built_in">require</span>.resolve(<span class="string">'postcss-loader'</span>),</span><br><span class="line">  options: &#123;</span><br><span class="line">    <span class="comment">// Necessary for external CSS imports to work</span></span><br><span class="line">    <span class="comment">// https://github.com/facebookincubator/create-react-app/issues/2677</span></span><br><span class="line">    ident: <span class="string">'postcss'</span>,</span><br><span class="line">    plugins: <span class="function"><span class="params">()</span> =&gt;</span> [</span><br><span class="line">      <span class="built_in">require</span>(<span class="string">'postcss-flexbugs-fixes'</span>),</span><br><span class="line">      autoprefixer(&#123;</span><br><span class="line">        browsers: [</span><br><span class="line">          <span class="string">'&gt;1%'</span>,</span><br><span class="line">          <span class="string">'last 4 versions'</span>,</span><br><span class="line">          <span class="string">'Firefox ESR'</span>,</span><br><span class="line">          <span class="string">'not ie &lt; 9'</span>, <span class="comment">// React doesn't support IE8 anyway</span></span><br><span class="line">        ],</span><br><span class="line">        flexbox: <span class="string">'no-2009'</span>,</span><br><span class="line">      &#125;),</span><br><span class="line">      <span class="comment">//这个位置</span></span><br><span class="line">        px2rem(&#123;<span class="attr">remUnit</span>: <span class="number">75</span>&#125;)</span><br><span class="line">    ],</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>这里面的数值就是1rem对应的px</p>
+<h3 id="4-测试"><a href="#4-测试" class="headerlink" title="4.测试"></a>4.测试</h3><p>现在启动服务器，因为原有的都是以px为单位，所以现在页面上应该全部转换为了rem<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/create-react-app配置webpack/4.png" alt="添加成功" title>
+                </div>
+                <div class="image-caption">添加成功</div>
+            </figure></p>
+<p>不要忘了配置<code>webpack.config.prod.js</code>这个文件，<br>最后只需要在你的页面上对html的font-size做变换就可以了，这里略过</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h3><p>webpack的文档和有些npm的文档写的走点心好么，搞得本来挺简单的东西查了好久！</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-25T10:48:26.376Z" itemprop="dateUpdated">2021-01-25 18:48:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/create-react-app/">create-react-app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/less/">less</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/px2rem/">px2rem</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/06/create-react-app配置webpack/&title=《create-react-app配置webpack》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/06/create-react-app配置webpack/&title=《create-react-app配置webpack》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/06/create-react-app配置webpack/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《create-react-app配置webpack》 — DHYANA&url=http://yoursite.com/2017/09/06/create-react-app配置webpack/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/06/create-react-app配置webpack/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/09/13/position的sticky属性/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">position的sticky属性</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/08/25/箭头函数的this指向/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">箭头函数的this指向</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'create-react-app配置webpack',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2017/09/06/create-react-app配置webpack/&title=《create-react-app配置webpack》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2017/09/06/create-react-app配置webpack/&title=《create-react-app配置webpack》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2017/09/06/create-react-app配置webpack/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《create-react-app配置webpack》 — DHYANA&url=http://yoursite.com/2017/09/06/create-react-app配置webpack/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2017/09/06/create-react-app配置webpack/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHklEQVR42u3aQW7DMAwEwPz/0+m1QFF3l3IKWBqdAtuxNReCIvl6xesdrN+e/37l5+/rf928MDAwHstINpdv9+fd375y/fV8bxgYGOcwkk1cB9MceX0lD80YGBgYyevadPCPoImBgYHxAca7XO0hFgMDA6M9xF6H2tnd2REXAwPjNEZedf//3x/pb2BgYDyKMUvsVhqc1yW52cLAwNibsVJKu+vJ9VQSAwPjHEaetCVl/Tzs5uG4KLdhYGBsxGjHKdqQmm9oJa3EwMDYm9HGq7aUn7/n5mELDAyM7RizINtuvd1uHqAxMDBOYORbbEv8UUoXtEujNBQDA2NrxuwD+SfbJsFKWomBgbE34zq9S7Z417hGe4TGwMA4k5GT2hTw3gGyV95BxcDA2IKRB9l7t3hXcomBgbErY715mYTC/G5eBBzOjGBgYDyQkQw05AGxPQYPj6ltMwADA2MLRn5EbBO+e4cz6pkRDAyMrRmzEYqVDa2niRgYGHsz2omMtqC/PqgRvRMDA+MYxsrAxKzN0A5hYGBgYORNyuvuYc6b/beuGmJgYDyW8S5XG0Znpf92RAMDA2NvxizJi0YfbrrSfhEDA2NXRh5k24SyOIIutCIwMDDOYSQbmo1c5G/7+FkcAwMDIy7VzVqeQx8GBsbBjPbJdpAiOULXLUwMDIyHM/JmQFuAa5sECQ8DA+M0Rpt3zYpoeWtzNuqBgYGxKeML01hLqaEDW9AAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

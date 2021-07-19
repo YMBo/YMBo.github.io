@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>tsconfig配置 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="typescript">
+    <meta name="description" content="一、前言不知不觉好久没有写博客和提交 github 了，20 年年初换了工作后，每天都非常忙，工作繁忙的同时自己也有一些收获和成长，也有一些新的收获想和想法想记录下来，但之前因为工作的原因这事一只拖着拖着最后就忘了，终于历经近一年终于产出了这篇文章 🤦‍♀ 二、背景因为对 tsconfig.json 的配置项不太了解，所以这篇文章以配置项解释+demo 的形式分析各个配置项的作用 三、tscon">
+<meta name="keywords" content="typescript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tsconfig配置">
+<meta property="og:url" content="http://yoursite.com/2021/01/25/tsconfig配置/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言不知不觉好久没有写博客和提交 github 了，20 年年初换了工作后，每天都非常忙，工作繁忙的同时自己也有一些收获和成长，也有一些新的收获想和想法想记录下来，但之前因为工作的原因这事一只拖着拖着最后就忘了，终于历经近一年终于产出了这篇文章 🤦‍♀ 二、背景因为对 tsconfig.json 的配置项不太了解，所以这篇文章以配置项解释+demo 的形式分析各个配置项的作用 三、tscon">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/tscoinfig配置/1.png">
+<meta property="og:image" content="http://yoursite.com/images/tscoinfig配置/2.png">
+<meta property="og:image" content="http://yoursite.com/images/tscoinfig配置/3.png">
+<meta property="og:image" content="http://yoursite.com/images/tscoinfig配置/4.png">
+<meta property="og:updated_time" content="2021-02-03T09:45:13.803Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tsconfig配置">
+<meta name="twitter:description" content="一、前言不知不觉好久没有写博客和提交 github 了，20 年年初换了工作后，每天都非常忙，工作繁忙的同时自己也有一些收获和成长，也有一些新的收获想和想法想记录下来，但之前因为工作的原因这事一只拖着拖着最后就忘了，终于历经近一年终于产出了这篇文章 🤦‍♀ 二、背景因为对 tsconfig.json 的配置项不太了解，所以这篇文章以配置项解释+demo 的形式分析各个配置项的作用 三、tscon">
+<meta name="twitter:image" content="http://yoursite.com/images/tscoinfig配置/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">tsconfig配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">tsconfig配置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-01-25T10:55:54.000Z" itemprop="datePublished" class="page-time">
+  2021-01-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、背景"><span class="post-toc-text">二、背景</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、tsconfig"><span class="post-toc-text">三、tsconfig</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、target"><span class="post-toc-text">1、target</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、outDir"><span class="post-toc-text">2、outDir</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、allowJs"><span class="post-toc-text">3、allowJs</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、strict"><span class="post-toc-text">4、strict</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、noImplicitAny"><span class="post-toc-text">5、noImplicitAny</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6、strictFunctionTypes"><span class="post-toc-text">6、strictFunctionTypes</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7、jsx"><span class="post-toc-text">7、jsx</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8、experimentalDecorators"><span class="post-toc-text">8、experimentalDecorators</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9、importHelpers-moduleResolution"><span class="post-toc-text">9、importHelpers/moduleResolution</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#10、noEmitHelpers"><span class="post-toc-text">10、noEmitHelpers</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#11、typeRoots"><span class="post-toc-text">11、typeRoots</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#12、declaration"><span class="post-toc-text">12、declaration</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#13、declarationDir"><span class="post-toc-text">13、declarationDir</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#14、allowSyntheticDefaultImports"><span class="post-toc-text">14、allowSyntheticDefaultImports</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#15、resolveJsonModule"><span class="post-toc-text">15、resolveJsonModule</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#16、baseUrl-paths"><span class="post-toc-text">16、baseUrl/paths</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#17、lib"><span class="post-toc-text">17、lib</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#18、types"><span class="post-toc-text">18、types</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-tsconfig配置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">tsconfig配置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-01-25 18:55:54" datetime="2021-01-25T10:55:54.000Z"  itemprop="datePublished">2021-01-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>不知不觉好久没有写博客和提交 github 了，20 年年初换了工作后，每天都非常忙，工作繁忙的同时自己也有一些收获和成长，也有一些新的收获想和想法想记录下来，但之前因为工作的原因这事一只拖着拖着最后就忘了，终于历经近一年终于产出了这篇文章 🤦‍♀</p>
+<h2 id="二、背景"><a href="#二、背景" class="headerlink" title="二、背景"></a>二、背景</h2><p>因为对 tsconfig.json 的配置项不太了解，所以这篇文章以配置项解释+demo 的形式分析各个配置项的作用</p>
+<h2 id="三、tsconfig"><a href="#三、tsconfig" class="headerlink" title="三、tsconfig"></a>三、tsconfig</h2><p>现在以 demo 的 tsconfig.json 每个配置项为例，详细说明其作用<br>新建 tsconfig.json 空文件</p>
+<p>经过测试在<code>tsconfig include</code> 字段包含的范围内编写 .d.ts/.ts，都将被自动识别</p>
+<h3 id="1、target"><a href="#1、target" class="headerlink" title="1、target"></a>1、target</h3><blockquote>
+<p><code>target</code>指的是编译后目标版本的语法是啥</p>
+</blockquote>
+<p><strong> demo </strong><br>新建一个 a.ts 文件，用 tsc 命令编译后看结果</p>
+<p>添加 <code>&quot;target&quot;: &quot;ESNext&quot;</code> 配置（ESNext：以当前 js 版本的下个版本提案为标准编译，总是最新语法）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> greeter = <span class="function">(<span class="params">person</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello, '</span> + person;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> interface c &#123;</span><br><span class="line">  age: string;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> user: string = <span class="string">'Jane User'</span>;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">age</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> greeter(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译后：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> greeter = <span class="function">(<span class="params">person</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello, '</span> + person;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> user = <span class="string">'Jane User'</span>;</span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">age</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> greeter(user);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> &#123;&#125;;</span><br></pre></td></tr></table></figure>
+<p>可以看到语法结构基本没啥变化，因为编译目标是最新语法</p>
+<p><code>&quot;target&quot;: &quot;ts3&quot;</code><br>编译后：<br>可以看编译后是 es3 的语法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> greeter = <span class="function"><span class="keyword">function</span> (<span class="params">person</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello, '</span> + person;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> user = <span class="string">'Jane User'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">age</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> tslib_1.__awaiter(<span class="keyword">this</span>, <span class="keyword">void</span> <span class="number">0</span>, <span class="keyword">void</span> <span class="number">0</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> tslib_1.__generator(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params">_a</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">switch</span> (_a.label) &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">          <span class="keyword">return</span> [<span class="number">4</span> <span class="comment">/*yield*/</span>, greeter(user)];</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">          _a.sent();</span><br><span class="line">          <span class="keyword">return</span> [<span class="number">2</span> <span class="comment">/*return*/</span>];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&quot;target&quot;: &quot;ts6&quot;</code><br>编译后：<br>可以看编译后是 es6 的语法，因为箭头函数被保留了,装饰器不是 es6 的语法所以被转换了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> greeter = <span class="function">(<span class="params">person</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello, '</span> + person;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> user = <span class="string">'Jane User'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">age</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> __awaiter(<span class="keyword">this</span>, <span class="keyword">void</span> <span class="number">0</span>, <span class="keyword">void</span> <span class="number">0</span>, <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> greeter(user);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>target 其他参数同理</p>
+<h3 id="2、outDir"><a href="#2、outDir" class="headerlink" title="2、outDir"></a>2、outDir</h3><blockquote>
+<p><code>outDir</code>指的是编译后的文件存放目录</p>
+</blockquote>
+<p>在 tsconfig 中添加 <code>&quot;outDir&quot;: &quot;lib&quot;</code>,运行 tsc<br>可以发现出现了个 lib 目录，lib 目录里面是 a.js,目录结构</p>
+<p>lib<br>└── a.js<br>├a.ts<br>├tsconfig.json</p>
+<h3 id="3、allowJs"><a href="#3、allowJs" class="headerlink" title="3、allowJs"></a>3、allowJs</h3><blockquote>
+<p><code>allowJs</code>是否允许编译 js</p>
+</blockquote>
+<p>在 tsconfig 中添加<strong>allowJs：false</strong><br>添加<code>m.js</code>文件，内容为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> greeter2 = <span class="function">(<span class="params">person</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'Hello, '</span> + person;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> user2 = <span class="string">'Jane User'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">age2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> greeter2(user2);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> name = <span class="string">'m.js'</span>;</span><br><span class="line"><span class="keyword">export</span> &#123; name, age2 &#125;;</span><br></pre></td></tr></table></figure>
+<p>运行下 tsc，发现如果 <strong>allowJs：false</strong>,那么 m.js（.js 文件）不会被编译，ture 的时候回被正常编译到 lib 文件夹下</p>
+<h3 id="4、strict"><a href="#4、strict" class="headerlink" title="4、strict"></a>4、strict</h3><blockquote>
+<p>这个选项规定了是否启用所有严格类型检查选项。启用 –strict 相当于启用 –noImplicitAny, –noImplicitThis, –alwaysStrict， –strictNullChecks 和 –strictFunctionTypes 和–strictPropertyInitialization</p>
+</blockquote>
+<p>相当于更严格的模式，以<code>noImplicitAny</code>为例，说明下，看 5</p>
+<h3 id="5、noImplicitAny"><a href="#5、noImplicitAny" class="headerlink" title="5、noImplicitAny"></a>5、noImplicitAny</h3><blockquote>
+<p>在表达式和声明上有隐含的 any 类型时报错</p>
+</blockquote>
+<p>在 tsconfig 中添加<strong>noImplicitAny:true</strong>,开启 any 类型检查</p>
+<p>运行 tsc，编译 a.ts，可以看到如下报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a.ts:31:18 - error TS7006: Parameter &apos;person&apos; implicitly has an &apos;any&apos; type.</span><br><span class="line"></span><br><span class="line">31 const greeter = (person) =&gt; &#123;</span><br><span class="line">                    ~~~~~~</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Found 1 error.</span><br></pre></td></tr></table></figure>
+<p>上面 noImplicitThis 之类的同理</p>
+<h3 id="6、strictFunctionTypes"><a href="#6、strictFunctionTypes" class="headerlink" title="6、strictFunctionTypes"></a>6、strictFunctionTypes</h3><blockquote>
+<p>这个查了许多资料，这个说的最好：<a href="https://juejin.cn/post/6896680181000634376" target="_blank" rel="noopener">strictFunctionTypes</a></p>
+</blockquote>
+<blockquote>
+<p>严格函数类型检查。<br>这个说的比较抽象，举个例子<br>父=子 错误 ， 子=父 正确</p>
+</blockquote>
+<p>在 tsconfig.json 添加<code>strictFunctionTypes:true</code>，开启检查<br>在 a.ts 添加一下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCurrentYear</span>(<span class="params">callback: (date: string | number</span>) =&gt; <span class="title">void</span>) </span>&#123;</span><br><span class="line">  callback(<span class="built_in">Math</span>.random() &gt; <span class="number">0.5</span> ? <span class="string">'2020'</span> : <span class="number">2020</span>);</span><br><span class="line">&#125;</span><br><span class="line">getCurrentYear(<span class="function">(<span class="params">date: string</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(date.charAt(<span class="number">0</span>));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>编译报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">a.ts:<span class="number">38</span>:<span class="number">16</span> - error TS2345: Argument <span class="keyword">of</span> type <span class="string">'(date: string) =&gt; void'</span> is not assignable to parameter <span class="keyword">of</span> type <span class="string">'(date: string | number) =&gt; void'</span>.</span><br><span class="line">  Types <span class="keyword">of</span> parameters <span class="string">'date'</span> and <span class="string">'date'</span> are incompatible.</span><br><span class="line">    Type <span class="string">'string | number'</span> is not assignable to type <span class="string">'string'</span>.</span><br><span class="line">      Type <span class="string">'number'</span> is not assignable to type <span class="string">'string'</span>.</span><br><span class="line"></span><br><span class="line"><span class="number">38</span> getCurrentYear(<span class="function">(<span class="params">date: string</span>) =&gt;</span> &#123;</span><br><span class="line">                  ~~~~~~~~~~~~~~~~~~~</span><br></pre></td></tr></table></figure>
+<p>如果 <code>strictFunctionTypes:false</code>关闭检查则不会报错</p>
+<h3 id="7、jsx"><a href="#7、jsx" class="headerlink" title="7、jsx"></a>7、jsx</h3><blockquote>
+<p>jsx 的编译规则</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>输入</th>
+<th>输出</th>
+<th>输出文件扩展名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>preserve</td>
+<td>“<div>“</div></td>
+<td><div></div></td>
+<td>.jsx</td>
+</tr>
+<tr>
+<td>react</td>
+<td><div></div></td>
+<td>React.createElement(“div”)</td>
+<td>.js</td>
+</tr>
+<tr>
+<td>react-native</td>
+<td><div></div></td>
+<td><div></div></td>
+<td>.js</td>
+</tr>
+</tbody>
+</table>
+<p>在 tsconfig.json 添加<code>&quot;jsx&quot;: &quot;preserve</code><br>创建文件<code>t.jsx</code>内容为:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>编译后：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;&lt;<span class="regexp">/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在 tsconfig.json 修改<code>&quot;jsx&quot;: &quot;react</code><br>编译后的文件后缀变成了.js:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">React.createElement(<span class="string">'div'</span>, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="8、experimentalDecorators"><a href="#8、experimentalDecorators" class="headerlink" title="8、experimentalDecorators"></a>8、experimentalDecorators</h3><blockquote>
+<p>允许是用装饰器</p>
+</blockquote>
+<p>如果不开启这个选项，是不能用装饰器的，在 a.ts 中添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function decoraters(target) &#123;</span><br><span class="line">  target.age = 10;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@decoraters</span><br><span class="line">class m &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到编译报错</p>
+<h3 id="9、importHelpers-moduleResolution"><a href="#9、importHelpers-moduleResolution" class="headerlink" title="9、importHelpers/moduleResolution"></a>9、importHelpers/moduleResolution</h3><blockquote>
+<p><strong>importHelpers:</strong>从 tslib 导入辅助工具函数（比如 <strong>extends， </strong>rest 等），而不是生成代码到文件里<br><strong>moduleResolution:</strong>决定如何处理模块。或者是”Node”对于 Node.js/io.js，或者是”Classic”（默认）</p>
+</blockquote>
+<p>这个选项依赖<strong>tslib</strong>这个库，安装这个库<br>在 tsconfig.json 添加<code>&quot;importHelpers&quot;: true</code>，这时候 a.ts 就报红了：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/tscoinfig配置/1.png" alt="红红红" title>
+                </div>
+                <div class="image-caption">红红红</div>
+            </figure></p>
+<p>说是找不到 tiblib 这个库，明明已经安装了呀，在 node_modules 目录下，其实是 ts 不知道去哪找这个库，所以我们要告诉 ts 去哪找这个库，添加配置：<br><code>moduleResolution:node</code></p>
+<blockquote>
+<p>多说一嘴，moduleResolution 有两个配置项 node 和 classic（默认），这俩逻辑也很简单<a href="https://www.tslang.cn/docs/handbook/module-resolution.html#node" target="_blank" rel="noopener">node</a>、<a href="https://www.tslang.cn/docs/handbook/module-resolution.html#classic" target="_blank" rel="noopener">classic</a> ，所以这里是设置<code>node</code></p>
+</blockquote>
+<blockquote>
+<p>tips:其实这个不配置 moduleResolution 也有另外的解决方案，就是在 tsconfig 加上这个配置，告诉如果用 classic 方案的话，去哪找这个包</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;    <span class="string">"baseUrl"</span>: <span class="string">"."</span>,</span><br><span class="line">&gt;    <span class="string">"paths"</span>: &#123;</span><br><span class="line">&gt;      <span class="string">"tslib"</span>: [</span><br><span class="line">&gt;        <span class="string">"./node_modules/tslib/tslib.d.ts"</span></span><br><span class="line">&gt;      ]</span><br><span class="line">&gt;    &#125;,</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>运行 tsc 编译，结果：<br>可以看到装饰器的辅助方法已经通过 import 引入了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; __decorate &#125; <span class="keyword">from</span> <span class="string">'tslib'</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decoraters</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.age = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> m = <span class="class"><span class="keyword">class</span> <span class="title">m</span> </span>&#123;&#125;;</span><br><span class="line">m = __decorate([decoraters], m);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> decoraters;</span><br></pre></td></tr></table></figure>
+<p><code>修改tsconfig.json试试importHelpers：false</code>，编译结果：<br>辅助方法打到了文件里了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> __decorate =</span><br><span class="line">  (<span class="keyword">this</span> &amp;&amp; <span class="keyword">this</span>.__decorate) ||</span><br><span class="line">  <span class="function"><span class="keyword">function</span> (<span class="params">decorators, target, key, desc</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> c = <span class="built_in">arguments</span>.length,</span><br><span class="line">      r =</span><br><span class="line">        c &lt; <span class="number">3</span></span><br><span class="line">          ? target</span><br><span class="line">          : desc === <span class="literal">null</span></span><br><span class="line">          ? (desc = <span class="built_in">Object</span>.getOwnPropertyDescriptor(target, key))</span><br><span class="line">          : desc,</span><br><span class="line">      d;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">Reflect</span> === <span class="string">'object'</span> &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">Reflect</span>.decorate === <span class="string">'function'</span>)</span><br><span class="line">      r = <span class="built_in">Reflect</span>.decorate(decorators, target, key, desc);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> i = decorators.length - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">        <span class="keyword">if</span> ((d = decorators[i]))</span><br><span class="line">          r = (c &lt; <span class="number">3</span> ? d(r) : c &gt; <span class="number">3</span> ? d(target, key, r) : d(target, key)) || r;</span><br><span class="line">    <span class="keyword">return</span> c &gt; <span class="number">3</span> &amp;&amp; r &amp;&amp; <span class="built_in">Object</span>.defineProperty(target, key, r), r;</span><br><span class="line">  &#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decoraters</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.age = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> m = <span class="class"><span class="keyword">class</span> <span class="title">m</span> </span>&#123;&#125;;</span><br><span class="line">m = __decorate([decoraters], m);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> decoraters;</span><br></pre></td></tr></table></figure>
+<h3 id="10、noEmitHelpers"><a href="#10、noEmitHelpers" class="headerlink" title="10、noEmitHelpers"></a>10、noEmitHelpers</h3><blockquote>
+<p>这个跟上面那个参数做的事情差不多，就是 <code>不生成帮助函数</code> 来试试看</p>
+</blockquote>
+<p>在 tsconfig.json 添加<code>&quot;noEmitHelpers&quot;: true</code>，不生成辅助方法：<br>编辑结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decoraters</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.age = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> m = <span class="class"><span class="keyword">class</span> <span class="title">m</span> </span>&#123;&#125;;</span><br><span class="line">m = __decorate([decoraters], m);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> decoraters;</span><br></pre></td></tr></table></figure>
+<h3 id="11、typeRoots"><a href="#11、typeRoots" class="headerlink" title="11、typeRoots"></a>11、typeRoots</h3><blockquote>
+<p>这个用于指定类型声明文件的查找路径。默认值为 node_modules/@types，即在 node_modules 下的@types 里面查找。需要注意的是这里仅仅是 d.ts 文件的查找路径。同样，这个也是相当于在引入<strong>非相对模块</strong>的时候拓宽了类型声明文件的查找范围，其实就是配置类型声明文件的查找目录 <code>注意这个只是类型的查找</code></p>
+</blockquote>
+<p>本地试了试，没发现有啥用，这个参数好像没啥实际应用场景啊？</p>
+<h3 id="12、declaration"><a href="#12、declaration" class="headerlink" title="12、declaration"></a>12、declaration</h3><blockquote>
+<p>生成相应的 .d.ts 文件。这个注意，只有代码里 export 的变量或方法 才会被生成.d.ts 文件，如果有个变量没有 export，那就在对应的.d.ts 文件里不会包含此变量的类型</p>
+</blockquote>
+<p>在 tsconfig.json 添加<code>&quot;declaration&quot;: true</code>，生成类型文件</p>
+<p>a.ts 中添加一个没有 export 的方法 age：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decoraters</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.age = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@decoraters</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">m</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">age</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'m'</span>);</span><br><span class="line">&#125;</span><br><span class="line">age();</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> decoraters;</span><br></pre></td></tr></table></figure>
+<p>看到输出的<code>a.d.ts</code>结果：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">declare <span class="function"><span class="keyword">function</span> <span class="title">decoraters</span>(<span class="params">target: any</span>): <span class="title">void</span>;</span></span><br><span class="line"><span class="function"><span class="title">export</span> <span class="title">default</span> <span class="title">decoraters</span>;</span></span><br></pre></td></tr></table></figure>
+<p>不包含<code>age</code>方法</p>
+<h3 id="13、declarationDir"><a href="#13、declarationDir" class="headerlink" title="13、declarationDir"></a>13、declarationDir</h3><blockquote>
+<p>生成.d.ts 文件的存放目录</p>
+</blockquote>
+<h3 id="14、allowSyntheticDefaultImports"><a href="#14、allowSyntheticDefaultImports" class="headerlink" title="14、allowSyntheticDefaultImports"></a>14、allowSyntheticDefaultImports</h3><blockquote>
+<p>当导入的模块是以 commonJs 语法导出时，不能用 import M from ‘./m’ 这种语法，会报错，因为 ts 会检测导入模块是否有 default 字段，没有的话导出要用 import * as M from ‘./m，加这个配置 可以正常导入 import M from ‘./‘</p>
+</blockquote>
+<p>新建 commonJs.js 文件,用 commonJs 语法导出：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> CommonJS = <span class="number">1</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCom</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> CommonJS;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(x);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>修改 a.ts:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> getCom <span class="keyword">from</span> <span class="string">'./commonJS'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(getCom);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">decoraters</span>(<span class="params">target</span>) </span>&#123;</span><br><span class="line">  target.age = <span class="number">10</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">a.ts:<span class="number">14</span>:<span class="number">8</span> - error TS1259: Module <span class="string">'"/Users/mbyang/Desktop/test/commonJS"'</span> can only be <span class="keyword">default</span>-imported using the <span class="string">'allowSyntheticDefaultImports'</span> flag</span><br><span class="line"></span><br><span class="line"><span class="number">14</span> <span class="keyword">import</span> getCom <span class="keyword">from</span> <span class="string">'./commonJS'</span>;</span><br><span class="line">          ~~~~~~</span><br><span class="line"></span><br><span class="line">  commonJS.js:<span class="number">6</span>:<span class="number">1</span></span><br><span class="line">    <span class="number">6</span> <span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">x</span>) </span>&#123;</span><br><span class="line">      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span><br><span class="line">    <span class="number">7</span>   <span class="built_in">console</span>.log(x);</span><br><span class="line">      ~~~~~~~~~~~~~~~~~</span><br><span class="line">    <span class="number">8</span> &#125;;</span><br><span class="line">      ~</span><br><span class="line">    This <span class="built_in">module</span> is declared <span class="keyword">with</span> using <span class="string">'export ='</span>, and can only be used <span class="keyword">with</span> a <span class="keyword">default</span> <span class="keyword">import</span> when using the <span class="string">'allowSyntheticDefaultImports'</span> flag.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Found <span class="number">1</span> error.</span><br></pre></td></tr></table></figure>
+<p>在 tsconfig.json 添加<code>&quot;allowSyntheticDefaultImports&quot;: true</code> 即可解决，或者修改为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> getCom <span class="keyword">from</span> <span class="string">'./commonJS'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="15、resolveJsonModule"><a href="#15、resolveJsonModule" class="headerlink" title="15、resolveJsonModule"></a>15、resolveJsonModule</h3><blockquote>
+<p>包括以“.json”扩展名导入的模块 ,一版这个要配合 include 选项，如果 include 选项没有配置.json 文件，那配置这个也没啥用</p>
+</blockquote>
+<h3 id="16、baseUrl-paths"><a href="#16、baseUrl-paths" class="headerlink" title="16、baseUrl/paths"></a>16、baseUrl/paths</h3><blockquote>
+<p>设置 baseUrl 来告诉编译器到哪里去查找模块。 所有非相对模块导入都会被当做相对于 baseUrl，baseUrl 默认值为’.’当前路径<br>注意是<code>非相对模块</code></p>
+</blockquote>
+<p>在 tsconfig.json 添加瞎写的<code>&quot;baseUrl&quot;: &quot;../../../&quot;</code>，添加<code>path</code>指定 a.ts 模块的路径:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"paths"</span>: &#123;</span><br><span class="line">           <span class="string">"a"</span>: [<span class="string">"./a.ts"</span>] <span class="comment">// 此处映射是相对于"baseUrl"</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>这个参数我来来回回试验没发现啥用，也不报错，后来发现是要用 ts 类型的文件，js 类型文件不报红，看下面例子</p>
+<p>创建新文件 m.ts，添加内容（如果是 m.js 不会报错）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> decoraters <span class="keyword">from</span> <span class="string">'a'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(decoraters);</span><br></pre></td></tr></table></figure>
+<p><code>a就是上面写的a.ts</code>，编译发现报错，因为 ts 不知道去哪找这个文件</p>
+<p>将<code>baseUrl 改成./或.</code> 发现 m.ts 不报错了，能找到模块 a 的定义</p>
+<h3 id="17、lib"><a href="#17、lib" class="headerlink" title="17、lib"></a>17、lib</h3><blockquote>
+<p>这个是用于指定要引入的库文件，属性值为一个数组，如果不配置 lib，那么其默认会引入 dom 库，但是如果配置了 lib，那么就只会引入指定的库了</p>
+</blockquote>
+<p>在 tsconfig.json 添加<code>&quot;lib&quot;: &quot;ES6&quot;</code>:<br>在 m.ts 添加代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'ccc'</span>);</span><br></pre></td></tr></table></figure>
+<p>可以看见已经报错了：<br><img src="/images/tscoinfig配置/2.png" alt="error"></p>
+<p><code>lib改为dom</code>则编译通过</p>
+<h3 id="18、types"><a href="#18、types" class="headerlink" title="18、types"></a>18、types</h3><blockquote>
+<p>官网是这么说的：如果指定了 types，只有被列出来的包才会被包含进来，它说的不是指的 import 导入模块找不到定义，指的是如果用了全局的变量，全局变量的类型找不找的到，看例子</p>
+</blockquote>
+<p>在 tsconfig.json 添加<code>&quot;types&quot;:[]</code><br>安装 jquery,npm i jquery -S，此时的 node_module/@types 目录为：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/tscoinfig配置/3.png" alt="node_modules" title>
+                </div>
+                <div class="image-caption">node_modules</div>
+            </figure></p>
+<p>然后在 m.ts 中，分别用 jq 和 node 的全局变量，添加代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// node</span></span><br><span class="line"><span class="built_in">console</span>.log(process);</span><br><span class="line"><span class="comment">// jquery</span></span><br><span class="line"><span class="built_in">console</span>.log($);</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/tscoinfig配置/4.png" alt="error" title>
+                </div>
+                <div class="image-caption">error</div>
+            </figure>
+<p>tsconfig.json 修改为 <code>&quot;types&quot;:[&quot;node&quot;,&quot;jquery&quot;]</code>后，编译通过</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-02-03T09:45:13.803Z" itemprop="dateUpdated">2021-02-03 17:45:13</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/typescript/">typescript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/01/25/tsconfig配置/&title=《tsconfig配置》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/01/25/tsconfig配置/&title=《tsconfig配置》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2021/01/25/tsconfig配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tsconfig配置》 — DHYANA&url=http://yoursite.com/2021/01/25/tsconfig配置/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2021/01/25/tsconfig配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/02/24/js的二进制/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">js的二进制</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2020/04/30/工具包/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">工具包</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'tsconfig配置',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/01/25/tsconfig配置/&title=《tsconfig配置》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/01/25/tsconfig配置/&title=《tsconfig配置》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2021/01/25/tsconfig配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《tsconfig配置》 — DHYANA&url=http://yoursite.com/2021/01/25/tsconfig配置/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2021/01/25/tsconfig配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3a3W7CMAwGUN7/pdkt0kb4bHdITU6uKkbTHCZZ9c/jEa/ny+p9/vs63+2yhYGBcVvGc7nWx1o/8t3317sld/3xXAwMjAMYySHyu9bI5AfKz4aBgYGx/s4Etn5BxMDAwJgwkuNWP8HAwMBIGEmSmdw1CdxfysUxMDBuyMir7t+//pf+BgYGxq0Yz+LKk8/ey2JvYWBg7M2oltKqQxW918TmeTAwMDZlJCnrJKHtjVbkP98j3w4DA+O2jHnQTAYs8sR10kLAwMDYlZGPR0xC56SUH92FgYFxGKMKq7LXyGr6+jbgYmBgbMToHbcaRnPSHImBgbE3o/qAXkKbh/UklX1bdMPAwNiOUS17TR7cGz4rd2IxMDA2ZfSGJPICXF7Oa4ZyDAyMTRnVBHIeiJN2Ql4ExMDAOJnRazrOYfn1h2ELDAyM7Ri917tqI6HaWij8FQMD4wBGXvSvls/mSXL0TQwMjK0Z1XywOhKRD5BVy3CjtBYDA+OGjF6ZPg9/5aS01+bEwMA4gJGQqmMZ1X164R4DA+McRq+stj5iss9lyTAGBsamjGsP1ztufm/0f8DAwNiOMQl2+XU1cb026cXAwNiD0Su3JSG19yLYDLgYGBgHMKoF/V4BLgnKeWMAAwMDo8pIdpsf90PRDQMDAyMegEiS3hwWFQExMDAOYFRHIvLxiEl7oNDOxMDA2JpRfVHLQ2S1zZAX+Eb9DQwMjDsxfgA6lUupJNsujQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

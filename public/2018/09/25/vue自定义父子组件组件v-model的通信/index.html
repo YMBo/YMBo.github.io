@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>vue自定义父子组件组件v-model的通信 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="Vue">
+    <meta name="description" content="一、前言前些天写一个checkbox的vue组件的时候想用v-model来进行状态的判断，但是想到这了，却不知道v-model怎么在组件里面实现，这篇文章记录v-model的实现以及v-model的扩展。具体效果可以参考iview的 Checkbox组件和CheckboxGroup组件 二、分析 (功能描述)我想做两个组件 第一个叫  ButtonSelect  、 ButtonSelectGro">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue自定义父子组件组件v-model的通信">
+<meta property="og:url" content="http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言前些天写一个checkbox的vue组件的时候想用v-model来进行状态的判断，但是想到这了，却不知道v-model怎么在组件里面实现，这篇文章记录v-model的实现以及v-model的扩展。具体效果可以参考iview的 Checkbox组件和CheckboxGroup组件 二、分析 (功能描述)我想做两个组件 第一个叫  ButtonSelect  、 ButtonSelectGro">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/vue自定义父子组件组件v-model的通信/checkbox.gif">
+<meta property="og:image" content="http://yoursite.com/images/vue自定义父子组件组件v-model的通信/CheckboxGroup.gif">
+<meta property="og:image" content="http://yoursite.com/images/vue自定义父子组件组件v-model的通信/notok.gif">
+<meta property="og:image" content="http://yoursite.com/images/vue自定义父子组件组件v-model的通信/ok.gif">
+<meta property="og:updated_time" content="2021-01-25T10:48:26.379Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue自定义父子组件组件v-model的通信">
+<meta name="twitter:description" content="一、前言前些天写一个checkbox的vue组件的时候想用v-model来进行状态的判断，但是想到这了，却不知道v-model怎么在组件里面实现，这篇文章记录v-model的实现以及v-model的扩展。具体效果可以参考iview的 Checkbox组件和CheckboxGroup组件 二、分析 (功能描述)我想做两个组件 第一个叫  ButtonSelect  、 ButtonSelectGro">
+<meta name="twitter:image" content="http://yoursite.com/images/vue自定义父子组件组件v-model的通信/checkbox.gif">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">vue自定义父子组件组件v-model的通信</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">vue自定义父子组件组件v-model的通信</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-09-25T02:38:15.000Z" itemprop="datePublished" class="page-time">
+  2018-09-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、分析-功能描述"><span class="post-toc-text">二、分析 (功能描述)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、关于v-model"><span class="post-toc-text">三、关于v-model</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-自定义v-model（v-model传递）"><span class="post-toc-text">1.自定义v-model（v-model传递）</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、ButtonSelect的实现"><span class="post-toc-text">四、ButtonSelect的实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-分析"><span class="post-toc-text">1. 分析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-实现"><span class="post-toc-text">2. 实现</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#五、总结"><span class="post-toc-text">五、总结</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-vue自定义父子组件组件v-model的通信"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">vue自定义父子组件组件v-model的通信</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-09-25 10:38:15" datetime="2018-09-25T02:38:15.000Z"  itemprop="datePublished">2018-09-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>前些天写一个checkbox的vue组件的时候想用v-model来进行状态的判断，但是想到这了，却不知道v-model怎么在组件里面实现，这篇文章记录v-model的实现以及v-model的扩展。具体效果可以参考<code>iview</code>的 <code>Checkbox组件和CheckboxGroup组件</code></p>
+<h3 id="二、分析-功能描述"><a href="#二、分析-功能描述" class="headerlink" title="二、分析 (功能描述)"></a>二、分析 (功能描述)</h3><p>我想做两个组件 第一个叫 <strong> ButtonSelect </strong> 、<strong> ButtonSelectGroup </strong></p>
+<ol>
+<li><p><code>ButtonSelect</code> :  其实这个组件就是一个checkbox复选框，只不过样式上进行的修改，我想在这上面绑定v-model，通过v-model来告诉父级组件当前的复选框状态(true/false)，<code>ButtonSelect</code> 的效果同iview的 <code>Checkbox组件</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/vue自定义父子组件组件v-model的通信/checkbox.gif" alt="CheckBox组件效果" title>
+                </div>
+                <div class="image-caption">CheckBox组件效果</div>
+            </figure>
+</li>
+<li><p><code>ButtonSelectGroup</code> : 当有多个 <strong>ButtonSelect</strong> 的时候，可以用 <code>ButtonSelectGroup</code>包裹<code>ButtonSelect</code>，然后通过 <code>ButtonSelectGroup</code> 上绑定 v-model ，来获得所有的选中项，格式是数组，效果同iview的 <code>CheckboxGroup</code></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/vue自定义父子组件组件v-model的通信/CheckboxGroup.gif" alt="CheckboxGroup组件效果" title>
+                </div>
+                <div class="image-caption">CheckboxGroup组件效果</div>
+            </figure>
+</li>
+</ol>
+<h3 id="三、关于v-model"><a href="#三、关于v-model" class="headerlink" title="三、关于v-model"></a>三、关于v-model</h3><p>v-model 双向绑定是一个很好用的功能，对于不同的组件v-model返回值也不同,但是这里只说说 <code>checkbox复选框的v-model</code></p>
+<ol>
+<li>单个复选框，绑定到布尔值</li>
+<li>多个复选框，绑定到同一个数组<br><a href="https://cn.vuejs.org/v2/guide/forms.html" target="_blank" rel="noopener">官网描述</a></li>
+</ol>
+<blockquote>
+<p><strong>这里一定要仔细观察，当多个复选框的时候它的v-model的值是一样的，只有这样才能返回数组，而数组每一项的值就是checkbox的value值</strong></p>
+</blockquote>
+<h4 id="1-自定义v-model（v-model传递）"><a href="#1-自定义v-model（v-model传递）" class="headerlink" title="1.自定义v-model（v-model传递）"></a>1.自定义v-model（v-model传递）</h4><p>父组件===&gt;子组件：默认名为value的prop<br>子组件===&gt;父组件：默认名为input的事件<br>通过 <strong>value</strong> 和 <strong>input</strong> 来完成v-model的赋值和传递</p>
+<p>但是有时候我们不想用value的input进行传递，name可以用<strong>model</strong>选项自定义：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model: &#123;</span><br><span class="line">    prop: <span class="string">'checked'</span>,</span><br><span class="line">    event: <span class="string">'change'</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>这样就变成了 prop为change 和 checked事件来代替value和input了</p>
+<h3 id="四、ButtonSelect的实现"><a href="#四、ButtonSelect的实现" class="headerlink" title="四、ButtonSelect的实现"></a>四、ButtonSelect的实现</h3><p>最顶级的组件ButtonSelectGroup、ButtonSelect的父组件，就叫他HelloWord组件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;ButtonSelectGroup v-model=&quot;select&quot;&gt;</span><br><span class="line">        &lt;ButtonSelect label=&apos;第一个&apos; &gt;&lt;/ButtonSelect&gt;</span><br><span class="line">        &lt;ButtonSelect label=&apos;第二个&apos;&gt;&lt;/ButtonSelect&gt;</span><br><span class="line">        &lt;ButtonSelect label=&apos;第三个&apos;&gt;&lt;/ButtonSelect&gt;</span><br><span class="line">    &lt;/ButtonSelectGroup&gt;</span><br><span class="line">    &#123;&#123;select&#125;&#125;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import  ButtonSelect from &quot;./ButtonSelect.vue&quot;;</span><br><span class="line">import ButtonSelectGroup from &quot;./ButtonSelectGroup.vue&quot;;</span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;HelloWorld&apos;,</span><br><span class="line">  components:&#123;</span><br><span class="line">    &apos;ButtonSelect&apos;:ButtonSelect,</span><br><span class="line">    &apos;ButtonSelectGroup&apos;:ButtonSelectGroup</span><br><span class="line">  &#125;,</span><br><span class="line">  data()&#123;</span><br><span class="line">    return&#123;</span><br><span class="line">      select:[]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">@keyframes ani &#123;</span><br><span class="line">    0% &#123;</span><br><span class="line">    background-color: #52c41a;</span><br><span class="line">    -webkit-box-shadow: 0 0 5px #52c41a;</span><br><span class="line">    box-shadow: 0 0 5px #52c41a;</span><br><span class="line">    &#125;</span><br><span class="line">    50% &#123;</span><br><span class="line">        background-color: #73d13d;</span><br><span class="line">        -webkit-box-shadow: 0 0 10px #73d13d;</span><br><span class="line">        box-shadow: 0 0 10px #73d13d;</span><br><span class="line">    &#125;</span><br><span class="line">    100% &#123;</span><br><span class="line">        background-color: #95de64;</span><br><span class="line">        -webkit-box-shadow: 0 0 5px #95de64;</span><br><span class="line">        box-shadow: 0 0 5px #95de64;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.selectBut&#123;</span><br><span class="line">    display: flex;</span><br><span class="line">    flex-wrap: nowrap;</span><br><span class="line">    margin: 5px;</span><br><span class="line">    border-radius: 5px ;</span><br><span class="line">    line-height: 30px;</span><br><span class="line">    height: 30px;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.selectBox&#123;</span><br><span class="line">    display: inline-block;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">&#125;</span><br><span class="line">.con&#123;</span><br><span class="line">    padding:0 5px;</span><br><span class="line">    box-shadow: 0 0 8px 0px  #88d6f7;</span><br><span class="line">    background: -webkit-linear-gradient(left,#5ec8ff,#4a9fd7);</span><br><span class="line">    background: -o-linear-gradient(left,#63e77d,#3e8aa6);</span><br><span class="line">    background: -moz-linear-gradient(left,#63e77d,#3e8aa6);</span><br><span class="line">    background: linear-gradient(left,#63e77d,#3e8aa6);</span><br><span class="line">&#125;</span><br><span class="line">.check&#123;</span><br><span class="line">    position: absolute;</span><br><span class="line">    top: 0;</span><br><span class="line">    bottom: 0;</span><br><span class="line">    left: 0;</span><br><span class="line">    right: 0;</span><br><span class="line">    z-index: 1;</span><br><span class="line">    cursor: pointer;</span><br><span class="line">    opacity: 0;</span><br><span class="line">    width: 100%;</span><br><span class="line">    height: 100%;</span><br><span class="line">    box-sizing: border-box;</span><br><span class="line">    padding: 0;</span><br><span class="line">    margin: 0;</span><br><span class="line">&#125;</span><br><span class="line">input.check:checked+.light&#123;</span><br><span class="line">    /* background: #19be6b; */</span><br><span class="line">    animation: ani 3s infinite alternate;</span><br><span class="line">&#125;</span><br><span class="line">.num&#123;</span><br><span class="line">    padding: 0 5px;</span><br><span class="line">    border-radius:0 5px 5px 0;</span><br><span class="line">    color: #fff;</span><br><span class="line">    font-weight: bold;</span><br><span class="line">    text-shadow: 0 -1px 1px #40a9ff;</span><br><span class="line">    /* box-shadow: 0 0 8px 0px  #88d6f7; */</span><br><span class="line">    background: -webkit-linear-gradient(left,#4a9fd7,#2d60a2);</span><br><span class="line">    background: -moz-linear-gradient(left,#3e8aa6,#2c5d9d);</span><br><span class="line">    background: -o-linear-gradient(left,#3e8aa6,#2c5d9d);</span><br><span class="line">    background: linear-gradient(left,#3e8aa6,#2c5d9d);</span><br><span class="line">&#125;</span><br><span class="line">.lightbox&#123;</span><br><span class="line">    position: relative;</span><br><span class="line">    width: 20px;</span><br><span class="line">    height: 100%;</span><br><span class="line">&#125;</span><br><span class="line">.light&#123;</span><br><span class="line">    transition:all .5;</span><br><span class="line">    background: #ccc;</span><br><span class="line">    height: 100%;</span><br><span class="line">    cursor: pointer;</span><br><span class="line">    border-radius: 5px 0 0 5px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;selectBox&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;selectBut&quot;&gt;</span><br><span class="line">                &lt;div class=&quot;lightbox&quot;&gt;</span><br><span class="line">                    &lt;input </span><br><span class="line">                        type=&quot;checkbox&quot; </span><br><span class="line">                        class=&quot;check&quot; </span><br><span class="line">                        :checked=&quot;currentValue&quot;</span><br><span class="line">                        @change=&quot;change&quot;/&gt;</span><br><span class="line">                    &lt;div class=&quot;light&quot;&gt;&lt;/div&gt;</span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;div class=&quot;con&quot;&gt;</span><br><span class="line">                    &lt;slot name=&quot;con&quot;&gt;ssss&lt;/slot&gt; </span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">                &lt;div class=&quot;num&quot;&gt;</span><br><span class="line">                   &lt;slot name=&quot;num&quot;&gt;aaa&lt;/slot&gt; </span><br><span class="line">                &lt;/div&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name:&apos;ButtonSelect&apos;,</span><br><span class="line">    data()&#123;</span><br><span class="line">        return&#123;</span><br><span class="line">            //根据v-model初始化当前组件状态</span><br><span class="line">            currentValue:this.value</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    props:&#123;</span><br><span class="line">        // v-model获取</span><br><span class="line">        value:&#123;</span><br><span class="line">            type:[Array,Boolean],</span><br><span class="line">            default:false</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        change(event)&#123;</span><br><span class="line">            var value=event.target.checked;</span><br><span class="line">            // 赋值v-model</span><br><span class="line">            this.$emit(&apos;input&apos;,value)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>关键点：</p>
+<blockquote>
+<p>template的 input<br>script:props的value和data里currentValue（获得初始状态）<br>script: change里this.$emit(‘input’)</p>
+</blockquote>
+<p>单个的复选框组件基本功能完成</p>
+<p>五、ButtonSelectGroup组件<br>实际应用中<code>ButtonSelect</code>会有很多个，我需要获取每一个的选中状态或者值（参考上面的CheckBoxGroup组件）</p>
+<h4 id="1-分析"><a href="#1-分析" class="headerlink" title="1. 分析"></a>1. 分析</h4><ol>
+<li>让多个checkbox返回数组的原理是什么？ 上面提到了，是给每一个checkbox相同的model，所以就要在父组件（ButtonSelectGroup）里给所有子组件（ButtonSelect）相同的v-model</li>
+<li>当所有的子组件其中有一个改变的时候，应该给父组件返回变化后的数组，父组件（上面提到了，是给每一个checkbox相同的model，所以就要在父组件（ButtonSelectGroup）里给所有子组件（ButtonSelect）设置相同的v-model）再将该数组通过input事件返回给<br>ButtonSelectGroup的调用者(ButtonSelectGroup的父组件)，完成v-model的传递</li>
+<li>当ButtonSelectGroup的父组件给定一个初始v-model值的时候，需要把每一个ButtonSelect进行状态的变换</li>
+</ol>
+<h4 id="2-实现"><a href="#2-实现" class="headerlink" title="2. 实现"></a>2. 实现</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">// 寻找子组件</span><br><span class="line">function findComponentsDownward (context, componentName) &#123;</span><br><span class="line">    return context.$children.reduce((components, child) =&gt; &#123;</span><br><span class="line">        if (child.$options.name === componentName) components.push(child);</span><br><span class="line">        const foundChilds = findComponentsDownward(child, componentName);</span><br><span class="line">        return components.concat(foundChilds);</span><br><span class="line">    &#125;, []);</span><br><span class="line">&#125;</span><br><span class="line">export default &#123;</span><br><span class="line">    name:&apos;ButtonSelectGroup&apos;,</span><br><span class="line">    props:&#123;</span><br><span class="line">        value:&#123;</span><br><span class="line">            type:Array,</span><br><span class="line">            default()&#123;</span><br><span class="line">                return []</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    data()&#123;</span><br><span class="line">        return&#123;</span><br><span class="line">            childrens:[],</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted()&#123;</span><br><span class="line">        this.updateModel()</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">        updateModel()&#123;</span><br><span class="line">            this.childrens = findComponentsDownward(this, &apos;ButtonSelect&apos;);</span><br><span class="line">            if(this.childrens)&#123;</span><br><span class="line">                const &#123; value &#125;=this;</span><br><span class="line">                // 给子组件设置相同的model</span><br><span class="line">                this.childrens.forEach(child=&gt;&#123;</span><br><span class="line">                    child.model=value;</span><br><span class="line">                    child.group = true;</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        change(data)&#123;</span><br><span class="line">            // 通知上级组件的v-model</span><br><span class="line">            this.$emit(&apos;input&apos;,data);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line">        value () &#123;</span><br><span class="line">            this.updateModel();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong> 注意注意注意 </strong></p>
+<blockquote>
+<p>这里有一个非常非常非常重要的点，就是这个watch里面这个value监听触发updateModel方法，你可以尝试去掉这个watch是什么结果。我就在这里卡了好久。来解释一下原因：<br>来一起想一下，子组件(ButtonSelect)的<code>model</code>是他爹(ButtonSelectGruop)给的，每次我点击了 <code>ButtonSelect</code>会通过<code>this.parent.change(this.model)</code> 来告诉父组件去更新使用的HelloWord里的 <code>select</code>，好了此时此刻我已经更新完了HelloWord里的 <code>v-model(select)</code>,但是注意子组件（ButtonSelect）的v-model是通过 父组件 （ButtonSelectGroup）赋值过来了，并不能直接更改，所以ButtonSelectGruop如果不加 watch的value监听的话，子组件的<code>v-model</code>永远是[]，所以可以在ButtonSelect change的时候打印一下，每次数组一定是一个值，所以要用过watch监听，每一次HelloWord的v-model变动，都要重新给ButtonSelect赋值一次，这样才能达到预期目的</p>
+</blockquote>
+<p>不加watch的样子：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/vue自定义父子组件组件v-model的通信/notok.gif" alt="不加watch" title>
+                </div>
+                <div class="image-caption">不加watch</div>
+            </figure></p>
+<p>加watch的样子：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/vue自定义父子组件组件v-model的通信/ok.gif" alt="加watch" title>
+                </div>
+                <div class="image-caption">加watch</div>
+            </figure></p>
+<h3 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h3><p>上面什么input事件、默认value什么的都还好理解，最最最重要的点就是上面说的watch来监听value，听我这么说可能云里雾里，需要自己动手实践一下，才能明白其中的意思</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-01-25T10:48:26.379Z" itemprop="dateUpdated">2021-01-25 18:48:26</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/&title=《vue自定义父子组件组件v-model的通信》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/&title=《vue自定义父子组件组件v-model的通信》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue自定义父子组件组件v-model的通信》 — DHYANA&url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/09/27/身份认证-jwt/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">身份认证-jwt</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/09/python格式化字符/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">python格式化字符</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'vue自定义父子组件组件v-model的通信',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/&title=《vue自定义父子组件组件v-model的通信》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/&title=《vue自定义父子组件组件v-model的通信》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《vue自定义父子组件组件v-model的通信》 — DHYANA&url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/09/25/vue自定义父子组件组件v-model的通信/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACvklEQVR42u3a0Y7bMAwEwPv/n26BPrVIne6S0t0VGD8FtqNoFEAkSH18xNePX9frnd+v9/dfx0m+9X60YxceHh7eaOpP1xPv1Mjv33x92o6Mh4eHd4/3PhgkP5YHkjzA5L/4eB8PDw/vS3l5gpuA2+XAw8PD+x95yeRyfDL1NsXHw8PD+0xeXg7Ii61JGTd/53qtBQ8PDy/mtQ2w7/D5Yn8PDw8Pb9GgyhtXbZLdPp3NFg8PD+8GLy8f3DjLlLTE2kJG8TN4eHh4I17etm+T3WSxZkevijfx8PDwLvOiZtKo3dUiT6XmeHh4eLd5s7ZWm1gn4SRJpqMlxsPDw7vAm23iecM+Lyi0KXXyPh4eHt49XnvsKW8+JROaJdlFUMHDw8O7xqv7ZsFC7JfsABIPDw/vAi8fYpbg1uXXslDShhY8PDy8Da+d0Gz7bu+0y/246Hh4eHgXeO3xqSRpbmvGm/ejp3h4eHgXeLPDT5vjBbMGWxISHsfHw8PDO8TbbNxtCTUfoV3ux/t4eHh413izRlf+ua0MzEoYf/kb8PDw8C7wkvS0PVZVb99l8Tcvl+Dh4eHd47Xt/M3RgbzU24aHf4yJh4eHd5TXprntdPPDAZuW2OroAB4eHl7MO1VKaBtUbRusDQZ/1Frw8PDwjvL2Ta9khHZbzxtps+XDw8PDO8Vr0+I8+W4LFvuG2Sra4OHh4cVhoE1Yi+Z9HAbyTT9/ioeHh/c5vLwUmyfN9bRGFx4eHt5t3qzBv1mO2UY/C1R4eHh4N3jthptHm+T9vGCRf2t2WAEPDw+v5W2Cwb68O2uqFYEBDw8P7xqv3b6T4mzbBtukyFEZFw8PD+8b8DaHAzbF4rrigoeHh/dFvDzJniXl7fjRkQU8PDy8a7zNEO8XKBk/b6fl38LDw8O7x2sbYJtC7Wb5Zmk6Hh4e3lHeT4A/IhaE0ZURAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
