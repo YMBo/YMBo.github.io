@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>链表快慢指针问题 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="算法">
+    <meta name="description" content="前言这篇文章讲了啥？  链表判断环 链表判断入口点 快慢指针是否一定能相遇  一、怎么判断链表是否有环？ 快慢指针的方式（快指针一次走两步，慢指针一次走一步） 循环查重  二、为什么快慢指针一定能相遇（在快步长是 2，慢步长是 1 的情况下）？由于链表是个环，所以相遇的过程可以看作是快指针从后边追赶慢指针的过程  当快慢指针相差一步的时候，继续往后走，慢指针走一步，快指针走两步，两者相遇  当快慢">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="链表快慢指针问题">
+<meta property="og:url" content="http://yoursite.com/2021/07/19/链表快慢指针问题/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="前言这篇文章讲了啥？  链表判断环 链表判断入口点 快慢指针是否一定能相遇  一、怎么判断链表是否有环？ 快慢指针的方式（快指针一次走两步，慢指针一次走一步） 循环查重  二、为什么快慢指针一定能相遇（在快步长是 2，慢步长是 1 的情况下）？由于链表是个环，所以相遇的过程可以看作是快指针从后边追赶慢指针的过程  当快慢指针相差一步的时候，继续往后走，慢指针走一步，快指针走两步，两者相遇  当快慢">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/链表快慢指针问题/1.png">
+<meta property="og:updated_time" content="2021-11-30T09:42:12.837Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="链表快慢指针问题">
+<meta name="twitter:description" content="前言这篇文章讲了啥？  链表判断环 链表判断入口点 快慢指针是否一定能相遇  一、怎么判断链表是否有环？ 快慢指针的方式（快指针一次走两步，慢指针一次走一步） 循环查重  二、为什么快慢指针一定能相遇（在快步长是 2，慢步长是 1 的情况下）？由于链表是个环，所以相遇的过程可以看作是快指针从后边追赶慢指针的过程  当快慢指针相差一步的时候，继续往后走，慢指针走一步，快指针走两步，两者相遇  当快慢">
+<meta name="twitter:image" content="http://yoursite.com/images/链表快慢指针问题/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">链表快慢指针问题</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">链表快慢指针问题</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-07-19T03:46:56.000Z" itemprop="datePublished" class="page-time">
+  2021-07-19
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一、怎么判断链表是否有环？"><span class="post-toc-text">一、怎么判断链表是否有环？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#二、为什么快慢指针一定能相遇（在快步长是-2，慢步长是-1-的情况下）？"><span class="post-toc-text">二、为什么快慢指针一定能相遇（在快步长是 2，慢步长是 1 的情况下）？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#三、为什么快指针一次走一步，慢指针一次走两步，走-3-步-4-步可不可以？2-步-6-步可不可以？"><span class="post-toc-text">三、为什么快指针一次走一步，慢指针一次走两步，走 3 步 4 步可不可以？2 步 6 步可不可以？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#结论"><span class="post-toc-text">结论</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#四、怎么找到入口节点"><span class="post-toc-text">四、怎么找到入口节点</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-链表快慢指针问题"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">链表快慢指针问题</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-07-19 11:46:56" datetime="2021-07-19T03:46:56.000Z"  itemprop="datePublished">2021-07-19</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>这篇文章讲了啥？</p>
+<ul>
+<li>链表判断环</li>
+<li>链表判断入口点</li>
+<li>快慢指针是否一定能相遇</li>
+</ul>
+<h4 id="一、怎么判断链表是否有环？"><a href="#一、怎么判断链表是否有环？" class="headerlink" title="一、怎么判断链表是否有环？"></a>一、怎么判断链表是否有环？</h4><ul>
+<li>快慢指针的方式（快指针一次走两步，慢指针一次走一步）</li>
+<li>循环查重</li>
+</ul>
+<h4 id="二、为什么快慢指针一定能相遇（在快步长是-2，慢步长是-1-的情况下）？"><a href="#二、为什么快慢指针一定能相遇（在快步长是-2，慢步长是-1-的情况下）？" class="headerlink" title="二、为什么快慢指针一定能相遇（在快步长是 2，慢步长是 1 的情况下）？"></a>二、为什么快慢指针一定能相遇（在快步长是 2，慢步长是 1 的情况下）？</h4><p>由于链表是个环，所以相遇的过程可以看作是快指针从后边追赶慢指针的过程</p>
+<ol>
+<li><p>当快慢指针相差一步的时候，继续往后走，慢指针走一步，快指针走两步，两者相遇</p>
+</li>
+<li><p>当快慢指针相差两步的时候，继续往后走，慢指针走一步，快指针走两步，那么此时两者相差一步，转换为第一种情况</p>
+</li>
+<li><p>当快慢指针相差 N 步的时候，继续往后走，慢指针走一步，快指针走两步，那么此时两者相差 N-1+2=N-1 步，由于 N 是逐渐变小的，所以最终快慢指针一定能相遇</p>
+</li>
+</ol>
+<h4 id="三、为什么快指针一次走一步，慢指针一次走两步，走-3-步-4-步可不可以？2-步-6-步可不可以？"><a href="#三、为什么快指针一次走一步，慢指针一次走两步，走-3-步-4-步可不可以？2-步-6-步可不可以？" class="headerlink" title="三、为什么快指针一次走一步，慢指针一次走两步，走 3 步 4 步可不可以？2 步 6 步可不可以？"></a>三、为什么快指针一次走一步，慢指针一次走两步，走 3 步 4 步可不可以？2 步 6 步可不可以？</h4><p>先说答案可以</p>
+<p>设：两格指针步长是 a,b，步数是 x，环的长度是 L，则</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax ≡ bx (mod L)</span><br></pre></td></tr></table></figure>
+<p><strong>表示 ax 与 bx 对模 L 同余</strong>， 这啥意思呢？翻译成 js 就是这样的 ax%L = bx%L ，就是俩余数相等<br><strong>也就是当这个等式成立的时候，快慢指针才能相遇</strong>，变换一下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ax-bx ≡ <span class="number">0</span>（mod L） === &gt;  x(a-b) ≡ <span class="number">0</span>(mod L)</span><br></pre></td></tr></table></figure>
+<p>根据这个等式可以得出一下结论</p>
+<ol>
+<li><code>那么当x=0的时候，等式成立，快慢指针相遇，x=0是最小值</code></li>
+<li><code>当x(a-b) (mod L) = 0</code> 等式成立</li>
+</ol>
+<p>x=0 的时候就是一步还没走，关键是第二个等式的成立条件<br>x(a-b) 必须是 L 的整数倍<br><strong>那么能得出结论，判断快慢指针是否能相遇，则必须满足这个条件<br><code>x(a-b) (mod L) = 0</code></strong><br>进而可以知道，快慢指针相遇的关键因素就是<strong>差值、环长、步数</strong>，<strong>再次简化，当 x 是 L 的倍数的时候无论 a,b 取值为多少，都能相遇</strong></p>
+<p>先说下为啥一般快慢指针步长都是 1 和 2，就是因为好算</p>
+<p>回到这个问题</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">快</th>
+<th style="text-align:center">慢</th>
+<th style="text-align:center">判断方法,x(步长)，L(环长)</th>
+<th style="text-align:center">结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4-3=1，则只需要满足 x(mod L)=0 即可相遇</td>
+<td style="text-align:center">当 x 是 L 整数倍一定可以相遇</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">6-2=4，则只需要满足 4x(mod L)=0 即可相遇</td>
+<td style="text-align:center">当 x 是 L 整数倍一定相遇</td>
+</tr>
+</tbody>
+</table>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><ol>
+<li>快慢指针相遇的关键因素就是<strong>环长、步数</strong>，当步数是环长的整数倍，则一定能相遇</li>
+<li>快慢指针无论取什么值，知道 x（步数）是 L（环长）的整数倍，则一定能相遇</li>
+<li>判断快慢指针是否能相遇的公式<strong>x(a-b) (mod L) = 0</strong></li>
+</ol>
+<h4 id="四、怎么找到入口节点"><a href="#四、怎么找到入口节点" class="headerlink" title="四、怎么找到入口节点"></a>四、怎么找到入口节点</h4><p>第一种方法，一把梭，直接循环遇到的第一个重复节点就是入口点<br>第二种，快慢指针<br><strong>为啥快慢指针能找到入口点</strong>，我先用 ps 画个图<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/链表快慢指针问题/1.png" alt="图" title>
+                </div>
+                <div class="image-caption">图</div>
+            </figure></p>
+<p>设起始点到入口点距离是 len<br>入口点到相遇点距离是 a<br>环长是 R<br>快指针在环里走了几圈 n<br>则快指针走过的距离为：len+nR+a<br>慢指针走过的距离：len+a<br>则有如下关系<br>len+nR+a=2(len+a)==&gt;len=nR-a（n&gt;=1）<br>当 n=1 的时候，len=R-a<br>所以首先找到相遇点，然后继续往下走，从起始点也同步往下走，当相遇时则就是入口点</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-11-30T09:42:12.837Z" itemprop="dateUpdated">2021-11-30 17:42:12</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/07/19/链表快慢指针问题/&title=《链表快慢指针问题》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/07/19/链表快慢指针问题/&title=《链表快慢指针问题》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2021/07/19/链表快慢指针问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《链表快慢指针问题》 — DHYANA&url=http://yoursite.com/2021/07/19/链表快慢指针问题/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2021/07/19/链表快慢指针问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2021/11/30/Immer解析/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Immer解析</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/03/05/cocos-creater截图/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">cocos/webgl截图</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: '链表快慢指针问题',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/07/19/链表快慢指针问题/&title=《链表快慢指针问题》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/07/19/链表快慢指针问题/&title=《链表快慢指针问题》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2021/07/19/链表快慢指针问题/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《链表快慢指针问题》 — DHYANA&url=http://yoursite.com/2021/07/19/链表快慢指针问题/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2021/07/19/链表快慢指针问题/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3awa7jIAwF0P7/T3ekWc0sml7b6dOrOayiKgEOC9dgHo+4Pf+2f5+T9ur9pJ/HJxoGBsbXMvKpJM/X3+ZLU6ZiYGAcwEiGyaNc9c3k+c2cMTAwMC5DYU7qBWIMDAyMSXf51jfvGQMDA2Oyia2mfXeliTfvxTEwML6Q0SsM/Mzzx+sbGBgYv57xHLdeMO2VAV5+i4GBsZqRpH3XE73+PdmgTnqLpoWBgfHljOthkjWoljnzsZJl/e9/AwMD4wDGvVfBJkG2esCHgYFxAqPXdf5tErJH72BgYKxmVA/i86sPvatmk7IoBgbGVkZ+QJYfh/V+z5Fv6hsYGBjrGL2AmwfTSWjOE1MMDIzdjN6xV5Rv9oJmbykxMDAOY0zSu/z35q2QaoaLgYGxgjHPK6sDJ1vlpHQajY6BgbGakU8l39ZWh5/0j4GBsYmRb0R7pYLJEVthVhgYGAcwJof+vSWoFhXejIiBgbGaUU0Be8lidSOa9Fy4mYuBgbGCkR+i9VLJ3mLdFmQxMDAWMXrhb3L0f1fwxcDAOIFRDXnzSeThuxpXMTAw9jGexTa5KlENu3lvGBgYuxm9MNd7c14kKG9rMTAwFjGqQTZJ9apb3BsCLgYGxgGMeeCrTrcXyl/2j4GBgRFc1Soc3xcLEuUSJgYGxsGM/Grp5LpYXnjAwMA4jZFsYucH/femnhgYGOcwelccqoXP/NveQmNgYCxl/AEptdsZfrj8SwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

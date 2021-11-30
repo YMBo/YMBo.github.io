@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>python格式化字符 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="python">
+    <meta name="description" content="一、前言本文是我初学python对格式化字符操作中的一些相对疑难问题的记录和理解 二、python中格式化方法format1.简单用法对于format最简单的用法就是这样了123name=&apos;YMBo&apos;age=18print &apos;&amp;#123;0&amp;#125; is &amp;#123;1&amp;#125; years old&apos;.format(name,age) 输出为  YMBo is 18 years old  对">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python格式化字符">
+<meta property="og:url" content="http://yoursite.com/2018/08/09/python格式化字符/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言本文是我初学python对格式化字符操作中的一些相对疑难问题的记录和理解 二、python中格式化方法format1.简单用法对于format最简单的用法就是这样了123name=&apos;YMBo&apos;age=18print &apos;&amp;#123;0&amp;#125; is &amp;#123;1&amp;#125; years old&apos;.format(name,age) 输出为  YMBo is 18 years old  对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-11-30T09:42:12.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python格式化字符">
+<meta name="twitter:description" content="一、前言本文是我初学python对格式化字符操作中的一些相对疑难问题的记录和理解 二、python中格式化方法format1.简单用法对于format最简单的用法就是这样了123name=&apos;YMBo&apos;age=18print &apos;&amp;#123;0&amp;#125; is &amp;#123;1&amp;#125; years old&apos;.format(name,age) 输出为  YMBo is 18 years old  对">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">python格式化字符</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">python格式化字符</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-09T03:38:07.000Z" itemprop="datePublished" class="page-time">
+  2018-08-09
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、python中格式化方法format"><span class="post-toc-text">二、python中格式化方法format</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-简单用法"><span class="post-toc-text">1.简单用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-复杂用法"><span class="post-toc-text">2.复杂用法</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-python格式化字符"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">python格式化字符</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-09 11:38:07" datetime="2018-08-09T03:38:07.000Z"  itemprop="datePublished">2018-08-09</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>本文是我初学python对格式化字符操作中的一些相对疑难问题的记录和理解</p>
+<h3 id="二、python中格式化方法format"><a href="#二、python中格式化方法format" class="headerlink" title="二、python中格式化方法format"></a>二、python中格式化方法format</h3><h4 id="1-简单用法"><a href="#1-简单用法" class="headerlink" title="1.简单用法"></a>1.简单用法</h4><p>对于format最简单的用法就是这样了<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">'YMBo'</span></span><br><span class="line">age=<span class="number">18</span></span><br><span class="line"><span class="keyword">print</span> <span class="string">'&#123;0&#125; is &#123;1&#125; years old'</span>.format(name,age)</span><br></pre></td></tr></table></figure></p>
+<p>输出为</p>
+<blockquote>
+<p>YMBo is 18 years old</p>
+</blockquote>
+<p>对于这种字符串拼接也可以用这种方式：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">'YMBo'</span></span><br><span class="line">age=<span class="number">18</span></span><br><span class="line"><span class="keyword">print</span> name+<span class="string">' and '</span>+str(age)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>注意！这种方式的字符串拼接类型都要为 str，所以<code>age</code>这一项要转为str，而format这中方式就不用</li>
+</ul>
+<h4 id="2-复杂用法"><a href="#2-复杂用法" class="headerlink" title="2.复杂用法"></a>2.复杂用法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">'YMBo'</span></span><br><span class="line">print(<span class="string">'lalallala :&#123;0:3&#125;'</span>.format(name))</span><br><span class="line"><span class="comment"># &#123;0:3&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>0：这里的 0 表示第几个参数，这里只有一个所以是 0</li>
+<li>3：这个3表示输出宽度，如果输出宽度小于字符串宽度则最后输出宽度为字符串宽度</li>
+</ul>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">name=<span class="string">'YMBo'</span></span><br><span class="line">print(<span class="string">'lalallala :&#123;0:^3&#125;'</span>.format(name))</span><br><span class="line"><span class="comment"># &#123;0:^3&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里多了个 <code>^</code>表示右对齐</li>
+</ul>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'lalallala :&#123;0:.3f&#125;'</span>.format(<span class="number">1.0</span>/<span class="number">3</span>))</span><br><span class="line"><span class="comment"># &#123;0:.3f&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>0表示第一个参数</li>
+<li>：后面没有数字表示宽度则自动分配</li>
+<li>.3表示小数点后3位</li>
+<li>f表示按照浮点数输出</li>
+</ul>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">' :&#123;0:_^100.3f&#125;'</span>.format(<span class="number">1.0</span>/<span class="number">3</span>))</span><br><span class="line"><span class="comment"># &#123;0:.3f&#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里的下滑线是填充文本</li>
+</ul>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>对比一下，python字符串格式化操作和JavaScript很相似的<br>都有两种方式<br>1.字符串和变量++++这种操作，但是python需要将不是str类型的变量转为str类型，而js不用<br>2.python中’{}’.format()，js中`${}`这种操作</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-11-30T09:42:12.833Z" itemprop="dateUpdated">2021-11-30 17:42:12</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/08/09/python格式化字符/&title=《python格式化字符》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/08/09/python格式化字符/&title=《python格式化字符》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/08/09/python格式化字符/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python格式化字符》 — DHYANA&url=http://yoursite.com/2018/08/09/python格式化字符/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/08/09/python格式化字符/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/09/25/vue自定义父子组件组件v-model的通信/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">vue自定义父子组件组件v-model的通信</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/21/webpack配置代码分割/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">webpack配置代码分割</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'python格式化字符',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/08/09/python格式化字符/&title=《python格式化字符》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/08/09/python格式化字符/&title=《python格式化字符》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/08/09/python格式化字符/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《python格式化字符》 — DHYANA&url=http://yoursite.com/2018/08/09/python格式化字符/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/08/09/python格式化字符/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aQW4CMQwFUO5/abqt1DL8H08rkbysEKBJ3iwsO/bjEa/nj/X9+1ef81+vv79tYWBgfCzjebmuGdeHyJ+Q7/vyDBgYGAcwXh1r8p/2cGv7YmBgYORHvD5uEpQxMDAw7mJcb5xsmR8dAwMDow2dScnahuD5MzEwME5g5Lfu///5T/obGBgYH8V4lmtOnZ/hl1NhYGBszcgDXN7UTJK/ecDFwMA4h9EOeLWjXfOkMAr3GBgYWzPay/12UCx5wvzKDwMDY2/G5Fo/Cbh1llq+IAwMjHMYeRjNB7wmw2Ft6MfAwNibMR9xyBO+eQvhsZZ7YmBgbM1I2o1rN2D5WFjxHAwMjAMYydV8W7i2QxttkoqBgXECYzIY0aZ9kzbnm30xMDC2ZrTXW5NwuXYxVxS3GBgYBzCS4NsGwbY8zoP+m1ocAwNja8YkCLZF7ORSr+jHYmBgbMFoS9N7G59rbQYMDIyTGe0MQzvOdVeJ+3IvDAyMTRlJIpgXpXkwbYfA6mELDAyM7RjXqV6eDq4F4rWWAAYGxmmMNplby0DXCtco3GNgYGzKeJYrSSXb4Yy8Lfqm/sbAwNiUcVfMbkN2XqwWwxYYGBhbM9ogmx9r7dfFgIuBgXEAIw98bRtgbeysfjUYGBgYS/+ZlJ114xMDAwNjkAJOksui/YCBgXEAIyli2/SubViujWhgYGCcwJgnamtty/w15f/BwMDYjvEF3uAsuhPD5jkAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

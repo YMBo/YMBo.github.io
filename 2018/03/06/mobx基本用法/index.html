@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>mobx基本用法 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="mobx">
+    <meta name="description" content="一、前言本文是我初学mobx时对mobx一些基本的认识，如果新发现会继续更新 二、redux和mobx相同点：都是用来管理JavaScript应用的状态，他们不一定要跟react结合使用，还可以与别的框架结合 不同点：  redux学习成本相对于mobx成本要高很多，有reducer、action、dispatch等概念，规则多，比如更新数据必须要用 dispatch，更新的逻辑必须要用 acti">
+<meta name="keywords" content="mobx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mobx基本用法">
+<meta property="og:url" content="http://yoursite.com/2018/03/06/mobx基本用法/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、前言本文是我初学mobx时对mobx一些基本的认识，如果新发现会继续更新 二、redux和mobx相同点：都是用来管理JavaScript应用的状态，他们不一定要跟react结合使用，还可以与别的框架结合 不同点：  redux学习成本相对于mobx成本要高很多，有reducer、action、dispatch等概念，规则多，比如更新数据必须要用 dispatch，更新的逻辑必须要用 acti">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/mobx基本用法/1.gif">
+<meta property="og:image" content="http://yoursite.com/images/mobx基本用法/2.gif">
+<meta property="og:image" content="http://yoursite.com/images/mobx基本用法/3.png">
+<meta property="og:updated_time" content="2021-11-30T09:42:12.833Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mobx基本用法">
+<meta name="twitter:description" content="一、前言本文是我初学mobx时对mobx一些基本的认识，如果新发现会继续更新 二、redux和mobx相同点：都是用来管理JavaScript应用的状态，他们不一定要跟react结合使用，还可以与别的框架结合 不同点：  redux学习成本相对于mobx成本要高很多，有reducer、action、dispatch等概念，规则多，比如更新数据必须要用 dispatch，更新的逻辑必须要用 acti">
+<meta name="twitter:image" content="http://yoursite.com/images/mobx基本用法/1.gif">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">mobx基本用法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">mobx基本用法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-03-06T01:59:46.000Z" itemprop="datePublished" class="page-time">
+  2018-03-06
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、前言"><span class="post-toc-text">一、前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、redux和mobx"><span class="post-toc-text">二、redux和mobx</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、mobx基本概念"><span class="post-toc-text">三、mobx基本概念</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-observable"><span class="post-toc-text">1. @observable </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-computed"><span class="post-toc-text">2. @computed</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-autorun"><span class="post-toc-text">3.  autorun </span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-action"><span class="post-toc-text">4. @action</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-oberver"><span class="post-toc-text">5. @oberver</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、运行环境的配置"><span class="post-toc-text">四、运行环境的配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-useStaticRendering"><span class="post-toc-text">6. useStaticRendering</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-mobx基本用法"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">mobx基本用法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-03-06 09:59:46" datetime="2018-03-06T01:59:46.000Z"  itemprop="datePublished">2018-03-06</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h3><p>本文是我初学mobx时对mobx一些基本的认识，如果新发现会继续更新</p>
+<h3 id="二、redux和mobx"><a href="#二、redux和mobx" class="headerlink" title="二、redux和mobx"></a>二、redux和mobx</h3><p>相同点：都是用来管理JavaScript应用的状态，他们不一定要跟react结合使用，还可以与别的框架结合</p>
+<p>不同点：</p>
+<ol>
+<li><strong>redux</strong>学习成本相对于mobx成本要高很多，有reducer、action、dispatch等概念，规则多，比如更新数据必须要用 dispatch，更新的逻辑必须要用 action，刚学的时候可能有点懵。<br><strong>mobx</strong>比较自由，可以用obj.key 的方式更新</li>
+<li><strong>redux</strong>更新数据的时候，要将更新数据的整个对象替换为一个新的对象才可以触发更新(这点接触过redux的会有感受)，而mobx自始至终是一份引用，所以redux每次会触发很多的组件的重新渲染，为了优化会配合immutable。<br><strong>mobx</strong>则是更新哪个属性，仅仅这个属性所在的位置会重新渲染（不是组件的重新渲染，不触发componentWillMount等方法，会触发componentWillUpdata）</li>
+</ol>
+<p>以上为自己理解，如有错误烦请指出</p>
+<h3 id="三、mobx基本概念"><a href="#三、mobx基本概念" class="headerlink" title="三、mobx基本概念"></a>三、mobx基本概念</h3><blockquote>
+<p>tip:以下提到的 <code>@</code> 是ES7里的修饰器，可以到网上找资源学习 es7的修饰器</p>
+</blockquote>
+<h4 id="1-observable"><a href="#1-observable" class="headerlink" title="1. @observable "></a>1. <strong>@observable </strong></h4><p>将属性转为可观察的，一旦发生变化，则变量所处的位置会立即发生变化</p>
+<h4 id="2-computed"><a href="#2-computed" class="headerlink" title="2. @computed"></a>2. <strong>@computed</strong></h4><p>这是一个有点不好理解的API，而且官网描述的也不是很清楚，下面是我的理解，如果有误，请指出<br>讲这个API之前先看一下下面的例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/************************************mobx********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; observable ,computed,autorun,action &#125; <span class="keyword">from</span> <span class="string">'mobx'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AppState</span> </span>&#123;</span><br><span class="line">	@observable count=<span class="number">0</span>;</span><br><span class="line">	@observable max = <span class="number">5</span>;</span><br><span class="line">	@computed <span class="keyword">get</span> msg()&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'msg的getter里执行...'</span>)</span><br><span class="line">		<span class="keyword">return</span> <span class="string">`msg结果===&gt;<span class="subst">$&#123;<span class="keyword">this</span>.max&gt;<span class="keyword">this</span>.count&#125;</span>`</span></span><br><span class="line">	&#125;</span><br><span class="line">	@action add()&#123;</span><br><span class="line">		<span class="keyword">this</span>.count +=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	@action changeName(c)&#123;</span><br><span class="line">		<span class="keyword">this</span>.max=c</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> appState = <span class="keyword">new</span> AppState;</span><br><span class="line">setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">	appState.add()</span><br><span class="line">&#125;,<span class="number">2000</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> appState;</span><br><span class="line"></span><br><span class="line"><span class="comment">/************************************index.jsx********************************/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> React,&#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span></span><br><span class="line"><span class="keyword">import</span> &#123;observer,inject&#125; <span class="keyword">from</span> <span class="string">'mobx-react'</span></span><br><span class="line"><span class="keyword">import</span> PropTypes <span class="keyword">from</span> <span class="string">'prop-types'</span></span><br><span class="line"></span><br><span class="line">@inject(<span class="string">'appState'</span>)</span><br><span class="line"></span><br><span class="line">@observer</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">TopicList</span> <span class="keyword">extends</span> <span class="title">Component</span></span>&#123;</span><br><span class="line">	<span class="keyword">constructor</span>()&#123;</span><br><span class="line">		<span class="keyword">super</span>()</span><br><span class="line">		<span class="keyword">this</span>.changeName=<span class="keyword">this</span>.changeName.bind(<span class="keyword">this</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	componentWillUpdate()&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(<span class="string">'更新！'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	changeName(event)&#123;</span><br><span class="line">		<span class="keyword">this</span>.props.appState.changeName(event.target.value)</span><br><span class="line">	&#125;</span><br><span class="line">	render()&#123;</span><br><span class="line">		<span class="keyword">return</span> (</span><br><span class="line">			&lt;div&gt;</span><br><span class="line">				&lt;input type=<span class="string">"text"</span> onChange=&#123;<span class="keyword">this</span>.changeName&#125;/&gt;</span><br><span class="line">				&lt;span&gt;&#123;<span class="keyword">this</span>.props.appState.msg&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">			&lt;/</span>div&gt;</span><br><span class="line">		)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">TopicList.propTypes=&#123;</span><br><span class="line">	appState:PropTypes.object</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>逻辑是有两个变量 count和max，在msg的getter里判断max&gt;count的情况,其中max为固定值，count每秒+1。</p>
+</blockquote>
+<p>在第二节的redux和mobx异同之处提出了mobx数据变化的时候组件只会触发 <code>componentWillUpdata</code> （没什么来源，自己试的），下面来看看上面代码 (<code>mobx里msg部分加了 @computed</code>) 运行情况：</p>
+<p><img src="/images/mobx基本用法/1.gif" alt="加了 @computed"></p>
+<p><strong> 可以看到只有当 <code>msg</code> 值发生变化的时候，才会触发 <code>componentWillUpdata</code> ，也就是前5s msg的结果一直为 true时，组件里是没有接收到新的 {this.props.appState.msg} 的（因为接受新的props值会触发 componentWillUpdata）</strong></p>
+<p>下面再来看看 <code>mobx里msg部分不加 @computed</code>  运行情况<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">get</span> msg()&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'msg的getter里执行...'</span>)</span><br><span class="line">	<span class="keyword">return</span> <span class="string">`msg结果===&gt;<span class="subst">$&#123;<span class="keyword">this</span>.max&gt;<span class="keyword">this</span>.count&#125;</span>`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/mobx基本用法/2.gif" alt="不加 @computed" title>
+                </div>
+                <div class="image-caption">不加 @computed</div>
+            </figure>
+<p><strong> 可以看到每一次的count值变化都会触发组件的componentWillUpdata </strong></p>
+<p>看明白了上面的例子和运行时的不同，再看看下面的总结就会好理解了</p>
+<p><strong> 总结：<br>如果使用了@computed （@computed msg getter()），那么msg的值将会被缓存，如果count的变化没有触发msg值的变话，那么msg的getter()值就不会改变，index.jsx组件也不会收到通知(componentWillUpdata)。（第一种情况）</strong></p>
+<p><strong> 如果不使用@computed属性，直接msg getter()的话，那么一旦count改变，所有用到msg getter()的地方都将重新计算(第二种情况)。 
+ </strong> </p>
+<blockquote>
+<p>@computed的意义在于它能够由MobX进行更智能的优化</p>
+</blockquote>
+<h4 id="3-autorun"><a href="#3-autorun" class="headerlink" title="3.  autorun "></a>3. <strong> autorun </strong></h4><p> 定义的 @observable 变量如果发生变化，autorun会自动执行相应的方法,例如将上面的mobx修改，index.jsx不变</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> &#123; observable ,computed,autorun,action &#125; <span class="keyword">from</span> <span class="string">'mobx'</span></span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">AppState</span> </span>&#123;</span><br><span class="line"> 	@observable count=<span class="number">0</span>;</span><br><span class="line"> 	@observable max = <span class="number">5</span>;</span><br><span class="line"> 	@computed <span class="keyword">get</span> msg()&#123;</span><br><span class="line"> 		<span class="built_in">console</span>.log(<span class="string">'msg的getter里执行...'</span>)</span><br><span class="line"> 		<span class="keyword">return</span> <span class="string">`msg结果===&gt;<span class="subst">$&#123;<span class="keyword">this</span>.max&gt;<span class="keyword">this</span>.count&#125;</span>`</span></span><br><span class="line"> 	&#125;</span><br><span class="line"> 	@action add()&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.count +=<span class="number">1</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	@action changeName(c)&#123;</span><br><span class="line"> 		<span class="keyword">this</span>.max=c</span><br><span class="line"> 	&#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">const</span> appState = <span class="keyword">new</span> AppState;</span><br><span class="line"><span class="comment">// 添加了 autorun</span></span><br><span class="line"> autorun(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line"> 	<span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;appState.count&#125;</span> 运行运行~`</span>)</span><br><span class="line"> &#125;)</span><br><span class="line"> setInterval(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line"> 	appState.add()</span><br><span class="line"> &#125;,<span class="number">1000</span>)</span><br><span class="line"> <span class="keyword">export</span> <span class="keyword">default</span> appState;</span><br></pre></td></tr></table></figure>
+<p> 因为autorun里的函数依赖了 count ，所以每一次setInterval的时候，都会执行autorun里的函数</p>
+<h4 id="4-action"><a href="#4-action" class="headerlink" title="4. @action"></a>4.<strong> @action</strong></h4><p> 如果要更新store里的内容，就要在相应的函数前加上 <code>@action</code> 例如上面的例子，标记为@action 。</p>
+<p> 作用：在mobx-react高级渲染性能优化小节中，我们知道，使用transaction可以将多个应用状态(Observable)的更新视为一次操作，并只触发一次监听者(Reactions)的动作(UI更新、网络请求等)，从而更大程度地提升应用的性能，避免多余的UI渲染和网络请求。action中封装了transaction，对函数使用action修饰符后，无论函数中对@observable变量（应用状态）有多少次修改，都只会在函数执行完成后，触发一次对应的监听者。如下代码，reset函数只会触发一次UI更新。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TodoItemModel</span> </span>&#123;</span><br><span class="line">    id;</span><br><span class="line">    @observable title;</span><br><span class="line">    @observable completed;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//使用action后，reset函数执行完成后，才会触发一次其监听者</span></span><br><span class="line">    @action</span><br><span class="line">    reset() &#123;</span><br><span class="line">        <span class="keyword">this</span>.completed = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.title= <span class="string">''</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="5-oberver"><a href="#5-oberver" class="headerlink" title="5. @oberver"></a>5.<strong> @oberver</strong></h4><p> observer 函数/装饰器可以用来将 React 组件转变成响应式组件<br> oberver是用来连接mobx与组件的一个API（告诉mobx本组件依赖于mobx的状态），由一个单独的包 mobx-react 提供，例子看上面的 index.jsx组件。使用了 observer 的react组件中用到的变量发生变化，组件才会更新</p>
+<h3 id="四、运行环境的配置"><a href="#四、运行环境的配置" class="headerlink" title="四、运行环境的配置"></a>四、运行环境的配置</h3><p>@(修饰器)是ES7的一个提案，Babel 转码器已经支持 Decorator<br>需要安装 babel-preset-stage-1 （stage-0也可以）和babel-plugin-transform-decorators，babel-plugin-transform-decorators一定要放在别的plugins前</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/mobx基本用法/3.png" alt=".babelrc配置" title>
+                </div>
+                <div class="image-caption">.babelrc配置</div>
+            </figure>
+<h4 id="6-useStaticRendering"><a href="#6-useStaticRendering" class="headerlink" title="6. useStaticRendering"></a>6. <strong>useStaticRendering</strong></h4><p>我们知道可以通过使用@observer，将react组件转换成一个监听者(Reactions)，这样在被监听的应用状态变量(Observable)有更新时，react组件就会重新渲染。而对于服务端的React组件，我们只需要它被渲染一次，而不需要组件监听模型的状态。事实上，如果服务端React组件像客户端组件一样监听模型的状态变化，就会造成严重的内存泄漏问题。官方提供了useStaticRendering方法，用于避免mobx服务端渲染的内存泄漏问题; 该方法只需要在server启动时设置一次。</p>
+<p>useStaticRendering(true);</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-11-30T09:42:12.833Z" itemprop="dateUpdated">2021-11-30 17:42:12</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobx/">mobx</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/06/mobx基本用法/&title=《mobx基本用法》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/06/mobx基本用法/&title=《mobx基本用法》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/06/mobx基本用法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mobx基本用法》 — DHYANA&url=http://yoursite.com/2018/03/06/mobx基本用法/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/06/mobx基本用法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/08/body-parser使用注意/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">body-parser使用注意</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/28/javascript的数据属性和访问器属性/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">javascript的数据属性和访问器属性</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'mobx基本用法',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/03/06/mobx基本用法/&title=《mobx基本用法》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/03/06/mobx基本用法/&title=《mobx基本用法》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/03/06/mobx基本用法/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《mobx基本用法》 — DHYANA&url=http://yoursite.com/2018/03/06/mobx基本用法/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/03/06/mobx基本用法/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACI0lEQVR42u3a0Y7CMAwEQP7/p3uvSEdhbRekJtMnhArJFGlx4jwe8XU8Xc/v/H/du//sUxdfGBgYt2Ucb6/39yTTyr8hH/fFiBgYGBswkkkksVgN1kk0Y2BgYCRf/SEE4zDtPQgMDAyMZJmaLFyrYY2BgYExWcQmMdorFqtLXwwMjN0Y+a77719/pb+BgYFxK8ZRvJLFZ7U0rDYDXswKAwNjaUa1XJs0A0Zbacl8MDAwNmDky9Tkzl6TMgnxaLsNAwNjIUakDI5H9FqS1QL09JsxMDCWZiQf6A1TPVQxaSRgYGDswEhakvMCMWlSVpfBGBgYOzDyAfKSrvqAen8DGBgYezJ6h7d6yN4/wykMAwNjaUZ1WtV2QtL+nBSIGBgY+zCqpVu+TVZtM+RHMQq/AwYGxs0Z1fJuEsfXthAwMDD2YUzi77KadNDO/PCbYGBgLMfIGwNJydjbaKuOi4GBsSejF6+9qJ0Efbkfi4GBcXNGb5GZH/n6xkbb6OAFBgbGDRnV6KwOkMd076FgYGDsxshDNonLpJHQg502MjEwMLZkNBeTxa203jYcBgbGDoyjeE0Wq5NtuA8jYmBgLM3oBWUvIvOpTApHDAyMVRm9pWk+cH5cY1Q+YmBgbMDIgy/ZVkvef39PdbYYGBgY18ZodfTHxIeBgbEl46riMn8QUZRjYGBswEgmMWkb5A9i1InFwMBYlFGtuxJAb9LzIMbAwFiO8QeSQXRyB7LL7AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>

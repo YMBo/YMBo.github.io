@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>javascript的数据属性和访问器属性 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="javascript">
+    <meta name="description" content="一、数据属性1.基本认识1.1概念数据属性包含一个数据值的位置，在这个位置可以读取和写入值 数据属性有4个描述其行为的特性 [[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能修改属性的特性，或者能把属性修改为访问器属性。默认true,（说的磨磨唧唧，其实就是能否通过delete删除属性、能否再修改Enumerable、Writable（特殊，把Config">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript的数据属性和访问器属性">
+<meta property="og:url" content="http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="一、数据属性1.基本认识1.1概念数据属性包含一个数据值的位置，在这个位置可以读取和写入值 数据属性有4个描述其行为的特性 [[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能修改属性的特性，或者能把属性修改为访问器属性。默认true,（说的磨磨唧唧，其实就是能否通过delete删除属性、能否再修改Enumerable、Writable（特殊，把Config">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/1.png">
+<meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/2.png">
+<meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/3.png">
+<meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/4.png">
+<meta property="og:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/5.png">
+<meta property="og:updated_time" content="2021-11-30T09:42:12.832Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript的数据属性和访问器属性">
+<meta name="twitter:description" content="一、数据属性1.基本认识1.1概念数据属性包含一个数据值的位置，在这个位置可以读取和写入值 数据属性有4个描述其行为的特性 [[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能修改属性的特性，或者能把属性修改为访问器属性。默认true,（说的磨磨唧唧，其实就是能否通过delete删除属性、能否再修改Enumerable、Writable（特殊，把Config">
+<meta name="twitter:image" content="http://yoursite.com/images/javascript的数据属性和访问器属性/1.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">javascript的数据属性和访问器属性</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">javascript的数据属性和访问器属性</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-02-28T03:25:55.000Z" itemprop="datePublished" class="page-time">
+  2018-02-28
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、数据属性"><span class="post-toc-text">一、数据属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-基本认识"><span class="post-toc-text">1.基本认识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-1概念"><span class="post-toc-text">1.1概念</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#数据属性有4个描述其行为的特性"><span class="post-toc-text">数据属性有4个描述其行为的特性</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-对数据属性的操作"><span class="post-toc-text">2.对数据属性的操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#栗子"><span class="post-toc-text">栗子</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-1注意！！！"><span class="post-toc-text">2.1注意！！！</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、访问器属性"><span class="post-toc-text">二、访问器属性</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-基本认识-1"><span class="post-toc-text">1.基本认识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#概念"><span class="post-toc-text">概念</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#访问器属性的四个特性"><span class="post-toc-text">访问器属性的四个特性</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-对访问器属性的操作"><span class="post-toc-text">2.对访问器属性的操作</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、总结"><span class="post-toc-text">三、总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-到底怎么判断是数据属性还是访问器属性"><span class="post-toc-text">1.到底怎么判断是数据属性还是访问器属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-定义多个属性"><span class="post-toc-text">2.定义多个属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、实际应用"><span class="post-toc-text">四、实际应用</span></a></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-javascript的数据属性和访问器属性"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">javascript的数据属性和访问器属性</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-02-28 11:25:55" datetime="2018-02-28T03:25:55.000Z"  itemprop="datePublished">2018-02-28</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="一、数据属性"><a href="#一、数据属性" class="headerlink" title="一、数据属性"></a>一、数据属性</h2><h3 id="1-基本认识"><a href="#1-基本认识" class="headerlink" title="1.基本认识"></a>1.基本认识</h3><h4 id="1-1概念"><a href="#1-1概念" class="headerlink" title="1.1概念"></a>1.1概念</h4><p>数据属性包含一个数据值的位置，在这个位置可以读取和写入值</p>
+<h4 id="数据属性有4个描述其行为的特性"><a href="#数据属性有4个描述其行为的特性" class="headerlink" title="数据属性有4个描述其行为的特性"></a>数据属性有4个描述其行为的特性</h4><ol>
+<li>[[Configurable]] : 表示能否通过 delte 删除属性从而重新定义属性，能修改属性的特性，或者能把属性修改为访问器属性。默认true,（<strong>说的磨磨唧唧，其实就是能否通过delete删除属性、能否再修改Enumerable、Writable（特殊，把Configurable设置为false后，这个属性也能被修改）、Value（更特殊，看下面例子）、Configurable属性这四个属性</strong>）</li>
+<li>[[Enumerable]] : 表示能否通过 for-in 循环返回属性。 默认 true</li>
+<li>[[Writable]] : 表示能否修改属性的值 。 默认 true</li>
+<li>[[Value]] : 包含这个属性的数据值。 默认 undefined</li>
+</ol>
+<blockquote>
+<p>tip：为了表示特性是内部值，该规范把他们放在了两对括号中</p>
+</blockquote>
+<h3 id="2-对数据属性的操作"><a href="#2-对数据属性的操作" class="headerlink" title="2.对数据属性的操作"></a>2.对数据属性的操作</h3><p>必须使用 ECMAScript 5 的 <code>Object.defineProperty()</code> 方法<br>三个参数</p>
+<ol>
+<li>属性所在的对象</li>
+<li>属性的名字</li>
+<li>描述符对象</li>
+</ol>
+<h4 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">	name:<span class="string">'y'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//禁止修改属性值</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(person,<span class="string">"name"</span>,&#123;</span><br><span class="line">	writable:<span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(person.name) 		<span class="comment">// y</span></span><br><span class="line"><span class="comment">//尝试修改属性</span></span><br><span class="line">person.name=<span class="string">'b'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person.name) 		<span class="comment">//y</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//可以看到禁止修改属性的值后，修改属性值无效</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-1注意！！！"><a href="#2-1注意！！！" class="headerlink" title="2.1注意！！！"></a>2.1注意！！！</h4><p>这四个数据属性中，<code>configurable</code> 是比较特殊的，一旦把属性定义为不可配置的，就不能再把它变回可配置了，此时再调用 <code>Object.defineProperty</code> 方法修改 <code>除writable之外的特性</code> 都会导致失败。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b=&#123;</span><br><span class="line">	age:<span class="number">0</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定义为不可配置</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(b,<span class="string">'age'</span>,&#123;</span><br><span class="line">	configurable:<span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//尝试删除配置</span></span><br><span class="line"><span class="keyword">delete</span> b.age</span><br><span class="line"><span class="built_in">console</span>.log(b.age)</span><br><span class="line"><span class="comment">// 成功打印0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//尝试修改enumerable</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(b,<span class="string">"age"</span>,&#123;</span><br><span class="line">	enumerable:<span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/* 报错：Uncaught TypeError: Cannot redefine property: age</span></span><br><span class="line"><span class="comment">    at Function.defineProperty (&lt;anonymous&gt;)</span></span><br><span class="line"><span class="comment">    at &lt;anonymous&gt;:3:8 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//   看下面这俩顺序👇👇👇👇👇👇👇👇👇👇👇👇👇</span></span><br><span class="line"><span class="comment">//尝试修改writable</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(b,<span class="string">"age"</span>,&#123;</span><br><span class="line">	writable:<span class="literal">false</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/*修改成功，不会报错*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//尝试修改value</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(b,<span class="string">"age"</span>,&#123;</span><br><span class="line">	value:<span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">/*报错：</span></span><br><span class="line"><span class="comment">VM17512:1 Uncaught TypeError: Cannot redefine property: age</span></span><br><span class="line"><span class="comment">    at Function.defineProperty (&lt;anonymous&gt;)</span></span><br><span class="line"><span class="comment">    at &lt;anonymous&gt;:1:8</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//  👆👆👆👆👆👆👆👆👆👆👆👆👆</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p><strong>tip</strong>:上面的操作只针对于 b对象的age 属性，所以此时我再添加一个属性也是成功的，比如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">b.name=<span class="string">'m'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(b)</span><br><span class="line"><span class="comment">// 输出 &#123;age: 0, name: "m"&#125;</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p><strong>tip2</strong>:<br>看上面的代码 22-37行，这俩属性很特殊，</p>
+<ol>
+<li>就算<code>configurable:false</code>了，<strong>writable属性依然可以被修改</strong></li>
+<li><strong>注意注意！！</strong>  看到代码里的顺序了么？writable的修改是在value的修改的上面的，这时修改value报错，但我发现如果<code>writable</code>和<code>configurable</code>同时为<code>false</code>（且的关系，不是或），这个value属性才会报错（也就是修改不了）,否则也是可以修改的</li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>tip3</strong>:<br>ES5有三个操作会忽略enumerable为false的属性。</p>
+</blockquote>
+<blockquote>
+<ol>
+<li>for…in循环：只遍历对象自身的和继承的可枚举的属性</li>
+<li>Object.keys()：返回对象自身的所有可枚举的属性的键名</li>
+<li>JSON.stringify()：只串行化对象自身的可枚举的属性</li>
+</ol>
+</blockquote>
+<h2 id="二、访问器属性"><a href="#二、访问器属性" class="headerlink" title="二、访问器属性"></a>二、访问器属性</h2><h3 id="1-基本认识-1"><a href="#1-基本认识-1" class="headerlink" title="1.基本认识"></a>1.基本认识</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>访问器属性不包含数据值。它包含一对getter和setter函数。当读取访问器属性时，会调用getter函数并返回有效值；<br>当写入访问器属性时，会调用setter函数并传入新值，setter函数负责处理数据。</p>
+<h4 id="访问器属性的四个特性"><a href="#访问器属性的四个特性" class="headerlink" title="访问器属性的四个特性"></a>访问器属性的四个特性</h4><ol>
+<li>[[Configurable]]：默认为true。表示能否通过delete删除属性从而重新定义属性，能否修改属性特性，或者能否把属性修改为访问器属性；</li>
+<li>[[Enumerable]]：默认为true。表示能否通过for-in循环返回属性；</li>
+<li>[[Get]]：读取属性时调用的函数，默认为undefined；</li>
+<li>[[Set]]：写入属性时调用的函数，默认为undefined；</li>
+</ol>
+<h3 id="2-对访问器属性的操作"><a href="#2-对访问器属性的操作" class="headerlink" title="2.对访问器属性的操作"></a>2.对访问器属性的操作</h3><blockquote>
+<p>tip :<br>1.当使用了getter或setter方法，不允许使用 <code>writable</code> 和 <code>value</code> 这两个属性。<br>2.get和set 函数不是必须的<br>3.先看这种写法：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/javascript的数据属性和访问器属性/1.png" alt="特别要注意这种写法，容易写错！" title>
+                </div>
+                <div class="image-caption">特别要注意这种写法，容易写错！</div>
+            </figure><br>可以看到 <code>堆栈溢出</code> 了，` 原因是因为如果在get里return this.year ，这样如果我们在外面 book .year时，就会运行get函数，而get函数里面执行到this.year时又会运行get函数，造成死循环。正常写法是利用一个中间值来设置某一个属性，看下面代码<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/javascript的数据属性和访问器属性/2.png" alt="正确写法" title>
+                </div>
+                <div class="image-caption">正确写法</div>
+            </figure><br>_year 前面的下划线是一种常用的记号，用于表示只能通过对象方法访问的属性。<br>一般上面上面代码目的是 设置一个属性的值会导致其他属性发生变化，就不用把属性单拿出来计算了，很方便</p>
+</blockquote>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><h3 id="1-到底怎么判断是数据属性还是访问器属性"><a href="#1-到底怎么判断是数据属性还是访问器属性" class="headerlink" title="1.到底怎么判断是数据属性还是访问器属性"></a>1.到底怎么判断是数据属性还是访问器属性</h3><p>可以通过 Object.getOwnPropertyNames()方法获取到所有实例中的属性，包括不可枚举的属性。<br>然后，使用Object.getOwnPropertyDescriptor(）方法获取到每一个属性的描述符，如果描述符中有get/set方法，说明它是访问器方法，否则它就是数据属性。<br>其实由于两种属性各自的4种特征都是都不一样的，如果一个对象的属性描述符里含有一个单独的特征就可以判断是什么类型的属性，比如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book=&#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book,<span class="string">'age'</span>,&#123;</span><br><span class="line">	value:<span class="number">5</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><code>描述符里我单独定义了value属性，而value属性仅仅输入数据属性，所以可以判断出 age属于数据属性</code></p>
+<h3 id="2-定义多个属性"><a href="#2-定义多个属性" class="headerlink" title="2.定义多个属性"></a>2.定义多个属性</h3><p>Object.defineProperty()这种写法每次只能定义一个属性，那么可以通过 <code>Object.defineProperties</code> 来定义多个属性<br>定义多个属性：<br><code>请注意下面图片内代码是有问题的，这是《js高级程序设计》 里的例子</code><br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/javascript的数据属性和访问器属性/3.png" alt="定义多个属性" title>
+                </div>
+                <div class="image-caption">定义多个属性</div>
+            </figure><br>这个方法定义多个属性没问题，但是也可以从上面的图看出来，定义的访问器属性year的set方法里面并没有生效，这俩属于数据属性，<code>原因是因为 定义的_year属性和edition属性不能往里面写值了</code>。</p>
+<p>自己解决历程：我自己猜想原因可能是这样，因为_year和edition写不进去值了，所以设置 enumerable 为true。我尝试修改了一下，如下<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/javascript的数据属性和访问器属性/4.png" alt="给两个数据属性添加了writable(可读写 )特征" title>
+                </div>
+                <div class="image-caption">给两个数据属性添加了writable(可读写 )特征</div>
+            </figure><br>这样运行成功。为了验证猜想，做了如下例子：</p>
+<p><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/javascript的数据属性和访问器属性/5.png" alt="所有特性" title>
+                </div>
+                <div class="image-caption">所有特性</div>
+            </figure>；</p>
+<p>可以看到只要是用 <code>Object.defineProperties()</code>  定义的对象的属性，那么定义过的每个属性描述符的4个默认属性（除了set和get外）都默认都是 false</p>
+<p>总结：使用 <code>Object.defineProperties()</code> 方法来定义多个属性的时候，每个属性的描述符里的属性都是默认的false(除了set和get外)，set或者get没定义的话默认 undefined</p>
+<h2 id="四、实际应用"><a href="#四、实际应用" class="headerlink" title="四、实际应用"></a>四、实际应用</h2><p>介绍了这个东西后，在实际中我该在什么情况用呢？</p>
+<p><strong>数据双向绑定 （Module&lt;==&gt;View）</strong><br>数据双向绑定就是通过 <code>Object.defineProperty</code> 实现的，我们来手写一个数据绑定</p>
+<pre><code class="html"><span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">"inputText"</span> <span class="attr">type</span>=<span class="string">"text"</span> /&gt;</span>
+<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span>
+</code></pre>
+<pre><code class="javascript"><span class="keyword">var</span> inputText=<span class="built_in">document</span>.querySelector(<span class="string">'.inputText'</span>);
+<span class="keyword">var</span> text=<span class="built_in">document</span>.querySelector(<span class="string">'.text'</span>);
+<span class="comment">//module</span>
+<span class="keyword">var</span> obj={<span class="attr">_txt</span>:<span class="literal">null</span>};
+<span class="built_in">Object</span>.defineProperty(obj,<span class="string">'txt'</span>,{
+    <span class="keyword">get</span>:function(){
+        <span class="keyword">return</span> <span class="keyword">this</span>._txt;
+    },
+    <span class="keyword">set</span>:function(value){
+        <span class="keyword">this</span>._txt=value;
+        text.innerHTML=value;
+        inputText.value=value
+    }
+})
+<span class="comment">//view</span>
+inputText.addEventListener(<span class="string">'input'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>{
+    <span class="keyword">const</span> text=e.target.value;
+    obj.txt=text;
+},<span class="literal">false</span>)
+</code></pre>
+<p>此时在input输入值的时候p的内容和obj.txt内容会变，在浏览器console中更改obj.txt的值，input和p也会变</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-11-30T09:42:12.832Z" itemprop="dateUpdated">2021-11-30 17:42:12</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/&title=《javascript的数据属性和访问器属性》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/&title=《javascript的数据属性和访问器属性》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript的数据属性和访问器属性》 — DHYANA&url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/03/06/mobx基本用法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">mobx基本用法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/02/07/受控组件和非受控组件/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">受控组件和非受控组件</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'javascript的数据属性和访问器属性',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/&title=《javascript的数据属性和访问器属性》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/&title=《javascript的数据属性和访问器属性》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《javascript的数据属性和访问器属性》 — DHYANA&url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2018/02/28/javascript的数据属性和访问器属性/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACw0lEQVR42u3awWrDMBAE0Pz/T7fQUy92ZlaS08LzKYTY1lNAWkb7esXX18919fn3Nbs3uevqlxsuPDw8vNHQr65kiPlzkulLeMW78PDw8I7x8qU5f3F+7/2E3k/rGwseHh7eR3nJcNulP9828PDw8P4jL/lmtqwnwQQeHh7eX+MlBe5sq7gaehLUtuU4Hh4e3jO89QOw5z8/er6Hh4eHF28JybLevnJWag9Hi4eHh3eAlzy0XWnzIGNGauMJPDw8vL28NmJoD73yFoFZ8PHm93h4eHgHePlCnAy0bdtq49fZQR0eHh7eXt7sCCpZmttiOm8aKCYLDw8P7wBvJX6dTcHs4H/WdoCHh4d3mne/BCcPSp6QBwqzKcbDw8N7kpcPqI1x22A3mYLNBTQeHh5ezMuD0eRzG8jmDQRtQIyHh4d3jtc2ObWHW+0mlGwP9fd4eHh4W3l5adsu8StNA23T1YbKHQ8PD285gGhvXtkGZuHs8AAMDw8Pb5mXHGXNlun8qGy9hetyM8PDw8M7wGsL2fx4rG2iyhf92YTi4eHhneO1UcV6gb7SwlUU6Hh4eHibeG3baDvotmUq2RLu/4A6Y8bDw8MreW1wkDw6L83b47FZuY+Hh4f3DC+PR1cC2XPTNyys8fDw8ALeLIBoi+k8vFjfTjbkK3h4eHgxr41ok8I3X+hX3ht1RuDh4eFt4rVH9XlbQPKE9eDjftvAw8PDO8GbtUatvH5WoOdtCnU+jYeHh7fAyw+i8mP7+7vut6Vkg3nzTDw8PLwDvDZmzQe9N8LIU9lZiIyHh4fX8mYNTzNM2yLQNhO8abrCw8PD28pLFuU2OMjL33YDyMt0PDw8vM/y2lh2xmsj5m0bAx4eHt4jvBly1i6QT/e2jQEPDw9vOedsX9Pem09c0dSFh4eHd4C3cgCWRLS7Yoi2TQEPDw/vAO8bn1dK31JeYr8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
