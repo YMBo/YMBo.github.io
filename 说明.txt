@@ -3,3 +3,4 @@ npm i hexo-cli -g
 npm i hexo
 npm install
 npm i hexo-deployer-git
+node版本不能过高，12.17就可以

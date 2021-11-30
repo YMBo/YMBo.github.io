@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+<!-- Baidu Tongji -->
+<script>var _hmt = _hmt || []</script>
+<script async src="//hm.baidu.com/hm.js?https://ymbo.github.io/"></script>
+<!-- End Baidu Tongji -->
+
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Immer解析 | DHYANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#4fe05c">
+    
+    
+    <meta name="keywords" content="javascript">
+    <meta name="description" content="前言Immutable思想  数据就是一旦创建，就不能更改的数据。每当对 Immutable 对象进行修改的时候，就会返回一个新的 Immutable 对象，以此来保证数据的不可变。  如果不用 Immutable，直接对源数据操作有什么不好？ 1.因为通常修改一个引用类型的数据，为了降低对源数据的副作用，一般要进行深拷贝，数据量大的话对性能有影响,效率低 2.数据操作过于灵活，不好追踪在哪修改的">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Immer解析">
+<meta property="og:url" content="http://yoursite.com/2021/11/30/Immer解析/index.html">
+<meta property="og:site_name" content="DHYANA">
+<meta property="og:description" content="前言Immutable思想  数据就是一旦创建，就不能更改的数据。每当对 Immutable 对象进行修改的时候，就会返回一个新的 Immutable 对象，以此来保证数据的不可变。  如果不用 Immutable，直接对源数据操作有什么不好？ 1.因为通常修改一个引用类型的数据，为了降低对源数据的副作用，一般要进行深拷贝，数据量大的话对性能有影响,效率低 2.数据操作过于灵活，不好追踪在哪修改的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/Immer解析/immer.png">
+<meta property="og:image" content="http://yoursite.com/images/Immer解析/immerProxy.png">
+<meta property="og:image" content="http://yoursite.com/images/Immer解析/immerProxy2.png">
+<meta property="og:updated_time" content="2021-11-30T10:13:59.877Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Immer解析">
+<meta name="twitter:description" content="前言Immutable思想  数据就是一旦创建，就不能更改的数据。每当对 Immutable 对象进行修改的时候，就会返回一个新的 Immutable 对象，以此来保证数据的不可变。  如果不用 Immutable，直接对源数据操作有什么不好？ 1.因为通常修改一个引用类型的数据，为了降低对源数据的副作用，一般要进行深拷贝，数据量大的话对性能有影响,效率低 2.数据操作过于灵活，不好追踪在哪修改的">
+<meta name="twitter:image" content="http://yoursite.com/images/Immer解析/immer.png">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">YMBo</h5>
+          <a href="mailto:619697451@qq.com" title="619697451@qq.com" class="mail">619697451@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags/hexo/"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/YMBo" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Immer解析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Immer解析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2021-11-30T09:45:08.000Z" itemprop="datePublished" class="page-time">
+  2021-11-30
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#一、immer-思想及意义"><span class="post-toc-text">一、immer 思想及意义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#二、熟悉-Immer"><span class="post-toc-text">二、熟悉 Immer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#三、Immer-目录结构"><span class="post-toc-text">三、Immer 目录结构</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#四、Immer-功能拆分"><span class="post-toc-text">四、Immer 功能拆分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1、immerClass"><span class="post-toc-text">1、immerClass</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1-1、主流程"><span class="post-toc-text">1.1、主流程</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2、scope-github"><span class="post-toc-text">2、scope github</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3、proxy-github"><span class="post-toc-text">3、proxy github</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-1、注解-❶-❷"><span class="post-toc-text">3.1、注解 ❶ ❷</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-2、注解-❸-源码"><span class="post-toc-text">3.2、注解 ❸ 源码</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-3、注解-❹-github"><span class="post-toc-text">3.3、注解 ❹ github</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-4、注解-❺-github"><span class="post-toc-text">3.4、注解 ❺ github</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-5、注解-❼-github"><span class="post-toc-text">3.5、注解 ❼ github</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4、processResult-github"><span class="post-toc-text">4、processResult github</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5、maybeFreeze"><span class="post-toc-text">5、maybeFreeze</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6、patchListener"><span class="post-toc-text">6、patchListener</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#1、历史回溯-demo"><span class="post-toc-text">1、历史回溯 demo</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7、plugin-系统"><span class="post-toc-text">7、plugin 系统</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+    
+<article id="post-Immer解析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Immer解析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2021-11-30 17:45:08" datetime="2021-11-30T09:45:08.000Z"  itemprop="datePublished">2021-11-30</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><strong>Immutable</strong>思想</p>
+<blockquote>
+<p>数据就是一旦创建，就不能更改的数据。每当对 Immutable 对象进行修改的时候，就会返回一个新的 Immutable 对象，以此来保证数据的不可变。</p>
+</blockquote>
+<p>如果不用 <strong>Immutable</strong>，直接对源数据操作有什么不好？</p>
+<p>1.因为通常修改一个引用类型的数据，为了降低对源数据的副作用，一般要进行深拷贝，数据量大的话对性能有影响,效率低</p>
+<p>2.数据操作过于灵活，不好追踪在哪修改的数据</p>
+<p>关于 Immutable 思想的实现有<strong>Immutable.js</strong>、<strong>immer.js</strong>等<br>而<strong>Immutable.js</strong>用法相对复杂，<strong>immer.js</strong>用法简单效率高，所以这篇文章是对 immer.js 源码的<strong>分析解读</strong></p>
+<h3 id="一、immer-思想及意义"><a href="#一、immer-思想及意义" class="headerlink" title="一、immer 思想及意义"></a>一、immer 思想及意义</h3><blockquote>
+<p>1.不再需要数据复制的防御机制(因为源数据是不变的)</p>
+<p>2.优化对数据变化的检测</p>
+<p>3.有助于简化开发过程，因为开发者不再需要在代码中追踪数据，寻找数据变更的位置（因为修改后的数据不可变，只能在 produce 理修改）</p>
+<p>4.降低修改数据过程中的复杂度（不用深拷贝的，采用原生代理，哪里修改代理哪里，实现数据共享）</p>
+<p>5.性能优化，数据共享，只改动被修改的部分（同上）</p>
+<p>6.提供草稿功能，保存了每次的修改，相当于提供了数据历史快照的功能</p>
+</blockquote>
+<h3 id="二、熟悉-Immer"><a href="#二、熟悉-Immer" class="headerlink" title="二、熟悉 Immer"></a>二、熟悉 Immer</h3><p>来个 demo 先熟悉下 Immer 用法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> produce, &#123; enablePatches, applyPatches &#125; <span class="keyword">from</span> <span class="string">"./immer"</span>;</span><br><span class="line"><span class="comment">// 这个是immer的插件使用的方法</span></span><br><span class="line">enablePatches();</span><br><span class="line"><span class="keyword">let</span> patches = [];</span><br><span class="line"><span class="keyword">let</span> inversePatches = [];</span><br><span class="line"><span class="keyword">let</span> demo = &#123; <span class="attr">name</span>: &#123; <span class="attr">age</span>: <span class="number">333</span> &#125;, <span class="attr">fan</span>: &#123; <span class="attr">zz</span>: <span class="number">333</span> &#125; &#125;;</span><br><span class="line"><span class="comment">// 第三个参数可选</span></span><br><span class="line"><span class="keyword">let</span> end = produce(</span><br><span class="line">  demo,</span><br><span class="line">  (draft) =&gt; &#123;</span><br><span class="line">    draft.name.age = <span class="number">1000</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  (patches, inversePatches) =&gt; &#123;</span><br><span class="line">    patches = stash.concat(patches);</span><br><span class="line">    inverseStash = inversePatches.concat(inversePatches);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment">// 通过applyPatches+inverseStash，能将值恢复到未修改状态</span></span><br><span class="line"><span class="comment">// 通过applyPatches+patches，能将值变为修改后的状态</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"历史回溯"</span>, applyPatches(end, inverseStash));</span><br></pre></td></tr></table></figure>
+<p><strong>这篇文章讲了啥？</strong></p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> <strong>Immer 的调度流程</strong></li>
+<li style="list-style: none"><input type="checkbox" checked> <strong>immer 的插件模式</strong></li>
+<li style="list-style: none"><input type="checkbox" checked> <strong>文件组织结构</strong></li>
+<li style="list-style: none"><input type="checkbox" checked> <strong>实现按需代理的原理</strong></li>
+<li style="list-style: none"><input type="checkbox" checked> <strong>将 proxy 转为普通对象的原理</strong></li>
+</ul>
+<h3 id="三、Immer-目录结构"><a href="#三、Immer-目录结构" class="headerlink" title="三、Immer 目录结构"></a>三、Immer 目录结构</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">| |____immer</span><br><span class="line">| | |____types</span><br><span class="line">| | | |____globals.d.ts</span><br><span class="line">| | | |____types-internal.ts</span><br><span class="line">| | | |____index.js.flow</span><br><span class="line">| | | |____types-external.ts</span><br><span class="line">| | |____core</span><br><span class="line">| | | |____a.d.ts</span><br><span class="line">| | | |____scope.ts</span><br><span class="line">| | | |____current.ts</span><br><span class="line">| | | |____finalize.ts</span><br><span class="line">| | | |____proxy.ts</span><br><span class="line">| | | |____immerClass.ts</span><br><span class="line">| | |____plugins</span><br><span class="line">| | | |____patches.ts</span><br><span class="line">| | | |____mapset.ts</span><br><span class="line">| | | |____es5.ts</span><br><span class="line">| | | |____all.ts</span><br><span class="line">| | |____utils</span><br><span class="line">| | | |____errors.ts</span><br><span class="line">| | | |____common.ts</span><br><span class="line">| | | |____env.ts</span><br><span class="line">| | | |____plugins.ts</span><br><span class="line">| | |____immer.ts</span><br><span class="line">| | |____test.ts</span><br><span class="line">| | |____internal.ts</span><br></pre></td></tr></table></figure>
+<ul>
+<li>核心功能以文件的形式放在了<code>core</code>下</li>
+<li>不同插件以文件的形式放在了<code>plugins</code>下</li>
+<li>剩下一些工具放在了<code>utils</code>下</li>
+<li>internal.ts 作为一个入口将上面提到的功能同一暴露出去</li>
+</ul>
+<h3 id="四、Immer-功能拆分"><a href="#四、Immer-功能拆分" class="headerlink" title="四、Immer 功能拆分"></a>四、Immer 功能拆分</h3><p>组织方式：immer 将主要功能拆分为不同文件，并将这些文件集中放在<code>core</code>目录下管理</p>
+<ul>
+<li><code>immerClass</code></li>
+<li><code>scope</code></li>
+<li><code>proxy</code></li>
+<li><code>processResult</code></li>
+<li><code>maybeFreeze</code></li>
+<li><code>patchListener</code></li>
+<li><code>pluign系统</code></li>
+</ul>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Immer解析/immer.png" alt="Immer" title>
+                </div>
+                <div class="image-caption">Immer</div>
+            </figure>
+<p>下面挨个对这些功能进行分析</p>
+<h4 id="1、immerClass"><a href="#1、immerClass" class="headerlink" title="1、immerClass"></a>1、<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts" target="_blank" rel="noopener">immerClass</a></h4><p>用这个 immer 库的时候，主要用的是<code>produce</code>这个函数 ，这个函数作为一个 Immer 类的实例方法暴露出来</p>
+<p>源码：<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L66" target="_blank" rel="noopener">produce</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> immer = <span class="keyword">new</span> Immer();</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> produce: IProduce = immer.produce;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> produce;</span><br></pre></td></tr></table></figure>
+<p>其中<code>produce</code>有两种用法，一种是普通传两个参数的调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nextState = produce(state,draft=&gt;&#123; ... &#125;)</span><br></pre></td></tr></table></figure>
+<p>一种是高阶函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">producer = produce(<span class="function"><span class="params">draft</span>=&gt;</span>&#123; ... &#125;)</span><br><span class="line">nextState = producer(state)</span><br></pre></td></tr></table></figure>
+<p>produce 方法里统筹调度了整个数据流转的过程，如下</p>
+<h5 id="1-1、主流程"><a href="#1-1、主流程" class="headerlink" title="1.1、主流程"></a>1.1、主流程</h5><p>produce 主要干了下面的几件事</p>
+<ul>
+<li><p><a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L91" target="_blank" rel="noopener">isDraftable(base)</a></p>
+<blockquote>
+<p>对数据类型判断，只处理基本类型 对象、数组</p>
+</blockquote>
+</li>
+<li><p><a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L93" target="_blank" rel="noopener">const scope = enterScope(this);</a></p>
+<blockquote>
+<p>创建 scope，scope 相当是一个 immer 实例、proxy 的管理器，具体的下面有说</p>
+</blockquote>
+</li>
+<li><p><a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L96" target="_blank" rel="noopener">const proxy = createProxy(this, base, undefined)</a></p>
+<blockquote>
+<p>对 base（源数据）创建代理，并返回给 produce 的第二个函数，就是 draft</p>
+</blockquote>
+</li>
+<li><p><a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L101" target="_blank" rel="noopener">result = recipe(proxy)</a></p>
+<blockquote>
+<p>执行 produce 的第二个参数函数，这里的 draft 就是上面创建的 proxy</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">produce(state,draft=&gt;&#123; ... &#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L115" target="_blank" rel="noopener">const m = processResult(result, scope);</a></p>
+<blockquote>
+<p>解析结果，对于 proxy 的修改都反映到了的代理数据（下面有讲）的 copy_字段，这里是将这些修改组装，反映到 result 上并返回。<br>主要依赖这俩函数<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/finalize.ts#L63" target="_blank" rel="noopener">finalize</a> <a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/finalize.ts#L134" target="_blank" rel="noopener">finalizeProperty</a>，将 proxy 类型的值进行递归取值，赋值给 result</p>
+</blockquote>
+</li>
+<li><p><a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/finalize.ts#L182" target="_blank" rel="noopener">maybeFreeze 数据自动冻结</a><br>经过 produce 返回的数据都是冻结状态，这个函数就是冻结数据用的</p>
+</li>
+</ul>
+<h4 id="2、scope-github"><a href="#2、scope-github" class="headerlink" title="2、scope github"></a>2、scope <a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/scope.ts" target="_blank" rel="noopener">github</a></h4><blockquote>
+<p>scope 这个概念在这里相当于一个 proxy 管理器，进行 proxy 历史操作的保存和 proxy 的 revoke</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">interface ImmerScope &#123;</span><br><span class="line">  <span class="comment">// 历史快照，保存的是操作的顺序</span></span><br><span class="line">  patches_?: Patch[];</span><br><span class="line">  <span class="comment">// 历史快照反向，保存的是反解顺序，执行这个会恢复为初始状态</span></span><br><span class="line">  inversePatches_?: Patch[];</span><br><span class="line">  <span class="comment">// 是否自动冻结 默认都是自动冻结</span></span><br><span class="line">  canAutoFreeze_: boolean;</span><br><span class="line">  <span class="comment">// proxy 队列</span></span><br><span class="line">  drafts_: any[];</span><br><span class="line">  <span class="comment">// 父级scope</span></span><br><span class="line">  parent_?: ImmerScope;</span><br><span class="line">  <span class="comment">// 补丁监听器</span></span><br><span class="line">  patchListener_?: PatchListener;</span><br><span class="line">  <span class="comment">// immer实例</span></span><br><span class="line">  immer_: Immer;</span><br><span class="line">  <span class="comment">// 没有标记为true的proxy</span></span><br><span class="line">  unfinalizedDrafts_: number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>patches<em>、inversePatches</em></p>
+<blockquote>
+<p>历史操作信息并不是在每次操作的时候 push 的，而是在 processResult 阶段通过调用<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/finalize.ts#L123" target="_blank" rel="noopener">generatePatches_</a> push 的</p>
+</blockquote>
+<blockquote>
+<p>当 recipe（produce 第二个参数）执行时，如果出现错误则直接调用 scope 的<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L108" target="_blank" rel="noopener">revokeScope</a> 方法，目的是将所有 proxy 撤销，终止流程</p>
+</blockquote>
+</li>
+<li><p>canAutoFreeze_默认就是 true，冻结结果</p>
+</li>
+<li>drafts_<blockquote>
+<p>每次创建的 proxy 都会推入这里存储</p>
+</blockquote>
+</li>
+<li>patchListener_<blockquote>
+<p>这个字段是个引用，指向的是 procude 第三个参数</p>
+</blockquote>
+</li>
+<li>immer_<blockquote>
+<p>immerClass 的实例</p>
+</blockquote>
+</li>
+<li>unfinalizedDrafts_<blockquote>
+<p>这里存储的是未标记为 finallized 的 proxy 的数量，当流程结束时会调用<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/finalize.ts#L63" target="_blank" rel="noopener">finalize</a> 将 proxy 标记为<strong>finalized</strong>，同时 unfinalizedDrafts_减 1</p>
+</blockquote>
+</li>
+</ul>
+<p>如果执行<code>recipe</code>顺利则执行<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/scope.ts#L122" target="_blank" rel="noopener">leaveScope</a>方法标记当前 scope 为完成状态<br>否则执行<a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/immerClass.ts#L108" target="_blank" rel="noopener">revokeScope</a> 方法，将所有 proxy 撤销，终止流程</p>
+<h4 id="3、proxy-github"><a href="#3、proxy-github" class="headerlink" title="3、proxy github"></a>3、proxy <a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/proxy.ts" target="_blank" rel="noopener">github</a></h4><p>这个功能就是 immer 的精髓了，对应这个图</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/images/Immer解析/immerProxy.png" alt="proxy" title>
+                </div>
+                <div class="image-caption">proxy</div>
+            </figure>
+<h5 id="3-1、注解-❶-❷"><a href="#3-1、注解-❶-❷" class="headerlink" title="3.1、注解 ❶ ❷"></a>3.1、注解 ❶ ❷</h5><blockquote>
+<p>❶ ❷<br>这个 state 数据结构</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 对这个东西做了代理</span></span><br><span class="line"><span class="keyword">const</span> state: ProxyState = &#123;</span><br><span class="line">  <span class="comment">// 代理的数据类型</span></span><br><span class="line">  type_: isArray ? ProxyType.ProxyArray : (ProxyType.ProxyObject <span class="keyword">as</span> any),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Track which produce call this is associated with.</span></span><br><span class="line">  scope_: parent ? parent.scope_ : getCurrentScope()!,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// True for both shallow and deep changes.</span></span><br><span class="line">  modified_: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Used during finalization.</span></span><br><span class="line">  finalized_: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Track which properties have been assigned (true) or deleted (false).</span></span><br><span class="line">  <span class="comment">// 表示已被分配（就是被修改过）</span></span><br><span class="line">  assigned_: &#123;&#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The parent draft state.</span></span><br><span class="line">  parent_: parent,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The base state.</span></span><br><span class="line">  base_: base,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The base proxy.</span></span><br><span class="line">  draft_: <span class="literal">null</span> <span class="keyword">as</span> any, <span class="comment">// set below</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 会将每一层的base浅拷贝到copy上</span></span><br><span class="line">  copy_: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Called by the `produce` function.</span></span><br><span class="line">  revoke_: <span class="literal">null</span> <span class="keyword">as</span> any,</span><br><span class="line">  isManual_: <span class="literal">false</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>创建代理的时候是使用<strong>Proxy.revocable</strong>创建的，因为用这个创建可以有<strong>revoke</strong>方法销毁 proxy</p>
+<p>关于这个代理后的结构举个例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> demo = &#123; <span class="attr">name</span>: &#123; <span class="attr">age</span>: <span class="number">333</span> &#125;, <span class="attr">fan</span>: &#123; <span class="attr">zz</span>: <span class="number">333</span> &#125; &#125;;</span><br><span class="line"><span class="keyword">let</span> end = produce(demo, (draft) =&gt; &#123;</span><br><span class="line">  draft.name.age = <span class="number">1000</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>提出问题：那这里的 draft 是啥结构呢？</strong></p>
+<blockquote>
+<p>这个 draft 就是上面代理返回的 proxy，它保存的所有的修改信息，数据结构如下</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">interface Ibase &#123;</span><br><span class="line">  [key: string]: any;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface Icopy extends Ibase &#123;</span><br><span class="line">  [key: string]: Istate;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Istate = ProxyHandler&lt;&#123;</span><br><span class="line">  base_: Ibase,</span><br><span class="line">  copy_: Icopy,</span><br><span class="line">&#125;&gt;;</span><br></pre></td></tr></table></figure>
+<p><strong>那上面的<code>draft</code>因为修改了 name 下的 age，那这个 draft 就是这样的</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> proxy = <span class="function">(<span class="params">base</span>) =&gt;</span></span><br><span class="line">  <span class="built_in">Proxy</span>.revocable(</span><br><span class="line">    &#123;</span><br><span class="line">      base_: base,</span><br><span class="line">      copy_: <span class="literal">null</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;&#125;</span><br><span class="line">  ).proxy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> draft: Istate = proxy(&#123;</span><br><span class="line">  base_: &#123; <span class="attr">name</span>: &#123; <span class="attr">age</span>: <span class="number">333</span> &#125;, <span class="attr">fan</span>: &#123; <span class="attr">zz</span>: <span class="number">333</span> &#125; &#125;,</span><br><span class="line">  copy_: &#123; <span class="attr">name</span>: proxy(&#123; <span class="attr">age</span>: <span class="number">333</span> &#125;), <span class="attr">fan</span>: &#123; <span class="attr">zz</span>: <span class="number">333</span> &#125; &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>draft.name.age = 1000</code>因为修改的深度是两层，而且只修改了<code>name</code>下的<code>age</code>字段,所以只代理的这两个值</p>
+<p>可以看到<code>base_</code>只是存源数据，所有的修改都反映到了 copy_字段上，这个代理有下面的特点</p>
+<ul>
+<li>每次的代理只代理对象的一层</li>
+<li>并不是对象所有值都会代理</li>
+<li>修改只会反映到 copy_字段上</li>
+</ul>
+<p>按需代理<br><img src="/images/Immer解析/immerProxy2.png" alt="按需代理"></p>
+<h5 id="3-2、注解-❸-源码"><a href="#3-2、注解-❸-源码" class="headerlink" title="3.2、注解 ❸ 源码"></a>3.2、注解 ❸ <a href="https://github.com/YMBo/codeLearn/blob/861c0e53b8fc59da64657d86d0c76734da34647d/Immer/src/immer/core/proxy.ts#L126" target="_blank" rel="noopener">源码</a></h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// peek直接取得是原始值，这里做的判断，如果相等那就proxy一下，否则不重复代理</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ooooooo'</span>, value);</span><br><span class="line"><span class="keyword">if</span> (value === peek(state.base_, prop)) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'代理get'</span>, state.copy_, prop);</span><br><span class="line">  <span class="comment">// 浅拷贝base到copy</span></span><br><span class="line">  prepareCopy(state);</span><br><span class="line">  <span class="comment">// 针对具体的属性做代理</span></span><br><span class="line">  state.copy_![prop <span class="keyword">as</span> any] = createProxy(</span><br><span class="line">    state.scope_.immer_,</span><br><span class="line">    value,</span><br><span class="line">    state,</span><br><span class="line">  );</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'zzzzz'</span>, state.copy_![prop <span class="keyword">as</span> any]);</span><br><span class="line">  <span class="keyword">return</span> state.copy_![prop <span class="keyword">as</span> any];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-3、注解-❹-github"><a href="#3-3、注解-❹-github" class="headerlink" title="3.3、注解 ❹ github"></a>3.3、注解 ❹ <a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/proxy.ts#L188" target="_blank" rel="noopener">github</a></h5><h5 id="3-4、注解-❺-github"><a href="#3-4、注解-❺-github" class="headerlink" title="3.4、注解 ❺ github"></a>3.4、注解 ❺ <a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/proxy.ts#L198" target="_blank" rel="noopener">github</a></h5><h5 id="3-5、注解-❼-github"><a href="#3-5、注解-❼-github" class="headerlink" title="3.5、注解 ❼ github"></a>3.5、注解 ❼ <a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/proxy.ts#L188" target="_blank" rel="noopener">github</a></h5><h4 id="4、processResult-github"><a href="#4、processResult-github" class="headerlink" title="4、processResult github"></a>4、processResult <a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/finalize.ts#L23" target="_blank" rel="noopener">github</a></h4><p>这个函数主要干了下面三件事</p>
+<p>1、计算出最后结果<br>2、冻结结果<br>3、计算补丁<code>patches_</code>、<code>inversePatches_</code>后触发补丁函数 patchListener_</p>
+<p>这三个功能主要依赖的是<br><a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/finalize.ts#L63" target="_blank" rel="noopener">finalize</a>、<a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/finalize.ts#L134" target="_blank" rel="noopener">finalizeProperty</a> 计算结果 result<br><a href="https://github.com/YMBo/codeLearn/blob/301f0243993dadcd9adc3c895cb9fddf71360d6b/Immer/src/immer/core/finalize.ts#L123" target="_blank" rel="noopener">generatePatches_</a> 计算 patches<em>、inversePatches</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个scope就是produce进来的时候enterScope创建的scope</span></span><br><span class="line"><span class="comment">// baseDraft取得是scope.drafts_的第一项</span></span><br><span class="line">result = finalize(scope, baseDraft, []);</span><br></pre></td></tr></table></figure>
+<p>现在来简化一下 finalize 流程，看看 immer 是怎么解析出最后结果的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">finalize</span>(<span class="params">rootScope,value</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// state.draft_指向的是当前state的proxy</span></span><br><span class="line">    <span class="comment">// 而 shallowCopy 主要是浅拷贝值到copy_字段上</span></span><br><span class="line">    <span class="comment">// 那目前的result就是一个不包含proxy的对象</span></span><br><span class="line">    <span class="keyword">const</span> result = state.copy_ = shallowCopy(state.draft_)</span><br><span class="line">    <span class="comment">// 这个patch第一次进来是个undefined</span></span><br><span class="line">    each(result，(key,childValue)=&gt;&#123;</span><br><span class="line">        finalizeProperty(</span><br><span class="line">          rootScope,</span><br><span class="line">          state,</span><br><span class="line">          result,</span><br><span class="line">          key,</span><br><span class="line">          childValue,</span><br><span class="line">          path,</span><br><span class="line">        )</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 冻结结果</span></span><br><span class="line">    maybeFreeze(rootScope, result, <span class="literal">false</span>);</span><br><span class="line">    <span class="comment">// 计算补丁值，计算出补丁数组并赋值到scope的patches_、inversePatches_字段</span></span><br><span class="line">    <span class="keyword">if</span> (path &amp;&amp; rootScope.patches_) &#123;</span><br><span class="line">      getPlugin(<span class="string">'Patches'</span>).generatePatches_(</span><br><span class="line">        state,</span><br><span class="line">        path,</span><br><span class="line">        rootScope.patches_,</span><br><span class="line">        rootScope.inversePatches_!,</span><br><span class="line">      );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个函数的作用是查找已经变成proxy的值 并把这些值修改结果反映到result上</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">finalizeProperty</span>(<span class="params">rootScope: ImmerScope,</span></span></span><br><span class="line"><span class="function"><span class="params">  parentState: undefined | ImmerState,</span></span></span><br><span class="line"><span class="function"><span class="params">  targetObject: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  prop: string | number,</span></span></span><br><span class="line"><span class="function"><span class="params">  childValue: any,</span></span></span><br><span class="line"><span class="function"><span class="params">  rootPath?: PatchPath,</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isDraft(childValue)) &#123;</span><br><span class="line">        <span class="comment">// 查找修改路径,主要是根据assigned_字段</span></span><br><span class="line">    <span class="keyword">const</span> path =</span><br><span class="line">      rootPath &amp;&amp;</span><br><span class="line">      parentState &amp;&amp;</span><br><span class="line">      parentState!.type_ !== ProxyType.Set &amp;&amp; <span class="comment">// Set objects are atomic since they have no keys.</span></span><br><span class="line">      !has((parentState <span class="keyword">as</span> Exclude&lt;ImmerState, SetState&gt;).assigned_!, prop) <span class="comment">// Skip deep patches for assigned keys.</span></span><br><span class="line">        ? rootPath!.concat(prop)</span><br><span class="line">        : <span class="literal">undefined</span>;</span><br><span class="line">        <span class="comment">// 深度优先遍历子项，一个递归</span></span><br><span class="line">        <span class="keyword">const</span> res = finalize(rootScope, childValue, path);</span><br><span class="line">        <span class="comment">// targetObject[prop]=res</span></span><br><span class="line">        <span class="keyword">set</span>(targetObject, prop, res);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5、maybeFreeze"><a href="#5、maybeFreeze" class="headerlink" title="5、maybeFreeze"></a>5、maybeFreeze</h4><p>这个是依赖<code>Object.freeze()</code>实现</p>
+<h4 id="6、patchListener"><a href="#6、patchListener" class="headerlink" title="6、patchListener"></a>6、patchListener</h4><p>补丁监听函数，”补丁“指的是操作数据的历史，主要有三个类型<code>REPLACE</code>、<code>ADD</code>、<code>REMOVE</code></p>
+<p>patchListener 也是 produce 的第三个参数，它接收两个参数分别是<code>inversePatches</code>和<code>patches</code></p>
+<ul>
+<li><p>patches 是操作数据的历史动作</p>
+</li>
+<li><p>inversePatches 是 patches 反向，这个反向比如 patches 其中一向是 Add，那么在 inversePatches 就是 Remove,也就是说通过 inversePatches 可以反解数据</p>
+</li>
+</ul>
+<p><strong>produce 第三个参数</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过 patchListener 函数，暴露正向和反向的补丁数组</span></span><br><span class="line">patchListener: <span class="function">(<span class="params">patches: Patch[], inversePatches: Patch[]</span>) =&gt;</span> <span class="keyword">void</span></span><br></pre></td></tr></table></figure>
+<p><strong>数组 patch 参数格式</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface Patch &#123;</span><br><span class="line">  op: <span class="string">"replace"</span> | <span class="string">"remove"</span> | <span class="string">"add"</span> <span class="comment">// 一次更改的动作类型</span></span><br><span class="line">  path: (string | number)[] <span class="comment">// 此属性指从树根到被更改树杈的路径</span></span><br><span class="line">  value?: any <span class="comment">// op为 replace、add 时，才有此属性，表示新的赋值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过补丁功能实现数据回溯</p>
+<h5 id="1、历史回溯-demo"><a href="#1、历史回溯-demo" class="headerlink" title="1、历史回溯 demo"></a>1、历史回溯 demo</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> stash = [];</span><br><span class="line"><span class="keyword">let</span> inverseStash = [];</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"执行前"</span>);</span><br><span class="line"><span class="keyword">var</span> b = produce(</span><br><span class="line">  a,</span><br><span class="line">  (draft) =&gt; &#123;</span><br><span class="line">    draft.name.gg = <span class="string">"1000"</span>;</span><br><span class="line">    draft.name.age = <span class="number">1000</span>;</span><br><span class="line">    <span class="keyword">delete</span> draft.fan.zz;</span><br><span class="line">  &#125;,</span><br><span class="line">  (patches, inversePatches) =&gt; &#123;</span><br><span class="line">    stash = stash.concat(patches);</span><br><span class="line">    inverseStash = inversePatches.concat(inversePatches);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"patches"</span>, patches);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"inversePatches"</span>, inversePatches);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"执行后"</span>, b, a);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"stash"</span>, stash);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"历史回溯"</span>, applyPatches(b, inverseStash));</span><br></pre></td></tr></table></figure>
+<h4 id="7、plugin-系统"><a href="#7、plugin-系统" class="headerlink" title="7、plugin 系统"></a>7、plugin 系统</h4><p>为啥要说 immer 的插件呢，因为用 patchListener 功能的时候必须引入<code>enablePatches()</code>调用一下才能用，达到了按需使用的效果</p>
+<p>immer 设计了一个 plugin 管理器存放在 plugins.ts 文件<br>主要功能有<br>1、<code>plugins={}</code>作为插件表，存放这所有插件<br>2、<code>loadPlugin</code>注册插件，其实就是往插件表上存<br>3、<code>getPlugin</code>调用插件,去插件表检索返回</p>
+<p>所有的插件以文件的形式保存在 plugins 目录下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|____plugins</span><br><span class="line">| |____patches.ts</span><br><span class="line">| |____mapset.ts</span><br><span class="line">| |____es5.ts</span><br><span class="line">| |____all.ts</span><br></pre></td></tr></table></figure>
+<p>这种可插拔的插件模式在自己写功能的时候也可以借鉴，这样能让小功能通过插件的方式引入，即插即用，提高了代码的灵活性，也便于不同功能的维护管理</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2021-11-30T10:13:59.877Z" itemprop="dateUpdated">2021-11-30 18:13:59</time>
+</span><br>
+
+
+        
+    </div>
+    <footer>
+        <a href="http://yoursite.com">
+            <img src="/img/avatar.jpg" alt="YMBo">
+            YMBo
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/11/30/Immer解析/&title=《Immer解析》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/11/30/Immer解析/&title=《Immer解析》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2021/11/30/Immer解析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Immer解析》 — DHYANA&url=http://yoursite.com/2021/11/30/Immer解析/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2021/11/30/Immer解析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2021/07/19/链表快慢指针问题/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">链表快慢指针问题</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+<section class="comments" id="comments">
+    <div id="gitment_thread"></div>
+    <link rel="stylesheet" href="//unpkg.com/gitment/style/default.css">
+    <script src="//unpkg.com/gitment/dist/gitment.browser.js"></script>
+    <script>
+        var gitment = new Gitment({
+            id: 'Immer解析',
+            owner: 'YMBo',
+            repo: 'YMBo.github.io',
+            oauth: {
+                client_id: '7f9179fe457b750c95b0',
+                client_secret: 'e4f5f301175b07da42da04cebfb6d198fcd4f229',
+            },
+        })
+        /*alert()
+        alert()
+        alert()*/
+        gitment.render('comments')
+    </script>
+</section>
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        觉得不错的，可以支持一下呦
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.png" data-alipay="/img/alipay.png">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>YMBo &copy; 2017 - 2021</span>
+            <span>
+                
+                <!-- Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a> -->
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2021/11/30/Immer解析/&title=《Immer解析》 — DHYANA&pic=http://yoursite.com/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2021/11/30/Immer解析/&title=《Immer解析》 — DHYANA&source=YMBo的博客，blog，YMBo" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2021/11/30/Immer解析/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Immer解析》 — DHYANA&url=http://yoursite.com/2021/11/30/Immer解析/&via=http://yoursite.com" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://yoursite.com/2021/11/30/Immer解析/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIklEQVR42u3aQW7DMAwEwPz/0y7Qaxp3l3ILWB6djFiINDkwEsnXKx7H90jevj+/j0/f+T7n4oGBgXFbxnE6Pi3waeY5bGXd8xUxMDCewEjC6PrW8wCd7w0DAwNjRk3Ca/IWAwMDY51xvt3ZJxgYGBgrl9gkdCak9SMpBgbG0xhtYeA/n/+wvoGBgXETxlGO88tqW7CcBdkfvh8DA2NrxuwC2Sbxr+0KKU64GBgYWzDWSwJtUTOfU1x3MTAwtmbMQme7TN5a0R4xMTAwnsBok/t5cLw2HP9CwsDA2JqxcilNNvcXJdKiHouBgbEFI2lfSMLirCEj3y4GBgZGm6xfCY55gB6ecDEwMLZjtJtut9hehpOj6uynx8DA2IORhLY2KOftF7NCAgYGxtMYbRidJc5mm46aLTAwMLZmRB0ZJaBN1c1axDAwMJ7AmB0HV+7Hs3aKOmuIgYGxEaO9TOYp/mubKs5XwcDAeAKjXWbl87zhrJ2JgYGxK6NtYpgVKWfhOCk2YGBgYKw81z0dowRfXaPAwMC4IaNtkmgvnO1GW2pUicXAwLg54yhH8nskb/M5S01gGBgYWzBmh7aV5P5SV0iZjMPAwNiJkQfZthVjVozM03bFvwcGBsYWjPbW25Yh6wavtvyAgYGBUQbBJAE3C8RRzwgGBgbGAiY5DrZhFwMD4zmM9hK7kplvmzOi/WBgYGzNaAsDecLuKl4OxsDA2I7xBSBGrWNFLiimAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+    var BLOG = {
+        ROOT: '/',
+        SHARE: true,
+        REWARD: true
+    };
+
+    
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+    
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+        <script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+        
+
+            
+
+
+                
+                    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+                    
+
+                        
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '网页崩溃啦！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '又好了';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+</body>
+</html>
